@@ -26,8 +26,15 @@ class Manager(User):
 
         return mentors_list
 
-    def change_mentor_data(self, mentor):
-        pass
+    def change_mentor_data(self, mentor, new_mentor_data):
+        user_list = UserContainer.get_instance().get_users_list()
+
+        for person in user_list:
+            if person == mentor:
+                user_list.remove(person)
+                user_list.append(new_mentor_data)
+
+        return user_list
 
     def get_mentors_list(self):
         user_list = UserContainer.get_instance().get_users_list()
