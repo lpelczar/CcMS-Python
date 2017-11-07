@@ -7,12 +7,18 @@ from mentor import Mentor
 class Manager(User):
 
     def __init__(self, login, password, email, phone_number, group_names, name):
-        super().__init__(login, password, email, phone_number)
-        self.groups = group_names
-        self.name = name
+        super().__init__(login, password, email, phone_number, name)
 
     def promote_user_to_mentor(self, user):
-        pass
+        user_list = UserContainer.get_instance().get_users_list()
+        promoted_user = Mentor(user.login, user.password, user.email, user.phone_number, user.name)
+
+        for person in user_list:
+            if person == user:
+                user_list.remove(person)
+                user_list.append(promoted_user)
+
+        return user_list
 
     def remove_mentor(self, mentor, mentors_list):
         if mentor in mentors_list:  # Operuje na liscie mentrowo, jesli sie nie przyda zmienic na IsInstance USerlist
