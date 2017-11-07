@@ -5,7 +5,8 @@ class Assignment():
         self.assignments = {}
 
     def add_assignment(self):
-        pass
+        title = assignment_view.new_assignment_input()
+        self.assignments[title] = assignment_view.new_assignment_input(False)
 
     @staticmethod
     def save_to_file(filename:str = 'assignments.txt'):
