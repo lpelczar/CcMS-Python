@@ -1,5 +1,7 @@
 from user import User
 from user_container import UserContainer
+from student import Student
+from mentor import Mentor
 
 
 class Manager(User):
@@ -8,7 +10,6 @@ class Manager(User):
         super().__init__(login, password, email, phone_number)
         self.groups = group_names
         self.name = name
-        self.user_list = UserContainer.get_instance().get_users_list()
 
     def promote_user_to_mentor(self, user):
         pass
@@ -23,9 +24,10 @@ class Manager(User):
         pass
 
     def get_mentors_list(self):
+        user_list = UserContainer.get_instance().get_users_list()
         mentors_list = []
 
-        for mentor in self.user_list:
+        for mentor in user_list:
             if isinstance(mentor, Mentor):
                 mentor = mentor.__str__
                 mentors_list.append
@@ -33,9 +35,10 @@ class Manager(User):
         return mentors_list
 
     def get_students_list(self):
+        user_list = UserContainer.get_instance().get_users_list()
         students_list = []
 
-        for student in self.user_list:
+        for student in user_list:
             if isinstance(student, Student):
                 student = student.__str__
                 students_list.append(student)
