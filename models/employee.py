@@ -6,9 +6,9 @@ class Employee(User):
     def __init__(self, *args, **kwargs):
         super(Employee, self).__init__(*args, **kwargs)
 
-    def show_students():
+    def get_students():
         """
-        :return: list of Students
+        :return: list of string representations of students
         """
-        users = UserContainer.get_users_list()
-        return [person for person in users if isinstance(person, Student)]
+        users = UserContainer.get_instance.get_users_list()
+        return [str(person) for person in users if isinstance(person, Student)]
