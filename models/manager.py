@@ -3,9 +3,10 @@ from user import User
 
 class Manager(User):
 
-    def __init__(self, login, password, email, phone_number, group_names):
+    def __init__(self, login, password, email, phone_number, group_names, name):
         super().__init__(login, password, email, phone_number)
         self.groups = group_names
+        self.name = name
 
     def promote_user_to_mentor(self, user):
         pass
@@ -26,4 +27,5 @@ class Manager(User):
         pass
 
     def __str__(self):
-        pass
+        information = self.name + ': ' + self.email + ', ' + self.phone_number
+        return information
