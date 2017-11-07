@@ -4,7 +4,8 @@ from user import User
 class Student(User):
 
     def __init__(self, *args, **kwargs):
-        self.submissions = {}  # Dictionary with key: Assignment, value: Grade
+        self.submissions = {}  # Dictionary with key: Assignment name, value: Assignment Submission
+        self.grades = []  # List of student grades
         self.group = None
         self.attendance = 0
         super(Student, self).__init__(*args, **kwargs)
@@ -13,7 +14,7 @@ class Student(User):
         """
         :return: list -> student grades
         """
-        return list(self.submissions.values())
+        return self.grades
 
     def submit_assignment(self, assignment_name):
         """
