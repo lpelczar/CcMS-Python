@@ -19,7 +19,7 @@ class Student(User):
         """
         Add new key to submissions with assignment_name
         """
-        self.submissions[assignment_name] = StudentView.submission_input()
+        self.submissions[assignment_name] = StudentController.submission_input()
 
     def get_submissions(self):
         """
