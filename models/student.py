@@ -20,3 +20,9 @@ class Student(User):
         Add new key to submissions with assignment_name
         """
         self.submissions[assignment_name] = None
+
+    def get_submissions(self):
+        """
+        :return: dict -> student submissions
+        """
+        return self.submissions
