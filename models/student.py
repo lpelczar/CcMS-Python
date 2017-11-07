@@ -14,3 +14,9 @@ class Student(User):
         :return: list -> student grades
         """
         return list(self.submissions.values())
+
+    def submit_assignment(self, assignment_name):
+        """
+        Add new key to submissions with assignment_name
+        """
+        self.submissions[assignment_name] = None
