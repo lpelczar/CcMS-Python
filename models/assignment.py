@@ -24,3 +24,6 @@ class Assignment():
                 title = splitted_line[0]
                 description = splitted_line[1]
                 self.assignments[title] = description
+
+    def get_assignments(self):
+        return self.assignments
