@@ -31,17 +31,23 @@ class RootView:
         print(exit_program)
 
     @staticmethod
-    def display_sing_menu():
+    def display_sing_menu(sing_up):
         os.system('clear')
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
-        information_to_creat_new_user = '\nAs new user of our platform you need to sing up with ur email and unique password!'
-        user_email = ''
-        user_password = ''
+        information_to_creat_new_user = '\nAs new user of our platform you need to sing up with your email and unique password!'
+        information_to_sing_in_as_user = '\nAs a user of our platform you need to sing in with your login and password.'
+
+        if sing_up:
+            print(information_to_creat_new_user)
+        else:
+            print(information_to_sing_in_as_user)
 
     @staticmethod
     def display_sing_up_menu():
-        print(information_to_creat_new_user)
+        user_email = ''
+        user_password = ''
+        min_lenght_user_input = 1
+        max_lenght_user_input = 30
+
         while user_email > min_lenght_user_input and user_email < max_lenght_user_input:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
 
