@@ -69,7 +69,7 @@ class MentorController:
         elif value_to_change == '5':
             student.group = MentorView.new_value('group')
 
-    
+
 
 
 
