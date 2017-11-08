@@ -17,6 +17,12 @@ class RootView:
 
     @staticmethod
     def display_main_menu():
+        """
+        Argument: none
+        Return: none
+
+        Method display main menu options.
+        """
         welcome_information = '\nWelcome in Canvas, patch 0.-2XYZ.4C version.'
         exit_program = '\n0. Exit'
         menu_options = ['sign in', 'sign up']
@@ -32,6 +38,12 @@ class RootView:
 
     @staticmethod
     def display_sign_menu(sign_up):
+        """
+        Argument: bool
+        Return: none
+
+        Method check if user want to sing in or create new account in platform and display infromation.
+        """
         os.system('clear')
         information_to_creat_new_user = '\nAs new user of our platform you need to sign up with your email and unique password!'
         information_to_sign_in_as_user = '\nAs a user of our platform you need to sign in with your login and password.'
@@ -43,6 +55,12 @@ class RootView:
 
     @staticmethod
     def create_user_password():
+        """
+        Argument: none
+        Return: str
+
+        Method check if new users password is correctly with requirements.
+        """
         user_password = ''
         min_lenght_user_input = 1
         max_lenght_user_input = 30
@@ -62,6 +80,12 @@ class RootView:
 
     @staticmethod
     def create_user_login():
+        """
+        Argument: none
+        Return: str
+
+        Method check if user login is enter correctly with requirements.
+        """
         user_login = ''
         min_lenght_user_input = 1
         max_lenght_user_input = 30
@@ -73,6 +97,12 @@ class RootView:
 
     @staticmethod
     def create_user_email():
+        """
+        Argument: none
+        Return: str
+
+        Method check if user email is enter correctly with requirements.
+        """
         user_email = ''
         min_lenght_email = 1
         max_lenght_email = 30
@@ -87,6 +117,12 @@ class RootView:
 
     @staticmethod
     def create_user_phone_number():
+        """
+        Argument: none
+        Return: str
+
+        Method check if user phone number is digits, and its lenght is 9.
+        """
         phone_number = ''
         lenght_number = 9
         correct_phone_number = True
@@ -100,6 +136,12 @@ class RootView:
 
     @staticmethod
     def get_user_login_password():
+        """
+        Argument: none
+        Return: tuple
+
+        Method take users login and password and return it as a tuple.
+        """
         user_login = input('Enter your login: ')
         user_password = input('Enter your password: ')
         login_password = (user_login, user_password)
