@@ -1,12 +1,31 @@
 class MentorView:
 
     @staticmethod
-    def display_students_list(students_list):
-        for student in students_list:
-            print(students_list.index(student), student.get_name())
+    def show_invalid_input():
+        print('Invalid input!')
 
     @staticmethod
-    def display_add_assignment():
+    def menu():
+        options = ['1', '2', '3', '4', '5']
+        option = ''
+        while option not in options:
+            option = input("""
+            Choose option:
+            1.Show students
+            2.Add assignment
+            3.Grade assignment
+            4.Check attendance
+            5.Change student data
+            6.Exit""")
+        return option
+
+    @staticmethod
+    def display_students_list(students_list):
+        for student in students_list:
+            print(students_list.index(student) + student.get_name() + student.group)
+
+    @staticmethod
+    def return_assignment_values():
         deadline = input('Type in deadline for assignment dd-mm-yyyy: ')
         title = input('Type in title of the assignment: ')
         description = input('Describe your assignment: ')
