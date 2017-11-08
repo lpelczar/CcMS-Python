@@ -1,3 +1,4 @@
+import traceback
 from models.student import Student
 from models.user_container import UserContainer
 from views.student_view import StudentView
@@ -5,15 +6,21 @@ from views.student_view import StudentView
 
 class StudentController:
 
-    INSTANCE = None
-
-    def __init__(self):
+    def __init__(self, student:Student):
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
         self.user_container = UserContainer.get_instance()
+        self.student = student
 
-    def start():
-        ...
+    def start(self):
+        should_exit = False
+        while not should_exit:
+            try:
+                StudentView.display_student_menu()
+                user_input = StudentView.get_user_input('Choose an option')
+            except Exception as e:
+                print(e)
+
 
     @classmethod
     def get_instance(cls):
