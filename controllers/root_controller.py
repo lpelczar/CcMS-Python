@@ -85,10 +85,10 @@ class RootController:
                 if isinstance(User, Student):
                     self.student_controller = StudentController(user)
                 elif isinstance(User, Mentor):
-                    self.mentor_controller = MentorController()
+                    self.mentor_controller = MentorController(user)
                 elif isinstance(User, Manager):
-                    self.manager_controller = ManagerController()
+                    self.manager_controller = ManagerController(user)
                 elif isinstance(User, Employee):
-                    self.employee_controller = EmployeeController()
+                    self.employee_controller = EmployeeController(user)
             else:
                 RootView.display_user_not_exist()

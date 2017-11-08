@@ -21,7 +21,7 @@ class Manager(User):
         return user_list
 
     def remove_mentor(self, mentor, mentors_list):
-        if mentor in mentors_list:  # Operuje na liscie mentrowo, jesli sie nie przyda zmienic na IsInstance USerlist
+        if mentor in mentors_list:  # Operuje na liscie mentorow, jesli sie nie przyda zmienic na IsInstance USerlist
             mentors_list.remove(mentor)
 
         return mentors_list
