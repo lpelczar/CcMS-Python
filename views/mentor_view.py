@@ -25,7 +25,7 @@ class MentorView:
             print(students_list.index(student) + student.get_name() + student.group)
 
     @staticmethod
-    def display_add_assignment():
+    def return_assignment_values():
         deadline = input('Type in deadline for assignment dd-mm-yyyy: ')
         title = input('Type in title of the assignment: ')
         description = input('Describe your assignment: ')

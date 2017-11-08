@@ -49,7 +49,7 @@ class MentorController:
     @staticmethod
     def add_assignment():
         students_list = UserContainer.get_instance().get_students_list()
-        deadline, title, description = MentorView.display_add_assignment()
+        deadline, title, description = MentorView.return_assignment_values()
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
         for student in students_list:
@@ -57,7 +57,7 @@ class MentorController:
 
     @staticmethod
     def grade_assignment():
-        student_index, assignment_index, grade = MentorView()
+        student_index, assignment_index, grade = MentorView.get_grading_values()
         students_list = UserContainer.get_instance().get_students_list()
         students_list[student_index].assigments[assignment_index].grade = grade
 
