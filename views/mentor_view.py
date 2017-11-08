@@ -21,6 +21,7 @@ class MentorView:
 
     @staticmethod
     def get_presence(student):
+        presence = None
         while presence != 'y' or presence != 'n'
             presence = input('Is ' +  student.get_name + ' present? (y/n)')
             if presence == 'y':

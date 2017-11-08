@@ -5,7 +5,7 @@ import re
 class RootView:
 
     @staticmethod
-    def display_starting_screen(file_name='welcome_screen.txt'):
+    def display_starting_screen(file_name='views/welcome_screen.txt'):
         """
         Argument: str ---> with filename to reader
         Return: None
@@ -24,14 +24,14 @@ class RootView:
         Method display main menu options.
         """
         welcome_information = '\nWelcome in Canvas, patch 0.-2XYZ.4C version.'
-        exit_program = '\n0. Exit'
-        menu_options = ['sign in', 'sign up']
+        exit_program = '0. Exit'
+        menu_options = ['Sign in', 'Sign up']
         number_option = 1
 
         print(welcome_information)
         for option in menu_options:
             number_option = str(number_option)
-            print(number_option, option)
+            print(number_option + '. ' + option)
             number_option = int(number_option)
             number_option += 1
         print(exit_program)
