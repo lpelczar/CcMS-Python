@@ -33,6 +33,9 @@ class RootController:
         return cls.INSTANCE
 
     def start(self):
+        """
+        Main loop for the program
+        """
         RootView.display_starting_screen()
         while True:
             option = input('Choose option: ')  # Todo -> move input to RootView
@@ -45,6 +48,9 @@ class RootController:
                     self.handle_sign_up()
 
     def handle_sign_up(self):
+        """
+        Handle creating new User
+        """
         RootView.display_sing_menu(True)
         while True:
             login, password = RootView.display_sign_up_menu()
