@@ -34,6 +34,9 @@ class ManagerController:
         return cls.INSTANCE
 
     def promote_user_to_mentor(self):
+        """
+        Make selected User a Mentor
+        """
         users = self.user_container.get_users_list()
         ManagerView.display_users()
         while True:
@@ -45,5 +48,6 @@ class ManagerController:
                                                             person.get_name()))
                     self.user_container.remove_user(person)
                     ManagerView.display_user_promoted(person)
+                    break
             else:
                 ManagerView.display_user_not_found()

@@ -16,3 +16,11 @@ class ManagerView:
     @staticmethod
     def get_promotion_input(self):
         return input('Enter login of the user which do you want to promote to Mentor: ')
+
+    @staticmethod
+    def display_user_promoted(self, user):
+        print('User: {} has been promoted to Mentor'.format(user.get_login()))
+
+    @staticmethod
+    def display_user_not_found(self):
+        print('User with that name not found!')
