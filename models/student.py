@@ -1,5 +1,5 @@
-from user import User
-from models.assigment_container import AssigmentContainer
+from models.user import User
+from models.assignment_container import AssignmentContainer
 from models.assignment import Assignment
 
 
