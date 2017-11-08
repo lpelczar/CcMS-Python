@@ -89,15 +89,19 @@ class RootView:
     def create_user_phone_number():
         phone_number = ''
         lenght_number = 9
+        correct_phone_number = True
 
-        correct_phone_number = False
-        while len(phone_number) == lenght_number and correct_phone_number:
+        while correct_phone_number:
             phone_number = input('Enter your phone number: ')
-            if phone_number.isdigit():
-                correct_phone_number = True
+            if phone_number.isdigit() and len(phone_number) == lenght_number:
+                correct_phone_number = False
 
         return phone_number
 
     @staticmethod
-    def display_sign_in_menu():
-        pass
+    def get_user_login_password():
+        user_login = input('Enter your login: ')
+        user_password = input('Enter your password: ')
+        login_password = (user_login, user_password)
+
+        return login_password

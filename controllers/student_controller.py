@@ -32,10 +32,11 @@ class StudentController:
         students = self.user_container.get_students_list()
         for pupil in students:
             if pupil.get_login() == student_login:
-                grades_list = pupil.get_grades()
+                assignments_with_grades = pupil.get_grades()
+                StudentView.display_student_grades(assignments_with_grades)
+                return
         else:
             raise ValueError('No student with this login!')
-        StudentView.display_student_grades(grades_list)  # Todo in StudentView
 
     def submit_assignment(self, student_login, assignment_name):
         """
@@ -45,9 +46,10 @@ class StudentController:
         for pupil in students:
             if pupil.get_login() == student_login:
                 pupil.submissions[assignment_name] = self.get_submission_input(assignment_name)
+                StudentView.display_submission_result()
+                return
         else:
             raise ValueError('No student with this login!')
-        StudentView.display_submission_result()  # Todo in StudentView
 
     @staticmethod
     def get_submission_input(assignment_name):
