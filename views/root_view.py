@@ -1,5 +1,6 @@
 import os
 import re
+import time
 
 
 class RootView:
@@ -56,16 +57,20 @@ class RootView:
     @staticmethod
     def create_user_password():
         max_pass_length = 30
+        min_pass_lenght = 5
 
         incorrect_input = True
         while incorrect_input:
-            user_password = input('Enter your password(it must contain 1 big character and digit, it cant be longer than 30 characters): ')
-            if user_password is not None and len(user_password) < max_pass_length:
+            user_password = input('Enter your password(it must contain big, small characters and digit, it must contain'
+                                  'min 6 chars and it cant be longer than 30 characters): ')
+            if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
                 for sign in user_password:
                     if sign.isdigit():
                         for sign in user_password:
                             if sign.isupper():
-                                incorrect_input = False
+                                for sign in user_password:
+                                    if sign.islower():
+                                        incorrect_input = False
 
         return user_password
 
@@ -78,12 +83,13 @@ class RootView:
         Method check if user login is enter correctly with requirements.
         """
         max_login_lenght = 30
+        min_login_lenght = 5
 
         incorrect_input = True
         while incorrect_input:
-            user_login = input('Enter your login(it cant be longer than 30 characters): ')
+            user_login = input('Enter your login(it must contain 6 characters and cant be longer than 30 characters): ')
 
-            if user_login is not None and len(user_login) < max_login_lenght:
+            if len(user_login) > min_login_lenght and len(user_login) < max_login_lenght:
                 incorrect_input = False
 
         return user_login
@@ -97,12 +103,13 @@ class RootView:
         Method check if user email is enter correctly with requirements.
         """
         max_email_lenght = 30
+        min_email_lenght = 0
 
         incorrect_email_adress = True
         while incorrect_email_adress:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
 
-            if user_email is not None and user_email < max_email_lenght:
+            if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
                 if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
                     incorrect_email_adress = False
 
@@ -116,7 +123,6 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        phone_number = ''
         lenght_number = 9
         incorrect_phone_number = True
 
@@ -141,13 +147,30 @@ class RootView:
         return login_password
 
     @staticmethod
+    def add_user_name():
+        """
+        Argument: None
+        Return: str
+
+        Method create users name and return it.
+        """
+        user_name = input('Enter your name and surname: ')
+        return user_name
+
+    @staticmethod
+    def display_user_created(login, password, phone_number, email, name):
+        os.system('clear')
+        print('\nYour succesful creat new account!\n Name: {}\n Phone number: {},'.format(name, phone_number) +
+              '\n Login: {}, \nPassword: {} \nEmail!: {}'.format(login, password, email))
+        input('Press enter to back')
+
+    @staticmethod
     def display_user_already_exists():
+        os.system('clear')
         print('Entered user already exists!')
+        time.sleep(2)
 
     @staticmethod
-    def display_user_created():
-        print('User has been created!')
-
-    @staticmethod
-    def get_option_input():
-        return input('Choose option: ')
+    def display_user_not_exist():
+        print('User not exists!')
+        time.sleep(2)
