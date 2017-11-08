@@ -10,7 +10,7 @@ class StudentController:
     def __init__(self):
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
-        self.user_container = UserContainer.get_instance
+        self.user_container = UserContainer.get_instance()
 
     def start():
         ...
@@ -29,8 +29,7 @@ class StudentController:
         """
         Show grades for student with given student login
         """
-        users = self.user_container.get_users_list()
-        students = [pupil for pupil in users if isinstance(pupil, Student)]
+        students = self.user_container.get_students_list()
         for pupil in students:
             if pupil.get_login() == student_login:
                 grades_list = pupil.get_grades()
@@ -42,8 +41,7 @@ class StudentController:
         """
         Add new key to submissions with assignment_name
         """
-        users = self.user_container.get_users_list()
-        students = [pupil for pupil in users if isinstance(pupil, Student)]
+        students = self.user_container.get_students_list()
         for pupil in students:
             if pupil.get_login() == student_login:
                 pupil.submissions[assignment_name] = self.get_submission_input(assignment_name)
