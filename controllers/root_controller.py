@@ -63,3 +63,16 @@ class RootController:
                 self.user_container.add_user(User(login, password))
                 RootView.display_user_created()
                 break
+
+    def handle_sign_in(self):
+        """
+        Handle logging to existing user
+        """
+        RootView.display_sign_menu(False)
+        while True:
+            login, password = RootView.get_user_login_password()
+            user = self.user_container.get_user(login, password)
+            if user:
+                if isinstance(User, Student):
+            else:
+                RootView.display_user_not_exist()

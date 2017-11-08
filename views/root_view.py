@@ -151,3 +151,7 @@ class RootView:
     @staticmethod
     def get_option_input():
         return input('Choose option: ')
+
+    @staticmethod
+    def display_user_not_exist():
+        print('User not exists!')
