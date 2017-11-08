@@ -39,7 +39,7 @@ class RootController:
         RootView.display_starting_screen()
         RootView.display_main_menu()
         while True:
-            option = input('Choose option: ')  # Todo -> move input to RootView
+            option = RootView.get_option_input()
             os.system('clear')
             RootView.display_main_menu()
             if option in self.OPTIONS.keys():
@@ -57,9 +57,9 @@ class RootController:
             login = RootView.create_user_login()
             password = RootView.create_user_password()
             if self.user_container.get_user(login, password):
-                RootView.display_user_already_exists()  # Todo -> in RootView 'User already exists!'
+                RootView.display_user_already_exists()
                 continue
             else:
                 self.user_container.add_user(User(login, password))
-                RootView.display_user_created()  # Todo -> in RootView 'User has been created!'
+                RootView.display_user_created()
                 break

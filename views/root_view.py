@@ -138,5 +138,16 @@ class RootView:
         user_login = input('Enter your login: ')
         user_password = input('Enter your password: ')
         login_password = (user_login, user_password)
-
         return login_password
+
+    @staticmethod
+    def display_user_already_exists():
+        print('Entered user already exists!')
+
+    @staticmethod
+    def display_user_created():
+        print('User has been created!')
+
+    @staticmethod
+    def get_option_input():
+        return input('Choose option: ')
