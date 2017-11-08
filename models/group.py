@@ -12,6 +12,7 @@ class Group():
         Group.load_groups_from_file()
         if name in Group.groups_list: raise AttributeError('Such group already exists !')
         self.name = name
+        self.attendance_check_count = 0
         Group.groups_list.append(self)
         Group.save_groups_to_file()
 
