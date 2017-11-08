@@ -1,8 +1,8 @@
-from root_controller import RootController
+from controllers.root_controller import RootController
 
 
 def main():
-    RootController.get_instance.start()
+    RootController.get_instance().start()
 
 
 if __name__ == '__main__':
