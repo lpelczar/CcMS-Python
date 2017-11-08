@@ -20,4 +20,36 @@ class MentorView:
         return student_index, assignment_index, grade
 
     @staticmethod
-    def
+    def get_presence(student):
+        presence = None
+        while presence != 'y' or presence != 'n':
+            presence = input('Is ' +  student.get_name + ' present? (y/n)')
+            if presence == 'y':
+                return True
+            if presence == 'n':
+                return False
+
+    @staticmethod
+    def get_student_index():
+        return int(input("Type in student's index: "))
+
+    @staticmethod
+    def get_group_name():
+        return input('Type in group name: ')
+
+    @staticmethod
+    def student_value_to_change():
+        return input('''
+        Which value would you like to change:
+        1. Login
+        2. Name
+        3. Password
+        4. Attendance
+        5. Group''')
+
+    @staticmethod
+    def new_value(string):
+        if string == 'attendance':
+            return int(input('How many days would you like to add: '))
+        else:
+            return input('Type in new ' + string)
