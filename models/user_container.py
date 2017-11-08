@@ -31,16 +31,16 @@ class UserContainer():
         with open(FILE_NAME, 'wb') as output:
             pickle.dump(self.users, output, pickle.HIGHEST_PROTOCOL) #saves object to file
 
-    def load_todo_items_from_file(self):
+    def load_users_from_file(self):
         """
         Method loads users list from file
         :return: None
         """
-        if not os.path.exists('todoitems.data') or os.stat('todoitems.data').st_size == 0:
+        if not os.path.exists(FILE_NAME) or os.stat(FILE_NAME).st_size == 0:
             return  # checks if the data file exists, if not it does not load it
-        if self.users: return #checks if the list have been loaded before if so it does not load again
-        with open('todoitems.data', 'rb') as input:
-            self.users = pickle.load(input) #load object from file
+        if self.users: return # checks if the list have been loaded before if so it does not load again
+        with open(FILE_NAME, 'rb') as input:
+            self.users = pickle.load(input) # load object from file
 
     def get_users_list(self):
         """
