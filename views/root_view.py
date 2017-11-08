@@ -56,11 +56,13 @@ class RootView:
     @staticmethod
     def create_user_password():
         max_pass_length = 30
+        min_pass_lenght = 5
 
         incorrect_input = True
         while incorrect_input:
-            user_password = input('Enter your password(it must contain big, small characters and digit, it cant be longer than 30 characters): ')
-            if user_password is not None and len(user_password) < max_pass_length:
+            user_password = input('Enter your password(it must contain big, small characters and digit, it must contain'
+                                  'min 6 chars and it cant be longer than 30 characters): ')
+            if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
                 for sign in user_password:
                     if sign.isdigit():
                         for sign in user_password:
@@ -100,12 +102,13 @@ class RootView:
         Method check if user email is enter correctly with requirements.
         """
         max_email_lenght = 30
+        min_email_lenght = 0
 
         incorrect_email_adress = True
         while incorrect_email_adress:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
 
-            if user_email is not None and user_email < max_email_lenght:
+            if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
                 if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
                     incorrect_email_adress = False
 
@@ -119,7 +122,6 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        phone_number = ''
         lenght_number = 9
         incorrect_phone_number = True
 
@@ -143,3 +145,14 @@ class RootView:
         login_password = (user_login, user_password)
 
         return login_password
+
+    @staticmethod
+    def add_user_name():
+        """
+        Argument: None
+        Return: str
+
+        Method create users name and return it.
+        """
+        user_name = input('Enter your name and surname: ')
+        return user_name
