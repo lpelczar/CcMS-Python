@@ -1,6 +1,25 @@
 class MentorView:
 
     @staticmethod
+    def show_invalid_input():
+        print('Invalid input!')
+
+    @staticmethod
+    def menu():
+        options = ['1', '2', '3', '4', '5']
+        option = ''
+        while option not in options:
+            option = input("""
+            Choose option:
+            1.Show students
+            2.Add assignment
+            3.Grade assignment
+            4.Check attendance
+            5.Change student data
+            6.Exit""")
+        return option
+
+    @staticmethod
     def display_students_list(students_list):
         for student in students_list:
             print(students_list.index(student) + student.get_name() + student.group)

@@ -12,6 +12,26 @@ class MentorController:
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
 
+    def start(self):
+        exit_program = False
+        while not exit_program:
+            option = MentorView.menu()
+            if option == '1':
+                self.show_students()
+            elif option == '2':
+                self.add_assignment()
+            elif option == '3':
+                self.grade_assignment()
+            elif option == '4':
+                self.check_attendance()
+            elif option == '5':
+                self.change_student_data()
+            elif option == '6':
+                exit_program = True
+            else:
+                MentorView.show_invalid_input()
+
+
     @classmethod
     def get_instance(cls):
         """
