@@ -33,7 +33,7 @@ class MentorController:
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.add_assignment(new_assignment)
 
-    def grade_assignment(self):
+    def grade_assignment(self, student_index, assignment_index):
         pass
 
     def check_attendance(self):
