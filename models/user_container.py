@@ -1,4 +1,5 @@
 import pickle, os
+from models.student import Student
 
 FILE_NAME = 'users.csv'
 
@@ -48,6 +49,13 @@ class UserContainer():
         :return:
         """
         return self.users
+
+    def get_students_list(self):
+        """
+        Extract students instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Student)]
 
     def get_user(self, login:str, password:str):
         """
