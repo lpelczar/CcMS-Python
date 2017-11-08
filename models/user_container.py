@@ -5,6 +5,7 @@ from models.mentor import Mentor
 
 FILE_NAME = 'users.csv'
 
+
 class UserContainer():
 
     INSTANCE = None
@@ -41,9 +42,9 @@ class UserContainer():
         """
         if not os.path.exists(FILE_NAME) or os.stat(FILE_NAME).st_size == 0:
             return  # checks if the data file exists, if not it does not load it
-        if self.users: return #checks if the list have been loaded before if so it does not load again
+        if self.users: return # checks if the list have been loaded before if so it does not load again
         with open(FILE_NAME, 'rb') as input:
-            self.users = pickle.load(input) #load object from file
+            self.users = pickle.load(input) # load object from file
 
     def get_users_list(self):
         """
@@ -102,5 +103,3 @@ class UserContainer():
         """
         self.users.remove(user)
         self.save_users_to_file()
-
-
