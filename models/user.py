@@ -3,7 +3,7 @@ class User:
     MAX_PASS_LENGTH = 8
     MAX_LOGIN_LENGTH = 10
 
-    def __init__(self, login, password, phone_number, email, name):
+    def __init__(self, login, password, phone_number=None, email=None, name=None):
         self.name = name
         if login is not None and len(login) > User.MAX_LOGIN_LENGTH:
             self.login = login
