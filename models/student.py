@@ -1,29 +1,27 @@
 from user import User
+from models.assigment_container import AssigmentContainer
+from models.assignment import Assignment
 
 
 class Student(User):
 
     def __init__(self, *args, **kwargs):
-        self.submissions = {}  # Dictionary with key: Assignment name, value: Assignment Submission
-        self.grades = []  # List of student grades
+        self.assignments = assignment_cotainer
+        self.submissions_grades = {}  # Dictionary with key: Assignment name, value: grade
         self.group = None
         self.attendance = 0
         super(Student, self).__init__(*args, **kwargs)
 
     def get_grades(self):
         """
-        :return: list -> student grades
+        :return: list -> list of grades
         """
-        return self.grades
+        return list(self.submissions.values())
 
-    def submit_assignment(self, assignment_name):
-        """
-        Add new key to submissions with assignment_name
-        """
-        self.submissions[assignment_name] = StudentController.submission_input()
+    def add_student_assigment(self, title, description, date):
+        assignment = Assignment(title, description, date)
+        self.assignments.add_assignment(assignment)
 
-    def get_submissions(self):
-        """
-        :return: dict -> student submissions
-        """
-        return self.submissions
+    def add_submission(self, assignment_index, submission):
+        assignment = self.assignments.get_assignment(assignment_index)
+        assignment.submission = submission
