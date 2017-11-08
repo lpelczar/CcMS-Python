@@ -146,7 +146,6 @@ class RootView:
         return login_password
 
     @staticmethod
-<<<<<<< HEAD
     def add_user_name():
         """
         Argument: None
@@ -161,13 +160,10 @@ class RootView:
     def display_user_created(login, password, phone_number, email, name):
         print('\nYour succesful creat new account, with name: {}, phone number: {},'.format(name, phone_number) +
               ' login: {}, password: {} and email!: {}'.format(login, password, email))
-=======
-    def display_user_already_exists():
-        print('Entered user already exists!')
 
     @staticmethod
-    def display_user_created():
-        print('User has been created!')
+    def display_user_already_exists():
+        print('Entered user already exists!')
 
     @staticmethod
     def get_option_input():
@@ -176,4 +172,3 @@ class RootView:
     @staticmethod
     def display_user_not_exist():
         print('User not exists!')
->>>>>>> 4b81fa34de1b991c62cf9a7a4d1d85738705b6b0
