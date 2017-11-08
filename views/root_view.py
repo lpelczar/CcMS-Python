@@ -1,4 +1,5 @@
 import os
+import re
 
 
 class RootView:
@@ -47,7 +48,7 @@ class RootView:
         max_lenght_user_input = 30
 
         correct_input = False
-        while user_password > min_lenght_user_input and user_password < max_lenght_user_input and correct_input:
+        while not len(user_password) > min_lenght_user_input and len(user_password) < max_lenght_user_input and correct_input:
             user_password = input('Enter your password(it must contain 1 big character and digit, it cant be longer than 30 characters): ')
 
             for sign in user_password:
@@ -65,7 +66,7 @@ class RootView:
         min_lenght_user_input = 1
         max_lenght_user_input = 30
 
-        while user_login > min_lenght_user_input and user_login < max_lenght_user_input:
+        while not len(user_login) > min_lenght_user_input and len(user_login) < max_lenght_user_input:
             user_login = input('Enter your login(it cant be longer than 30 characters): ')
 
         return user_login
@@ -73,15 +74,14 @@ class RootView:
     @staticmethod
     def create_user_email():
         user_email = ''
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
+        min_lenght_email = 1
+        max_lenght_email = 30
 
-        correct_email_adress = False
-        while user_email > min_lenght_user_input and user_email < max_lenght_user_input and correct_email_adress:
+        correct_email_adress = True
+        while not len(user_email) > min_lenght_email and len(user_email) < max_lenght_email and correct_email_adress:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
-            for sign in user_email:
-                if sign == '@':
-                    correct_email_adress = True
+            if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                correct_email_adress = False
 
         return user_email
 
