@@ -14,10 +14,6 @@ class RootController:
 
     INSTANCE = None
 
-    OPTIONS = {'1': 'Sign in',
-               '2': 'Sign up',
-               '0': 'Exit'}
-
     def __init__(self):
         self.mentor_controller = MentorController()
         self.manager_controller = ManagerController()

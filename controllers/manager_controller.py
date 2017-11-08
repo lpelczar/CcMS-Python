@@ -1,5 +1,6 @@
 from models.user_container import UserContainer
 from models.manager import Manager
+from models.mentor import Mentor
 from views.manager_view import ManagerView
 
 
@@ -16,9 +17,9 @@ class ManagerController:
         while not should_exit:
             try:
                 ManagerView.display_manager_menu()
-                user_input = ManagerView.get_user_input('Choose an option')
+                user_input = ManagerView.get_user_input('Choose an option ')
                 if user_input == '1':
-                    self.manager.
+                    self.manager.promote_user_to_mentor()
             except Exception as e:
                 print(e)
 
@@ -37,5 +38,12 @@ class ManagerController:
         ManagerView.display_users()
         while True:
             user_login = ManagerView.get_promotion_input()
-            for user in users:
-                if user_login == user.get_login():
+            for person in users:
+                if person is self.user_container.get_user_by_login(user_login):
+                    self.user_container.users.append(Mentor(person.get_login(), person.get_password(),
+                                                            person.get_phone_number(), person.get_email(),
+                                                            person.get_name()))
+                    self.user_container.remove_user(person)
+                    ManagerView.display_user_promoted(person)
+            else:
+                ManagerView.display_user_not_found()
