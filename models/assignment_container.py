@@ -23,7 +23,7 @@ class AssignmentContainer:
             cls.INSTANCE = AssignmentContainer()
         return cls.INSTANCE
     
-    def save_to_file(self):
+    def load_from_file(self):
         """
         Method saves groups list to file
         :return: None
@@ -35,7 +35,7 @@ class AssignmentContainer:
             self.assignments = pickle.load(input)  # load object from file
 
 
-    def load_from_file(self):
+    def save_to_file(self):
         """
         Method load groups list from file
         :return: None
