@@ -38,4 +38,4 @@ class User:
         self.name = name
 
     def __str__(self):
-        return 'Name: {} Phone: {} Email: {}'.format(self.name, self.phone_number, self.email)
+        return 'Login: {} Name: {}'.format(self.login, self.name)
