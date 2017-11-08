@@ -42,14 +42,13 @@ class MentorController:
             cls.INSTANCE = MentorController()
         return cls.INSTANCE
 
-    @staticmethod
-    def show_students():
-        students_list = UserContainer.get_students_list()
+    def show_students(self):
+        students_list = UserContainer.get_instance().get_students_list()
         MentorView.display_students_list(students_list)
 
     @staticmethod
     def add_assignment():
-        students_list = UserContainer.get_students_list()
+        students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.display_add_assignment()
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
@@ -58,8 +57,8 @@ class MentorController:
 
     @staticmethod
     def grade_assignment():
-        #student_index, assignment_index, grade = MentorView.
-        students_list = UserContainer.get_students_list()
+        student_index, assignment_index, grade = MentorView()
+        students_list = UserContainer.get_instance().get_students_list()
         students_list[student_index].assigments[assignment_index].grade = grade
 
     @staticmethod
@@ -74,7 +73,7 @@ class MentorController:
 
     @staticmethod
     def change_student_data():
-        students_list = UserContainer.get_students_list()
+        students_list = UserContainer.get_instance().get_students_list()
         student_index = MentorView.get_student_index()
         student = students_list[student_index]
         value_to_change = MentorView.student_value_to_change()
