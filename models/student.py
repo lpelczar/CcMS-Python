@@ -13,10 +13,11 @@ class Student(User):
         super(Student, self).__init__(*args, **kwargs)
 
     def get_grades(self):
-        """
-        :return: list -> list of grades
-        """
-        return list(self.submissions.values())
+        grades = {}
+        for assignment in self.assignments:
+            if assignment.grade:
+                grades[assignment.title] = str(grade)
+        return grades
 
     def add_student_assigment(self, title, description, date):
         assignment = Assignment(title, description, date)

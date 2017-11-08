@@ -24,7 +24,7 @@ class MentorController:
 
     @staticmethod
     def show_students():
-        students_list = [user for user in UserContainer.get_instance().get_users_list() if isinstance(user, Student)]
+        students_list = UserContainer.get_students_list()
         MentorView.display_students_list(students_list)
 
     @staticmethod
@@ -33,8 +33,17 @@ class MentorController:
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.add_assignment(new_assignment)
 
-    def grade_assignment(self, student_index, assignment_index):
-        pass
+    @staticmethod
+    def grade_assignment():
+        FIRST_COMMENT_INDEX = 0
+        SECOND_COMMENT_INDEX = 1
+        THIRD_COMMENT_INDEX = 2
+
+        student_index = MentorView.get_grading_values(FIRST_COMMENT_INDEX)
+        assignment_index = MentorView.get_grading_values(SECOND_COMMENT_INDEX)
+        grade = MentorView.get_grading_values(THIRD_COMMENT_INDEX)
+        students_list = UserContainer.get_students_list()
+        students_list[student_index].assigments[assignment_index].grade = grade
 
     def check_attendance(self):
         pass
@@ -44,4 +53,5 @@ class MentorController:
 
     def change_student_data(self):
         pass
+
 
