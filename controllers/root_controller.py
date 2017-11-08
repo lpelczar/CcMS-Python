@@ -63,7 +63,7 @@ class RootController:
             password = RootView.create_user_password()
 
             if self.user_container.get_user(login, password):
-                RootView.display_user_already_exists()  # Todo -> in RootView 'User already exists!'
+                RootView.display_user_already_exists()
                 continue
             else:
                 phone_number = RootView.create_user_phone_number()
@@ -72,3 +72,16 @@ class RootController:
                 self.user_container.add_user(User(login, password, phone_number, email, name))
                 RootView.display_user_created(login, password, phone_number, email, name)  # Todo -> in RootView 'User has been created!'
                 break
+
+    def handle_sign_in(self):
+        """
+        Handle logging to existing user
+        """
+        RootView.display_sign_menu(False)
+        while True:
+            login, password = RootView.get_user_login_password()
+            user = self.user_container.get_user(login, password)
+            if user:
+                if isinstance(User, Student):
+            else:
+                RootView.display_user_not_exist()

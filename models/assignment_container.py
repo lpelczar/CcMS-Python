@@ -3,7 +3,9 @@ import os, pickle
 FILE_NAME = 'assignments.csv'
 
 class AssignmentContainer:
-    
+
+    INSTANCE = None
+
     def __init__(self):
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
