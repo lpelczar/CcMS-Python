@@ -1,5 +1,7 @@
 import pickle, os
 from models.student import Student
+from models.employee import Employee
+from models.mentor import Mentor
 
 FILE_NAME = 'users.csv'
 
@@ -56,6 +58,20 @@ class UserContainer():
         :return:
         """
         return [user for user in self.get_users_list() if isinstance(user, Student)]
+
+    def get_employee_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Employee)]
+
+    def get_mentor_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Mentor)]
 
     def get_user(self, login:str, password:str):
         """
