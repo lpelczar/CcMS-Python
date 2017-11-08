@@ -5,6 +5,10 @@ from controllers.student_controller import StudentController
 from views.root_view import RootView
 from models.user_container import UserContainer
 from models.user import User
+from models.student import Student
+from models.mentor import Mentor
+from models.manager import Manager
+from models.employee import Employee
 from controllers.key_getch import getch
 import sys
 import os
@@ -19,10 +23,6 @@ class RootController:
                          '0': 'Exit'}
 
     def __init__(self):
-        self.mentor_controller = MentorController()
-        self.manager_controller = ManagerController()
-        self.employee_controller = EmployeeController()
-        self.student_controller = StudentController()
         self.user_container = UserContainer.get_instance()
 
     @classmethod
@@ -83,5 +83,12 @@ class RootController:
             user = self.user_container.get_user(login, password)
             if user:
                 if isinstance(User, Student):
+                    self.student_controller = StudentController(user)
+                elif isinstance(User, Mentor):
+                    self.mentor_controller = MentorController()
+                elif isinstance(User, Manager):
+                    self.manager_controller = ManagerController()
+                elif isinstance(User, Employee):
+                    self.employee_controller = EmployeeController()
             else:
                 RootView.display_user_not_exist()
