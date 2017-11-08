@@ -77,12 +77,14 @@ class RootView:
 
         Method check if user login is enter correctly with requirements.
         """
-        user_login = ''
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
+        max_login_lenght = 30
 
-        while not len(user_login) > min_lenght_user_input and len(user_login) < max_lenght_user_input:
+        incorrect_input = True
+        while incorrect_input:
             user_login = input('Enter your login(it cant be longer than 30 characters): ')
+
+            if user_login is not None and len(user_login) < max_login_lenght:
+                incorrect_input = False
 
         return user_login
 
@@ -94,15 +96,15 @@ class RootView:
 
         Method check if user email is enter correctly with requirements.
         """
-        user_email = ''
-        min_lenght_email = 1
-        max_lenght_email = 30
+        max_email_lenght = 30
 
-        correct_email_adress = True
-        while not len(user_email) > min_lenght_email and len(user_email) < max_lenght_email and correct_email_adress:
+        incorrect_email_adress = True
+        while incorrect_email_adress:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
-            if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
-                correct_email_adress = False
+
+            if user_email is not None and user_email < max_email_lenght:
+                if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                    incorrect_email_adress = False
 
         return user_email
 
@@ -116,12 +118,12 @@ class RootView:
         """
         phone_number = ''
         lenght_number = 9
-        correct_phone_number = True
+        incorrect_phone_number = True
 
-        while correct_phone_number:
+        while incorrect_phone_number:
             phone_number = input('Enter your phone number: ')
             if phone_number.isdigit() and len(phone_number) == lenght_number:
-                correct_phone_number = False
+                incorrect_phone_number = False
 
         return phone_number
 
