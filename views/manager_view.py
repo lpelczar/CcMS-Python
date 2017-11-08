@@ -18,6 +18,10 @@ class ManagerView:
         return input('Enter login of the user which do you want to promote to Mentor: ')
 
     @staticmethod
+    def get_user_remove_input(self):
+        return input('Enter login of the user which do you want to remove: ')
+
+    @staticmethod
     def display_user_promoted(self, user):
         print('User: {} has been promoted to Mentor'.format(user.get_login()))
 

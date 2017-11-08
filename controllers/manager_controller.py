@@ -38,7 +38,7 @@ class ManagerController:
         Make selected User a Mentor
         """
         users = self.user_container.get_users_list()
-        ManagerView.display_users()
+        ManagerView.display_users(users)
         while True:
             user_login = ManagerView.get_promotion_input()
             for person in users:
@@ -50,4 +50,18 @@ class ManagerController:
                     ManagerView.display_user_promoted(person)
                     break
             else:
+                ManagerView.display_user_not_found()
+
+    def remove_mentor(self):
+        """
+        Remove mentor from list
+        """
+        mentors = self.user_container.get_mentors_list()
+        ManagerView.display_users(mentors)
+        while True:
+            user_login = ManagerView.get_user_remove_input()
+            try:
+                user = self.user_container.get_user_by_login(user_login)
+                self.user_container.remove(user)
+            except:
                 ManagerView.display_user_not_found()
