@@ -38,7 +38,7 @@ class MentorController:
 
     @staticmethod
     def grade_assignment():
-        student_index, assignment_index, grade = MentorView.
+        #student_index, assignment_index, grade = MentorView.
         students_list = UserContainer.get_students_list()
         students_list[student_index].assigments[assignment_index].grade = grade
 
@@ -68,8 +68,3 @@ class MentorController:
             student.attendance += MentorView.new_value('attendance')
         elif value_to_change == '5':
             student.group = MentorView.new_value('group')
-
-
-
-
-

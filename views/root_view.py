@@ -5,7 +5,7 @@ import re
 class RootView:
 
     @staticmethod
-    def display_starting_screen(file_name='welcome_screen.txt'):
+    def display_starting_screen(file_name='views/welcome_screen.txt'):
         """
         Argument: str ---> with filename to reader
         Return: None
@@ -17,21 +17,33 @@ class RootView:
 
     @staticmethod
     def display_main_menu():
+        """
+        Argument: none
+        Return: none
+
+        Method display main menu options.
+        """
         welcome_information = '\nWelcome in Canvas, patch 0.-2XYZ.4C version.'
-        exit_program = '\n0. Exit'
-        menu_options = ['sign in', 'sign up']
+        exit_program = '0. Exit'
+        menu_options = ['Sign in', 'Sign up']
         number_option = 1
 
         print(welcome_information)
         for option in menu_options:
             number_option = str(number_option)
-            print(number_option, option)
+            print(number_option + '. ' + option)
             number_option = int(number_option)
             number_option += 1
         print(exit_program)
 
     @staticmethod
     def display_sign_menu(sign_up):
+        """
+        Argument: bool
+        Return: none
+
+        Method check if user want to sing in or create new account in platform and display infromation.
+        """
         os.system('clear')
         information_to_creat_new_user = '\nAs new user of our platform you need to sign up with your email and unique password!'
         information_to_sign_in_as_user = '\nAs a user of our platform you need to sign in with your login and password.'
@@ -43,65 +55,99 @@ class RootView:
 
     @staticmethod
     def create_user_password():
-        user_password = ''
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
+        max_pass_length = 30
 
-        correct_input = False
-        while not len(user_password) > min_lenght_user_input and len(user_password) < max_lenght_user_input and correct_input:
+        incorrect_input = True
+        while incorrect_input:
             user_password = input('Enter your password(it must contain 1 big character and digit, it cant be longer than 30 characters): ')
+            if user_password is not None and len(user_password) < max_pass_length:
+                for sign in user_password:
+                    if sign.isdigit():
+                        for sign in user_password:
+                            if sign.isupper():
+                                incorrect_input = False
 
-            for sign in user_password:
-                if sign.isdigit():
-                    for sign in user_password:
-                        if sign.isupper():
-                            correct_input = True
-                            password = user_password
-
-        return password
+        return user_password
 
     @staticmethod
     def create_user_login():
-        user_login = ''
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
+        """
+        Argument: none
+        Return: str
 
-        while not len(user_login) > min_lenght_user_input and len(user_login) < max_lenght_user_input:
+        Method check if user login is enter correctly with requirements.
+        """
+        max_login_lenght = 30
+
+        incorrect_input = True
+        while incorrect_input:
             user_login = input('Enter your login(it cant be longer than 30 characters): ')
+
+            if user_login is not None and len(user_login) < max_login_lenght:
+                incorrect_input = False
 
         return user_login
 
     @staticmethod
     def create_user_email():
-        user_email = ''
-        min_lenght_email = 1
-        max_lenght_email = 30
+        """
+        Argument: none
+        Return: str
 
-        correct_email_adress = True
-        while not len(user_email) > min_lenght_email and len(user_email) < max_lenght_email and correct_email_adress:
+        Method check if user email is enter correctly with requirements.
+        """
+        max_email_lenght = 30
+
+        incorrect_email_adress = True
+        while incorrect_email_adress:
             user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
-            if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
-                correct_email_adress = False
+
+            if user_email is not None and user_email < max_email_lenght:
+                if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                    incorrect_email_adress = False
 
         return user_email
 
     @staticmethod
     def create_user_phone_number():
+        """
+        Argument: none
+        Return: str
+
+        Method check if user phone number is digits, and its lenght is 9.
+        """
         phone_number = ''
         lenght_number = 9
-        correct_phone_number = True
+        incorrect_phone_number = True
 
-        while correct_phone_number:
+        while incorrect_phone_number:
             phone_number = input('Enter your phone number: ')
             if phone_number.isdigit() and len(phone_number) == lenght_number:
-                correct_phone_number = False
+                incorrect_phone_number = False
 
         return phone_number
 
     @staticmethod
     def get_user_login_password():
+        """
+        Argument: none
+        Return: tuple
+
+        Method take users login and password and return it as a tuple.
+        """
         user_login = input('Enter your login: ')
         user_password = input('Enter your password: ')
         login_password = (user_login, user_password)
-
         return login_password
+
+    @staticmethod
+    def display_user_already_exists():
+        print('Entered user already exists!')
+
+    @staticmethod
+    def display_user_created():
+        print('User has been created!')
+
+    @staticmethod
+    def get_option_input():
+        return input('Choose option: ')
