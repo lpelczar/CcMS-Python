@@ -1,5 +1,6 @@
 import os
 import re
+import time
 
 
 class RootView:
@@ -158,17 +159,18 @@ class RootView:
 
     @staticmethod
     def display_user_created(login, password, phone_number, email, name):
-        print('\nYour succesful creat new account, with name: {}, phone number: {},'.format(name, phone_number) +
-              ' login: {}, password: {} and email!: {}'.format(login, password, email))
+        os.system('clear')
+        print('\nYour succesful creat new account!\n Name: {}\n Phone number: {},'.format(name, phone_number) +
+              '\n Login: {}, \nPassword: {} \nEmail!: {}'.format(login, password, email))
+        input('Press enter to back')
 
     @staticmethod
     def display_user_already_exists():
+        os.system('clear')
         print('Entered user already exists!')
-
-    @staticmethod
-    def get_option_input():
-        return input('Choose option: ')
+        time.sleep(2)
 
     @staticmethod
     def display_user_not_exist():
         print('User not exists!')
+        time.sleep(2)
