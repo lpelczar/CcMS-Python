@@ -31,5 +31,3 @@ class AssignmentContainer:
         for assignment in self.assigments:
             if self.assignments.index(assignment) == index:
                 return assignment
-
-
