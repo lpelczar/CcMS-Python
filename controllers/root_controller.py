@@ -3,6 +3,8 @@ from manager_controller import ManagerController
 from employee_controller import EmployeeController
 from student_controller import StudentController
 from root_view import RootView
+from user_container import UserContainer
+from user import User
 import os
 
 
@@ -18,6 +20,7 @@ class RootController:
         self.manager_controller = ManagerController()
         self.employee_controller = EmployeeController()
         self.student_controller = StudentController()
+        self.user_container = UserContainer.get_instance()
 
     @classmethod
     def get_instance(cls):
@@ -32,17 +35,23 @@ class RootController:
     def start(self):
         RootView.display_starting_screen()
         while True:
-            option = input('Choose option: ')  #Todo -> move input to RootView
+            option = input('Choose option: ')  # Todo -> move input to RootView
             os.system('clear')
             RootView.display_main_menu()
             if option in self.OPTIONS.keys():
                 if option == '1':
-                    self.add_todo_item()
+                    self.handle_sign_in()
                 elif option == '2':
-                    self.modify_item()
-                elif option == '3':
-                    self.delete_item()
-                elif option == '4':
-                    self.mark_as_done()
-                elif option == '5':
-                    self.display_items()
+                    self.handle_sign_up()
+
+    def handle_sign_up(self):
+        RootView.display_sing_menu(True)
+        while True:
+            login, password = RootView.display_sign_up_menu()
+            if self.user_container.get_user(login, password):
+                RootView.display_user_already_exists()  # Todo -> in RootView 'User already exists!'
+                continue
+            else:
+                self.user_container.add_user(User(login, password))
+                RootView.display_user_created()  # Todo -> in RootView 'User has been created!'
+                break
