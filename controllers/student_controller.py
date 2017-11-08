@@ -1,6 +1,6 @@
-from student import Student
-from user_container import UserContainer
-from student_view import StudentView
+from models.student import Student
+from models.user_container import UserContainer
+from views.student_view import StudentView
 
 
 class StudentController:
