@@ -156,3 +156,8 @@ class RootView:
         """
         user_name = input('Enter your name and surname: ')
         return user_name
+
+    @staticmethod
+    def display_user_created(login, password, phone_number, email, name):
+        print('\nYour succesful creat new account, with name: {}, phone number: {},'.format(name, phone_number) +
+              ' login: {}, password: {} and email!: {}'.format(login, password, email))
