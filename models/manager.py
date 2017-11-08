@@ -1,7 +1,7 @@
-from user import User
-from user_container import UserContainer
-from student import Student
-from mentor import Mentor
+from models.user import User
+from models.user_container import UserContainer
+from models.student import Student
+from models.mentor import Mentor
 
 
 class Manager(User):

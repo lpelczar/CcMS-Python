@@ -1,4 +1,7 @@
 import pickle, os
+from models.student import Student
+from models.employee import Employee
+from models.mentor import Mentor
 
 FILE_NAME = 'users.csv'
 
@@ -10,7 +13,7 @@ class UserContainer():
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
         self.users = []
-        self.load_todo_items_from_file()
+        self.load_users_from_file()
 
     @classmethod
     def get_instance(cls):
@@ -31,15 +34,15 @@ class UserContainer():
         with open(FILE_NAME, 'wb') as output:
             pickle.dump(self.users, output, pickle.HIGHEST_PROTOCOL) #saves object to file
 
-    def load_todo_items_from_file(self):
+    def load_users_from_file(self):
         """
         Method loads users list from file
         :return: None
         """
-        if not os.path.exists('todoitems.data') or os.stat('todoitems.data').st_size == 0:
+        if not os.path.exists(FILE_NAME) or os.stat(FILE_NAME).st_size == 0:
             return  # checks if the data file exists, if not it does not load it
         if self.users: return #checks if the list have been loaded before if so it does not load again
-        with open('todoitems.data', 'rb') as input:
+        with open(FILE_NAME, 'rb') as input:
             self.users = pickle.load(input) #load object from file
 
     def get_users_list(self):
@@ -48,6 +51,27 @@ class UserContainer():
         :return:
         """
         return self.users
+
+    def get_students_list(self):
+        """
+        Extract students instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Student)]
+
+    def get_employee_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Employee)]
+
+    def get_mentor_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Mentor)]
 
     def get_user(self, login:str, password:str):
         """
