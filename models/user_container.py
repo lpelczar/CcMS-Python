@@ -1,6 +1,10 @@
 import pickle, os
+from models.student import Student
+from models.employee import Employee
+from models.mentor import Mentor
 
 FILE_NAME = 'users.csv'
+
 
 class UserContainer():
 
@@ -10,7 +14,7 @@ class UserContainer():
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
         self.users = []
-        self.load_todo_items_from_file()
+        self.load_users_from_file()
 
     @classmethod
     def get_instance(cls):
@@ -49,6 +53,27 @@ class UserContainer():
         """
         return self.users
 
+    def get_students_list(self):
+        """
+        Extract students instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Student)]
+
+    def get_employee_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Employee)]
+
+    def get_mentor_list(self):
+        """
+        Extract employee instances from user lsit
+        :return:
+        """
+        return [user for user in self.get_users_list() if isinstance(user, Mentor)]
+
     def get_user(self, login:str, password:str):
         """
         Methodd returns User if such objects exists, otherwise it returns None.
@@ -78,5 +103,3 @@ class UserContainer():
         """
         self.users.remove(user)
         self.save_users_to_file()
-
-
