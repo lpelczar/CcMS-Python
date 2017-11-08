@@ -43,22 +43,19 @@ class RootView:
 
     @staticmethod
     def create_user_password():
-        user_password = ''
-        min_lenght_user_input = 1
-        max_lenght_user_input = 30
+        max_pass_length = 30
 
-        correct_input = False
-        while not len(user_password) > min_lenght_user_input and len(user_password) < max_lenght_user_input and correct_input:
+        incorrect_input = True
+        while incorrect_input:
             user_password = input('Enter your password(it must contain 1 big character and digit, it cant be longer than 30 characters): ')
+            if user_password is not None and len(user_password) < max_pass_length:
+                for sign in user_password:
+                    if sign.isdigit():
+                        for sign in user_password:
+                            if sign.isupper():
+                                incorrect_input = False
 
-            for sign in user_password:
-                if sign.isdigit():
-                    for sign in user_password:
-                        if sign.isupper():
-                            correct_input = True
-                            password = user_password
-
-        return password
+        return user_password
 
     @staticmethod
     def create_user_login():
