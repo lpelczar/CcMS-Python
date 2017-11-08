@@ -9,5 +9,5 @@ class StudentView:
             print('Assignment name: {}; Grade: {}'.format(key, value))
 
     @staticmethod
-    def display_submission_result(self):
+    def display_submission_result():
         print('You succesfully added new submission !')
