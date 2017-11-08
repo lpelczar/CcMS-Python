@@ -41,15 +41,14 @@ class ManagerController:
         ManagerView.display_users(users)
         while True:
             user_login = ManagerView.get_promotion_input()
-            for person in users:
-                if person is self.user_container.get_user_by_login(user_login):
-                    self.user_container.users.append(Mentor(person.get_login(), person.get_password(),
-                                                            person.get_phone_number(), person.get_email(),
-                                                            person.get_name()))
-                    self.user_container.remove_user(person)
-                    ManagerView.display_user_promoted(person)
-                    break
-            else:
+            try:
+                user = self.user_container.get_user_by_login(user_login)
+                self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
+                                                        user.get_phone_number(), user.get_email(),
+                                                        user.get_name()))
+                self.user_container.remove_user(user)
+                ManagerView.display_user_promoted(user)
+            except:
                 ManagerView.display_user_not_found()
 
     def remove_mentor(self):
@@ -63,5 +62,6 @@ class ManagerController:
             try:
                 user = self.user_container.get_user_by_login(user_login)
                 self.user_container.remove(user)
+                ManagerView.display_user_deleted(user)
             except:
                 ManagerView.display_user_not_found()
