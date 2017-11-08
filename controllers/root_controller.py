@@ -1,10 +1,10 @@
-from mentor_controller import MentorController
-from manager_controller import ManagerController
-from employee_controller import EmployeeController
-from student_controller import StudentController
-from root_view import RootView
-from user_container import UserContainer
-from user import User
+from controllers.mentor_controller import MentorController
+from controllers.manager_controller import ManagerController
+from controllers.employee_controller import EmployeeController
+from controllers.student_controller import StudentController
+from views.root_view import RootView
+from models.user_container import UserContainer
+from models.user import User
 import os
 
 

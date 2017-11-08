@@ -8,7 +8,6 @@ from models.student import Student
 class MentorController:
     def __init__(self):
         self.INSTANCE = None
-
         if self.INSTANCE is not None:
             raise ValueError("An instantiation already exists!")
 
@@ -29,19 +28,16 @@ class MentorController:
 
     @staticmethod
     def add_assignment():
+        students_list = UserContainer.get_students_list()
         deadline, title, description = MentorView.display_add_assignment()
         new_assignment = Assignment(deadline, title, description)
-        AssignmentContainer.add_assignment(new_assignment)
+        AssignmentContainer.get_instance().add_assignment(new_assignment)
+        for student in students_list:
+            student.add_student_assigment(deadline, title, description)
 
     @staticmethod
     def grade_assignment():
-        FIRST_COMMENT_INDEX = 0
-        SECOND_COMMENT_INDEX = 1
-        THIRD_COMMENT_INDEX = 2
-
-        student_index = MentorView.get_grading_values(FIRST_COMMENT_INDEX)
-        assignment_index = MentorView.get_grading_values(SECOND_COMMENT_INDEX)
-        grade = MentorView.get_grading_values(THIRD_COMMENT_INDEX)
+        student_index, assignment_index, grade = MentorView.
         students_list = UserContainer.get_students_list()
         students_list[student_index].assigments[assignment_index].grade = grade
 
