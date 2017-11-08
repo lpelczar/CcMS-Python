@@ -3,7 +3,7 @@ class MentorView:
     @staticmethod
     def display_students_list(students_list):
         for student in students_list:
-            print(students_list.index(student), student.get_name())
+            print(students_list.index(student) + student.get_name() + student.group)
 
     @staticmethod
     def display_add_assignment():
