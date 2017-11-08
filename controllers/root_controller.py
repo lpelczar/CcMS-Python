@@ -15,7 +15,8 @@ class RootController:
     INSTANCE = None
 
     OPTIONS = OPTIONS = {'1': 'Sign in',
-                         '2': 'Sign up'}
+                         '2': 'Sign up',
+                         '0': 'Exit'}
 
     def __init__(self):
         self.mentor_controller = MentorController()
@@ -60,10 +61,14 @@ class RootController:
         while True:
             login = RootView.create_user_login()
             password = RootView.create_user_password()
+
             if self.user_container.get_user(login, password):
                 RootView.display_user_already_exists()  # Todo -> in RootView 'User already exists!'
                 continue
             else:
-                self.user_container.add_user(User(login, password))
+                phone_number = RootView.create_user_phone_number()
+                email = RootView.create_user_email()
+                name = RootView.add_user_name()
+                self.user_container.add_user(User(login, password, phone_number, email, name))
                 RootView.display_user_created()  # Todo -> in RootView 'User has been created!'
                 break
