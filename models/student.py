@@ -6,7 +6,7 @@ from models.assignment import Assignment
 class Student(User):
 
     def __init__(self, *args, **kwargs):
-        self.assignments = list(AssignmentContainer.get_assignments_list())
+        self.assignments = list(AssignmentContainer.get_instance().get_assignments_list())
         self.group = None
         self.attendance = 0
         super().__init__(*args, **kwargs)
@@ -20,8 +20,8 @@ class Student(User):
 
     def add_student_assigment(self, deadline, title, description):
         assignment = Assignment(deadline, title, description)
-        self.assignments.add_assignment(assignment)
+        self.assignments.append(assignment)
 
     def add_submission(self, assignment_index, submission):
-        assignment = self.assignments.get_assignment(assignment_index)
+        assignment = self.assignments[assignment_index]
         assignment.submission = submission

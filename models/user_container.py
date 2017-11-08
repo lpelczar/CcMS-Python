@@ -98,8 +98,9 @@ class UserContainer():
         :param user: User -> user object
         :return: None
         """
-        self.users.append(user)
-        self.save_users_to_file()
+        if self.get_user(user.login, user.password) == None :
+            self.users.append(user)
+            self.save_users_to_file()
 
     def remove_user(self, user):
         """
