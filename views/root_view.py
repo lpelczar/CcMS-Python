@@ -59,13 +59,15 @@ class RootView:
 
         incorrect_input = True
         while incorrect_input:
-            user_password = input('Enter your password(it must contain 1 big character and digit, it cant be longer than 30 characters): ')
+            user_password = input('Enter your password(it must contain big, small characters and digit, it cant be longer than 30 characters): ')
             if user_password is not None and len(user_password) < max_pass_length:
                 for sign in user_password:
                     if sign.isdigit():
                         for sign in user_password:
                             if sign.isupper():
-                                incorrect_input = False
+                                for sign in user_password:
+                                    if sign.islower():
+                                        incorrect_input = False
 
         return user_password
 
@@ -78,12 +80,13 @@ class RootView:
         Method check if user login is enter correctly with requirements.
         """
         max_login_lenght = 30
+        min_login_lenght = 5
 
         incorrect_input = True
         while incorrect_input:
-            user_login = input('Enter your login(it cant be longer than 30 characters): ')
+            user_login = input('Enter your login(it must contain 6 characters and cant be longer than 30 characters): ')
 
-            if user_login is not None and len(user_login) < max_login_lenght:
+            if len(user_login) > min_login_lenght and len(user_login) < max_login_lenght:
                 incorrect_input = False
 
         return user_login

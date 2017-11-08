@@ -5,6 +5,8 @@ from controllers.student_controller import StudentController
 from views.root_view import RootView
 from models.user_container import UserContainer
 from models.user import User
+from controllers.key_getch import getch
+import sys
 import os
 
 
@@ -36,17 +38,19 @@ class RootController:
         """
         Main loop for the program
         """
-        RootView.display_starting_screen()
-        RootView.display_main_menu()
         while True:
-            option = input('Choose option: ')  # Todo -> move input to RootView
             os.system('clear')
+            RootView.display_starting_screen()
             RootView.display_main_menu()
+
+            option = getch()  # Todo -> move input to RootView
             if option in self.OPTIONS.keys():
                 if option == '1':
                     self.handle_sign_in()
                 elif option == '2':
                     self.handle_sign_up()
+                elif option == '0':
+                    sys.exit()
 
     def handle_sign_up(self):
         """
