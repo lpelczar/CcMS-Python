@@ -26,5 +26,9 @@ class ManagerView:
         print('User: {} has been promoted to Mentor'.format(user.get_login()))
 
     @staticmethod
+    def display_user_deleted(self, user):
+        print('User: {} has been deleted'.format(user.get_login()))
+
+    @staticmethod
     def display_user_not_found(self):
         print('User with that name not found!')
