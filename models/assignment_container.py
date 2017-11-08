@@ -1,22 +1,44 @@
-class AssignmentContainer:
-    def __init__(self):
-        self.assignments = []
+import os, pickle
 
-    @staticmethod
-    def save_to_file(filename: str = 'assignments.txt'):
+FILE_NAME = 'assignments.csv'
+
+class AssignmentContainer:
+    
+    def __init__(self):
+        if self.INSTANCE is not None:
+            raise ValueError("An instantiation already exists!")
+        self.assignments = []
+        self.load_from_file()
+
+    
+    @classmethod
+    def get_instance(cls):
         """
-                Method loads users list from file
-                :return: None
-                """
+        Retruns the singleton instance of AssignmentContainer
+        :return: None
+        """
+        if cls.INSTANCE is None:
+            cls.INSTANCE = AssignmentContainer()
+        return cls.INSTANCE
+    
+    def save_to_file(self):
+        """
+        Method saves groups list to file
+        :return: None
+        """
         if not os.path.exists(FILE_NAME) or os.stat(FILE_NAME).st_size == 0:
             return  # checks if the data file exists, if not it does not load it
-        if self.users: return  # checks if the list have been loaded before if so it does not load again
+        if self.assignments: return  # checks if the list have been loaded before if so it does not load again
         with open(FILE_NAME, 'rb') as input:
-            self.users = pickle.load(input)  # load object from file
+            self.assignments = pickle.load(input)  # load object from file
 
-    @staticmethod
-    def load_from_file(filename: str = 'assignments.txt'):
-        if not self.users:
+
+    def load_from_file(self):
+        """
+        Method load groups list from file
+        :return: None
+        """
+        if not self.assignments:
             return
         with open(FILE_NAME, 'wb') as output:
             pickle.dump(self.assignments, output, pickle.HIGHEST_PROTOCOL)  # saves assignments to file
@@ -26,8 +48,4 @@ class AssignmentContainer:
 
     def add_assignment(self, assignment):
         self.assignments.append(assignment)
-
-    def get_assignment(self, index):
-        for assignment in self.assigments:
-            if self.assignments.index(assignment) == index:
-                return assignment
+        self.save_to_file()
