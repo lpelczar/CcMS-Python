@@ -170,7 +170,8 @@ class RootView:
 
         Method create users name and return it.
         """
-        user_name = input('Enter your name and surname: ')
+        print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
+        user_name = input()
         return user_name
 
     @staticmethod
@@ -195,7 +196,7 @@ class RootView:
         Method display information if user already exist.
         """
         os.system('clear')
-        print('Entered user already exists!')
+        print(ColorfulView.format_string_to_red('Entered user already exists!'))
         time.sleep(2)
 
     @staticmethod
@@ -207,7 +208,7 @@ class RootView:
         Method display information about not existing user account
         if someone try to singin with not exist login in database.
         """
-        print('User not exists!')
+        print(ColorfulView.format_string_to_red('User not exists!'))
         time.sleep(2)
 
     @staticmethod
@@ -219,6 +220,8 @@ class RootView:
         Method display infromation when created user try to singin without any status of student, mentor etc.
         """
         os.system('clear')
-        print('\nYou try to sing in as random user, please wait for manager or mentor to change your status!')
-        print('\n\nWe will inform you when it will be ready.\n\nThank you for patient!')
+        print(ColorfulView.format_string_to_green('\nYou try to sing in as random user,'
+                                                  ' please wait for manager or mentor to change your status!'))
+        print(ColorfulView.format_string_to_white('\n\nWe will inform you when it will be ready.'
+                                                  '\n\nThank you for patient!'))
         time.sleep(4)
