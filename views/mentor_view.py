@@ -90,7 +90,7 @@ class MentorView:
         while True:
             if users:
                 for user in users:
-                    print('Index: ' + users.index(user) + ' Name: ' + user.get_name() + ' Email: ' + user.get_email())
+                    print('Index: ' + str(users.index(user)) + ' Name: ' + user.name + ' Email: ' + user.email)
                 user_index = int(input('Type in index of user you want to assign to students: '))
                 try:
                     user = users[user_index]

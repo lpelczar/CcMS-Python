@@ -101,11 +101,15 @@ class MentorController:
     def promote_user_to_student():
         not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
         user_to_assign = MentorView.get_user_to_assign(not_assigned_users)
+        name = user_to_assign.name
+        login = user_to_assign.login
+        password = user_to_assign.password
+        phone_number = user_to_assign.phone_number
+        email = user_to_assign.email
+        UserContainer.get_instance().remove_user(user_to_assign)
         if not user_to_assign:
             return
-        user_to_assign = Student(user_to_assign.name, user_to_assign.login, user_to_assign.password,
-                                 user_to_assign.phone_number, user_to_assign.email)
-        UserContainer.get_instance().remove_user(user_to_assign)
+        user_to_assign = Student(name, login, password, phone_number, email)
         UserContainer.get_instance().add_user(user_to_assign)
 
 
