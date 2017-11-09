@@ -4,6 +4,7 @@ from models.assignment_container import AssignmentContainer
 from views.mentor_view import MentorView
 from models.group import Group
 from models.student import Student
+from datetime import date
 
 
 class MentorController:
@@ -59,6 +60,12 @@ class MentorController:
     def add_assignment():
         students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.return_assignment_values()
+        try:
+            deadline_list = deadline.split('-')
+            deadline = date(deadline_list[0], deadline_list[1], deadline_list[2])
+        except IndexError or ValueError:
+            MentorView.date_error()
+            return
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
         for student in students_list:
