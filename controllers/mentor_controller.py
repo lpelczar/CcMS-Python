@@ -62,7 +62,7 @@ class MentorController:
         deadline, title, description = MentorView.return_assignment_values()
         try:
             deadline_list = deadline.split('-')
-            deadline = date(deadline_list[0], deadline_list[1], deadline_list[2])
+            deadline = date(int(deadline_list[0]), int(deadline_list[1]), int(deadline_list[2]))
         except IndexError or ValueError:
             MentorView.date_error()
             return
