@@ -55,7 +55,7 @@ Choose option:
         os.system('clear')
         for student in students_list:
             if student.group:
-                group_str = student.group
+                group_str = student.group.name
             else:
                 group_str = "Not assigned"
             print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
@@ -121,13 +121,6 @@ Choose option:
                 print('Invalid input!')
 
     @staticmethod
-    def get_group_index(groups):
-        for group in groups:
-            print('Index: ' + str(groups.index(group)) + ' Group name: ' + group.name)
-        index = input('Type in index of group you need: ')
-        return index
-
-    @staticmethod
     def get_student_value_to_change():
         os.system('clear')
         return input('''
@@ -170,6 +163,7 @@ There are currently no unassigned users
     def get_group_index(group_list):
         MentorView.display_groups(group_list)
         group_index = input('Choose group: ')
+        return group_index
 
     @staticmethod
     def display_groups(group_list, exit_with_enter=False):
