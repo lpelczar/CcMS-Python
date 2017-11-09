@@ -22,7 +22,7 @@ class RootView:
                     item = ColorfulView.format_ascii(item)
                     print(item, end='')
                     sys.stdout.flush()
-                    speed = 0.002
+                    speed = 0.001
                     time.sleep(speed)
 
     def display_main_menu_screen(file_name='views/welcome_screen.txt'):
@@ -84,6 +84,12 @@ class RootView:
 
     @staticmethod
     def create_user_password():
+        """
+        Arguments: none
+        Return: none
+
+        Method let to create user his account password and check if it contain requirements.
+        """
         max_pass_length = 30
         min_pass_lenght = 5
 
