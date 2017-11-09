@@ -74,6 +74,17 @@ class UserContainer():
         """
         return [user for user in self.get_users_list() if isinstance(user, Mentor)]
 
+    def get_not_assigned_users_list(self):
+        """
+        Extract not assigned instances from user list
+        :return:
+        """
+        not_assigned_users = [user for user in self.get_users_list() if not isinstance(user, Mentor)]
+        not_assigned_users = [user for user in not_assigned_users if not isinstance(user, Employee)]
+        not_assigned_users = [user for user in not_assigned_users if not isinstance(user, Student)]
+        return not_assigned_users
+
+
     def get_user(self, login:str, password:str):
         """
         Methodd returns User if such objects exists, otherwise it returns None.

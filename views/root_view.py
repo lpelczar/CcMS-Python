@@ -1,6 +1,7 @@
 import os
 import re
 import time
+from views.colorful_view import ColorfulView
 
 
 class RootView:
@@ -28,13 +29,18 @@ class RootView:
         exit_program = '0. Exit'
         menu_options = ['Sign in', 'Sign up']
         number_option = 1
+        welcome_information = ColorfulView.format_string_to_yellow(welcome_information)
+        exit_program = ColorfulView.format_string_to_red(exit_program)
 
         print(welcome_information)
+
         for option in menu_options:
-            number_option = str(number_option)
-            print(number_option + '. ' + option)
+            option = str(number_option) + '. ' + option
+            option = ColorfulView.format_string_to_green(option)
+            print(option)
             number_option = int(number_option)
             number_option += 1
+
         print(exit_program)
 
     @staticmethod
@@ -46,13 +52,16 @@ class RootView:
         Method check if user want to sing in or create new account in platform and display infromation.
         """
         os.system('clear')
-        information_to_creat_new_user = '\nAs new user of our platform you need to sign up with your email and unique password!'
-        information_to_sign_in_as_user = '\nAs a user of our platform you need to sign in with your login and password.'
+        create_new_user_info = '\nAs new user of our platform you need to sign up with your email and unique password!'
+        create_new_user_info = ColorfulView.format_string_to_green(create_new_user_info)
+
+        sign_in_as_user_info = '\nAs a user of our platform you need to sign in with your login and password.'
+        sign_in_as_user_info = ColorfulView.format_string_to_yellow(sign_in_as_user_info)
 
         if sign_up:
-            print(information_to_creat_new_user)
+            print(create_new_user_info)
         else:
-            print(information_to_sign_in_as_user)
+            print(sign_in_as_user_info)
 
     @staticmethod
     def create_user_password():
@@ -158,26 +167,26 @@ class RootView:
         return user_name
 
     @staticmethod
-    """
-    Arguments: str, str, str, str, str
-    Return: none
-
-    Method display information about created user account.
-    """
     def display_user_created(login, password, phone_number, email, name):
+        """
+        Arguments: str, str, str, str, str
+        Return: none
+
+        Method display information about created user account.
+            """
         os.system('clear')
         print('\nYour succesful creat new account!\n Name: {}\nPhone number: {},'.format(name, phone_number) +
               '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email))
         input('Press enter to back')
 
     @staticmethod
-    """
-    Argument: none
-    Return: none
-
-    Method display information if user already exist.
-    """
     def display_user_already_exists():
+        """
+        Argument: none
+        Return: none
+
+        Method display information if user already exist.
+        """
         os.system('clear')
         print('Entered user already exists!')
         time.sleep(2)
