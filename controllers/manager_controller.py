@@ -2,7 +2,7 @@ from models.user_container import UserContainer
 from models.manager import Manager
 from models.mentor import Mentor
 from views.manager_view import ManagerView
-import os
+import os, traceback
 
 
 class ManagerController:
@@ -24,12 +24,19 @@ class ManagerController:
                 user_input = ManagerView.get_user_input('Choose an option: ')
                 if user_input == '1':
                     self.promote_user_to_mentor()
+                elif user_input == '2':
+                    self.remove_mentor()
+                elif user_input == '4':
+                    self.display_mentors()
                 elif user_input == '5':
                     self.display_students()
                 elif user_input == '6':
                     should_exit = True
-            except Exception as e:
-                print(e)
+            except Exception:
+                tb = traceback.format_exc()
+                print(tb)
+                input()
+        os.system('clear')
 
     @classmethod
     def get_instance(cls, manager: Manager):
@@ -46,7 +53,7 @@ class ManagerController:
         Make selected User a Mentor
         """
         users = self.user_container.get_users_list()
-        ManagerView.display_users(users)
+        ManagerView.display_actual_list(users)
         user_login = ManagerView.get_promotion_input()
         try:
             user = self.user_container.get_user_by_login(user_login)
@@ -58,22 +65,24 @@ class ManagerController:
         except:
             ManagerView.display_user_not_found()
 
-
     def remove_mentor(self):
         """
         Remove mentor from list
         """
-        mentors = self.user_container.get_mentors_list()
-        ManagerView.display_users(mentors)
-        while True:
-            user_login = ManagerView.get_user_remove_input()
-            try:
-                user = self.user_container.get_user_by_login(user_login)
-                self.user_container.remove(user)
-                ManagerView.display_user_deleted(user)
-            except:
-                ManagerView.display_user_not_found()
+        mentors = self.user_container.get_mentor_list()
+        ManagerView.display_actual_list(mentors)
+        user_login = ManagerView.get_user_remove_input()
+        try:
+            user = self.user_container.get_user_by_login(user_login)
+            self.user_container.remove_user(user)
+            ManagerView.display_user_deleted(user)
+        except:
+            ManagerView.display_user_not_found()
 
     def display_students(self):
         students = self.user_container.get_students_list()
-        ManagerView.display_students(students)
+        ManagerView.display_users(students)
+
+    def display_mentors(self):
+        mentors = self.user_container.get_mentor_list()
+        ManagerView.display_users(mentors)
