@@ -15,6 +15,10 @@ class StudentController:
         self.student = student
 
     def start(self):
+        """
+        Main method of StudentController
+        :return: None
+        """
         should_exit = False
         self.update_user_assignments()
         while not should_exit:
@@ -83,6 +87,10 @@ class StudentController:
         UserContainer.get_instance().save_users_to_file()
 
     def update_user_assignments(self):
+        """
+        Updates missing assignments after user login.
+        :return:
+        """
         for global_assignment in AssignmentContainer.get_instance().get_assignments_list():
             add_assignment = True
             for user_assignment in self.student.assignments:
@@ -90,7 +98,7 @@ class StudentController:
                     add_assignment = False
                     break
             if add_assignment:
-                self.student.add_student_assigment(global_assignment.deadline, global_assignment.title,
-                                                   global_assignment.description)
+                self.student.add_student_assignment(global_assignment.deadline, global_assignment.title,
+                                                    global_assignment.description)
 
 

@@ -46,10 +46,19 @@ class AssignmentContainer:
             pickle.dump(self.assignments, output, pickle.HIGHEST_PROTOCOL)  # saves assignments to file
 
     def get_assignments_list(self):
+        """
+        Getter of assignments_list attribute
+        :return: None
+        """
         return self.assignments
 
     def add_assignment(self, assignment):
-        if assignment.grade != None or assignment.submission != None:
+        """
+        Adds an assignment to existing assignments list.
+        :param assignment: Assignment -> assignment instance to be added
+        :return:
+        """
+        if assignment.grade is not None or assignment.submission is not None:
             raise AttributeError('You cannot add scheme assignment with defined grade or submission')
         if self.assignments:
             for existing_assignment in self.assignments:

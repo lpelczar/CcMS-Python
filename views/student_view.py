@@ -14,7 +14,7 @@ class StudentView:
 
     @staticmethod
     def display_submission_result():
-        print('You succesfully added new submission !')
+        print('You successfully added new submission !')
 
     @staticmethod
     def display_user_assignments(assignments: list):

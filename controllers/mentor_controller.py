@@ -62,7 +62,7 @@ class MentorController:
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
         for student in students_list:
-            student.add_student_assigment(deadline, title, description)
+            student.add_student_assignment(deadline, title, description)
 
     @staticmethod
     def grade_assignment():
