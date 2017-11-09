@@ -4,6 +4,7 @@ from models.assignment_container import AssignmentContainer
 from views.mentor_view import MentorView
 from models.group import Group
 from models.student import Student
+from datetime import date
 
 
 class MentorController:
@@ -59,6 +60,12 @@ class MentorController:
     def add_assignment():
         students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.return_assignment_values()
+        try:
+            deadline_list = deadline.split('-')
+            deadline = date(deadline_list[0], deadline_list[1], deadline_list[2])
+        except IndexError or ValueError:
+            MentorView.date_error()
+            return
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
         for student in students_list:
@@ -68,7 +75,7 @@ class MentorController:
     def grade_assignment():
         student_index, assignment_index, grade = MentorView.get_grading_values()
         students_list = UserContainer.get_instance().get_students_list()
-        students_list[student_index].assigments[assignment_index].grade = grade
+        students_list[student_index].assignments[assignment_index].grade = grade
 
     @staticmethod
     def check_attendance():
@@ -84,7 +91,11 @@ class MentorController:
     def change_student_data():
         students_list = UserContainer.get_instance().get_students_list()
         student_index = MentorView.get_student_index()
-        student = students_list[student_index]
+        try:
+            student = students_list[student_index]
+        except IndexError:
+            MentorView.display_index_error()
+            return
         value_to_change = MentorView.student_value_to_change()
         if value_to_change == '1':
             student.login = MentorView.new_value('login')
@@ -101,11 +112,15 @@ class MentorController:
     def promote_user_to_student():
         not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
         user_to_assign = MentorView.get_user_to_assign(not_assigned_users)
+        name = user_to_assign.name
+        login = user_to_assign.login
+        password = user_to_assign.password
+        phone_number = user_to_assign.phone_number
+        email = user_to_assign.email
+        UserContainer.get_instance().remove_user(user_to_assign)
         if not user_to_assign:
             return
-        user_to_assign = Student(user_to_assign.name, user_to_assign.login, user_to_assign.password,
-                                 user_to_assign.phone_number, user_to_assign.email)
-        UserContainer.get_instance().remove_user(user_to_assign)
+        user_to_assign = Student(name, login, password, phone_number, email)
         UserContainer.get_instance().add_user(user_to_assign)
 
 
