@@ -17,7 +17,8 @@ class MentorView:
             4.Grade assignment
             5.Check attendance
             6.Change student data
-            7.Exit""")
+            7.Promote user to student 
+            8.Exit""")
         return option
 
     @staticmethod
@@ -83,3 +84,21 @@ class MentorView:
             return int(input('How many days would you like to add: '))
         else:
             return input('Type in new ' + string)
+
+    @staticmethod
+    def get_user_to_assign(users):
+        while True:
+            if users:
+                for user in users:
+                    print('Index: ' + users.index(user) + ' Name: ' + user.get_name() + ' Email: ' + user.get_email())
+                user_index = int(input('Type in index of user you want to assign to students: '))
+                try:
+                    user = users[user_index]
+                    return user
+                except:
+                    print('Wrong index!')
+            else:
+                print("""
+                There are currently no unassigned users
+                """)
+                return
