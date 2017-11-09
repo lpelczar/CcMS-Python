@@ -2,7 +2,6 @@ from models.user_container import UserContainer
 from models.assignment import Assignment
 from models.assignment_container import AssignmentContainer
 from views.mentor_view import MentorView
-from models.student import Student
 from models.group import Group
 
 
@@ -21,12 +20,14 @@ class MentorController:
             elif option == '2':
                 self.add_assignment()
             elif option == '3':
-                self.grade_assignment()
+                self.show_assignments()
             elif option == '4':
-                self.check_attendance()
+                self.grade_assignment()
             elif option == '5':
-                self.change_student_data()
+                self.check_attendance()
             elif option == '6':
+                self.change_student_data()
+            elif option == '7':
                 exit_program = True
             else:
                 MentorView.show_invalid_input()
@@ -42,9 +43,15 @@ class MentorController:
             cls.INSTANCE = MentorController()
         return cls.INSTANCE
 
-    def show_students(self):
+    @staticmethod
+    def show_students():
         students_list = UserContainer.get_instance().get_students_list()
         MentorView.display_students_list(students_list)
+
+    @staticmethod
+    def show_assignments():
+        assignments = AssignmentContainer.get_instance().get_assignments_list()
+        MentorView.display_assignments(assignments)
 
     @staticmethod
     def add_assignment():
@@ -87,3 +94,4 @@ class MentorController:
             student.attendance += MentorView.new_value('attendance')
         elif value_to_change == '5':
             student.group = MentorView.new_value('group')
+
