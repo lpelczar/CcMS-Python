@@ -5,14 +5,17 @@ class MentorView:
     @staticmethod
     def date_error():
         print('Wrong date format!')
+        input('Press enter to return')
 
     @staticmethod
     def display_index_error():
         print('Index out of range!')
+        input('Press enter to return')
 
     @staticmethod
     def show_invalid_input():
         print('Invalid input!')
+        input('Press enter to return')
 
     @staticmethod
     def menu():
