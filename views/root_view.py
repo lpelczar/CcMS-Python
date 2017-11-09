@@ -14,6 +14,8 @@ class RootView:
         Return: None
         """
         os.system('clear')
+        main_screen_colored = []
+
         with open(file_name) as f:
             reader = f.readlines()
             for line in reader:
@@ -21,20 +23,20 @@ class RootView:
                 for item in line:
                     item = ColorfulView.format_ascii(item)
                     print(item, end='')
+                    main_screen_colored.append(item)
                     sys.stdout.flush()
                     speed = 0.001
                     time.sleep(speed)
 
-    def display_main_menu_screen(file_name='views/welcome_screen.txt'):
+        return main_screen_colored
+
+    def display_main_menu_screen(main_screen_colored):
         """
         Param: str ---> with filename to reader
         Return: None
         """
         os.system('clear')
-        with open(file_name) as f:
-            reader = f.read()
-            reader = ColorfulView.format_ascii(reader)
-            print(reader)
+        print(''.join(main_screen_colored))
 
     @staticmethod
     def display_main_menu():
