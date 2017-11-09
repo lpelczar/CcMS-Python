@@ -64,7 +64,7 @@ class MentorController:
         try:
             deadline_list = deadline.split('-')
             deadline = date(int(deadline_list[0]), int(deadline_list[1]), int(deadline_list[2]))
-        except IndexError or ValueError:
+        except:
             MentorView.date_error()
             return
         new_assignment = Assignment(deadline, title, description)
@@ -84,7 +84,8 @@ class MentorController:
             if not students_list[student_index].assignments:
                 MentorView.display_not_enough_data()
                 return
-            assignment_index, grade = MentorView.get_grade_values(students_list[student_index])
+            student = students_list[student_index]
+            assignment_index, grade = MentorView.get_grade_values(student)
             assignment_index = int(assignment_index)
         except:
             MentorView.show_invalid_input()
@@ -130,8 +131,8 @@ class MentorController:
         except IndexError:
             MentorView.display_index_error()
             return
-        value_to_change = MentorView.student_value_to_change()
         while value_changing:
+            value_to_change = MentorView.student_value_to_change()
             if value_to_change == '1':
                 student.login = MentorView.new_value('login')
             elif value_to_change == '2':

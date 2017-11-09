@@ -16,6 +16,7 @@ class EmployeeController:
                 exit_program = True
             else:
                 EmployeeView.display_input_error()
+        exit()
 
     @staticmethod
     def show_students():
