@@ -10,7 +10,7 @@ class RootView:
     @staticmethod
     def display_animate_starting_screen(file_name='views/welcome_screen.txt'):
         """
-        Argument: str ---> with filename to reader
+        Param: str ---> with filename to reader
         Return: None
         """
         os.system('clear')
@@ -22,12 +22,12 @@ class RootView:
                     item = ColorfulView.format_ascii(item)
                     print(item, end='')
                     sys.stdout.flush()
-                    speed = 0.002
+                    speed = 0.001
                     time.sleep(speed)
 
     def display_main_menu_screen(file_name='views/welcome_screen.txt'):
         """
-        Argument: str ---> with filename to reader
+        Param: str ---> with filename to reader
         Return: None
         """
         os.system('clear')
@@ -39,7 +39,7 @@ class RootView:
     @staticmethod
     def display_main_menu():
         """
-        Argument: none
+        Param: none
         Return: none
 
         Method display main menu options.
@@ -65,10 +65,10 @@ class RootView:
     @staticmethod
     def display_sign_menu(sign_up):
         """
-        Argument: bool
+        Param: bool
         Return: none
 
-        Method check if user want to sing in or create new account in platform and display infromation.
+        Method check if user want to sign in or create new account in platform and display infromation.
         """
         os.system('clear')
         create_new_user_info = '\nAs new user of our platform you need to sign up with your email and unique password!'
@@ -84,6 +84,12 @@ class RootView:
 
     @staticmethod
     def create_user_password():
+        """
+        Arguments: none
+        Return: none
+
+        Method let to create user his account password and check if it contain requirements.
+        """
         max_pass_length = 30
         min_pass_lenght = 5
 
@@ -107,10 +113,10 @@ class RootView:
     @staticmethod
     def create_user_login():
         """
-        Argument: none
+        Param: none
         Return: str
 
-        Method check if user login is enter correctly with requirements.
+        Method check if user login is entered correctly with requirements.
         """
         max_login_lenght = 30
         min_login_lenght = 5
@@ -128,7 +134,7 @@ class RootView:
     @staticmethod
     def create_user_email():
         """
-        Argument: none
+        Param: none
         Return: str
 
         Method check if user email is enter correctly with requirements.
@@ -151,7 +157,7 @@ class RootView:
     @staticmethod
     def create_user_phone_number():
         """
-        Argument: none
+        Param: none
         Return: str
 
         Method check if user phone number is digits, and its lenght is 9.
@@ -170,7 +176,7 @@ class RootView:
     @staticmethod
     def get_user_login_password():
         """
-        Argument: none
+        Param: none
         Return: tuple
 
         Method take users login and password and return it as a tuple.
@@ -183,7 +189,7 @@ class RootView:
     @staticmethod
     def add_user_name():
         """
-        Argument: None
+        Param: None
         Return: str
 
         Method create users name and return it.
@@ -195,13 +201,13 @@ class RootView:
     @staticmethod
     def display_user_created(login, password, phone_number, email, name):
         """
-        Arguments: str, str, str, str, str
+        Param: str, str, str, str, str
         Return: none
 
         Method display information about created user account.
             """
         os.system('clear')
-        account_created_info1 = '\nYour succesful creat new account!\n Name: {}\nPhone number: {},'.format(name, phone_number)
+        account_created_info1 = '\nYou have created a new account!\nName: {}\nPhone number: {},'.format(name, phone_number)
         account_created_info2 = '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email)
         acc_info = account_created_info1 + account_created_info2
         print(ColorfulView.format_string_to_green(acc_info))
@@ -210,7 +216,7 @@ class RootView:
     @staticmethod
     def display_user_already_exists():
         """
-        Argument: none
+        Param: none
         Return: none
 
         Method display information if user already exist.
@@ -222,7 +228,7 @@ class RootView:
     @staticmethod
     def display_user_not_exist():
         """
-        Argument: none
+        Param: none
         Return: none
 
         Method display information about not existing user account
@@ -235,14 +241,14 @@ class RootView:
     @staticmethod
     def display_error_user_singin():
         """
-        Argument: none
+        Param: none
         Return: none
 
-        Method display infromation when created user try to singin without any status of student, mentor etc.
+        Method display infromation when created user try to signing without any status of student, mentor etc.
         """
         os.system('clear')
-        print(ColorfulView.format_string_to_green('\nYou try to sing in as random user,'
+        print(ColorfulView.format_string_to_green('\nYou are trying to sign in as random user,'
                                                   ' please wait for manager or mentor to change your status!'))
         print(ColorfulView.format_string_to_white('\n\nWe will inform you when it will be ready.'
-                                                  '\n\nThank you for patient!'))
+                                                  '\n\nThank you for patience!'))
         time.sleep(4)
