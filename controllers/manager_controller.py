@@ -2,7 +2,7 @@ from models.user_container import UserContainer
 from models.manager import Manager
 from models.mentor import Mentor
 from views.manager_view import ManagerView
-import os
+import os, traceback
 
 
 class ManagerController:
@@ -26,12 +26,17 @@ class ManagerController:
                     self.promote_user_to_mentor()
                 elif user_input == '2':
                     self.remove_mentor()
+                elif user_input == '4':
+                    self.display_mentors()
                 elif user_input == '5':
                     self.display_students()
                 elif user_input == '6':
                     should_exit = True
-            except Exception as e:
-                print(e)
+            except Exception:
+                tb = traceback.format_exc()
+                print(tb)
+                input()
+        os.system('clear')
 
     @classmethod
     def get_instance(cls, manager: Manager):
@@ -77,3 +82,7 @@ class ManagerController:
     def display_students(self):
         students = self.user_container.get_students_list()
         ManagerView.display_users(students)
+
+    def display_mentors(self):
+        mentors = self.user_container.get_mentor_list()
+        ManagerView.display_users(mentors)
