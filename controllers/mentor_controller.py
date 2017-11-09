@@ -79,7 +79,11 @@ class MentorController:
 
     @staticmethod
     def check_attendance():
-        group_name = MentorView.get_group_name()
+        groups = Group.get_groups()
+        if groups:
+            group_name = MentorView.get_group_name(groups)
+        else:
+            return
         group = Group.get_students_by_group(group_name)
         for student in group:
             student_present = MentorView.get_presence(student)

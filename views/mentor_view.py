@@ -92,8 +92,16 @@ Choose option:
                 print('Wrong index!')
 
     @staticmethod
-    def get_group_name():
-        return input('Type in group name: ')
+    def get_group_name(groups):
+        for group in groups:
+            print('Index: ' + str(groups.index(group)) + ' Group name: ' + group.name)
+        while True:
+            index = int(input('Type in index of group you need: '))
+            try:
+                group = groups[index]
+                return group
+            except:
+                print('Wrong index value!')
 
     @staticmethod
     def student_value_to_change():
