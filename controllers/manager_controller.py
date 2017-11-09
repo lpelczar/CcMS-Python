@@ -46,7 +46,7 @@ class ManagerController:
         Make selected User a Mentor
         """
         users = self.user_container.get_users_list()
-        ManagerView.display_users(users)
+        ManagerView.display_actual_list(users)
         user_login = ManagerView.get_promotion_input()
         try:
             user = self.user_container.get_user_by_login(user_login)
@@ -57,7 +57,6 @@ class ManagerController:
             ManagerView.display_user_promoted(user)
         except:
             ManagerView.display_user_not_found()
-
 
     def remove_mentor(self):
         """
@@ -76,4 +75,4 @@ class ManagerController:
 
     def display_students(self):
         students = self.user_container.get_students_list()
-        ManagerView.display_students(students)
+        ManagerView.display_users(students)
