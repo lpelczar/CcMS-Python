@@ -17,6 +17,8 @@ class ManagerView:
     @staticmethod
     def display_actual_list(users):
         print('')
+        if not users:
+            print('List is empty!')
         for k, v in enumerate(users):
             print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
                   v.get_name() + ' Role: ' + v.__class__.__name__)
@@ -24,6 +26,8 @@ class ManagerView:
     @staticmethod
     def display_users(users):
         print('')
+        if not users:
+            print('List is empty!')
         for k, v in enumerate(users):
             print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
                   v.get_name() + ' Role: ' + v.__class__.__name__)

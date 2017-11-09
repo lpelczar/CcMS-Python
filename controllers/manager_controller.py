@@ -24,6 +24,8 @@ class ManagerController:
                 user_input = ManagerView.get_user_input('Choose an option: ')
                 if user_input == '1':
                     self.promote_user_to_mentor()
+                elif user_input == '2':
+                    self.remove_mentor()
                 elif user_input == '5':
                     self.display_students()
                 elif user_input == '6':
@@ -62,16 +64,15 @@ class ManagerController:
         """
         Remove mentor from list
         """
-        mentors = self.user_container.get_mentors_list()
-        ManagerView.display_users(mentors)
-        while True:
-            user_login = ManagerView.get_user_remove_input()
-            try:
-                user = self.user_container.get_user_by_login(user_login)
-                self.user_container.remove(user)
-                ManagerView.display_user_deleted(user)
-            except:
-                ManagerView.display_user_not_found()
+        mentors = self.user_container.get_mentor_list()
+        ManagerView.display_actual_list(mentors)
+        user_login = ManagerView.get_user_remove_input()
+        try:
+            user = self.user_container.get_user_by_login(user_login)
+            self.user_container.remove_user(user)
+            ManagerView.display_user_deleted(user)
+        except:
+            ManagerView.display_user_not_found()
 
     def display_students(self):
         students = self.user_container.get_students_list()
