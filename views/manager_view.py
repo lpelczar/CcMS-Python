@@ -1,3 +1,6 @@
+STARTING_INDEX = 1
+
+
 class ManagerView:
 
     @staticmethod
@@ -21,7 +24,7 @@ class ManagerView:
         if not users:
             print('List is empty!')
         for k, v in enumerate(users):
-            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
+            print(str(k + STARTING_INDEX) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
                   v.get_name() + ' Role: ' + v.__class__.__name__)
         print('')
 
@@ -31,7 +34,7 @@ class ManagerView:
         if not users:
             print('List is empty!')
         for k, v in enumerate(users):
-            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
+            print(str(k + STARTING_INDEX) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
                   v.get_name() + ' Role: ' + v.__class__.__name__)
         input('\nPress ENTER to continue')
 
