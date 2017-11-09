@@ -78,13 +78,13 @@ class RootController:
             user = self.user_container.get_user(login, password)
             if user:
                 if isinstance(user, Student):
-                    self.student_controller = StudentController(user)
+                    StudentController(user).start()
                 elif isinstance(user, Mentor):
-                    self.mentor_controller = MentorController(user)
+                    MentorController.start()
                 elif isinstance(user, Manager):
-                    self.manager_controller = ManagerController(user)
+                    ManagerController(user).start()
                 elif isinstance(user, Employee):
-                    self.employee_controller = EmployeeController(user)
+                    EmployeeController.start()
                 elif isinstance(user, User):
                     RootView.display_error_user_singin()
                     sys.exit()
