@@ -30,13 +30,19 @@ class RootView:
 
         return main_screen_colored
 
-    def display_main_menu_screen(main_screen_colored):
+    def display_main_menu_screen(file_name='views/welcome_screen.txt'):
         """
         Param: str ---> with filename to reader
         Return: None
         """
         os.system('clear')
-        print(''.join(main_screen_colored))
+        with open(file_name) as f:
+            reader = f.readlines()
+            for line in reader:
+                line = list(line)
+                for item in line:
+                    item = ColorfulView.format_ascii(item)
+                    print(item, end='')
 
     @staticmethod
     def display_main_menu():
