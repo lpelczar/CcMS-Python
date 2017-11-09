@@ -41,13 +41,12 @@ class RootController:
             RootView.display_main_menu()
 
             option = getch()  # Todo -> move input to RootView
-            if option in self.OPTIONS.keys():
-                if option == '1':
-                    self.handle_sign_in()
-                elif option == '2':
-                    self.handle_sign_up()
-                elif option == '0':
-                    sys.exit()
+            if option == '1':
+                self.handle_sign_in()
+            elif option == '2':
+                self.handle_sign_up()
+            elif option == '0':
+                sys.exit()
 
     def handle_sign_up(self):
         """
