@@ -15,6 +15,7 @@ class RootView:
         os.system('clear')
         with open(file_name) as f:
             reader = f.read()
+            reader = ColorfulView.format_ascii(reader)
         print(reader)
 
     @staticmethod
@@ -70,8 +71,10 @@ class RootView:
 
         incorrect_input = True
         while incorrect_input:
-            user_password = input('Enter your password(it must contain big, small characters and digit, it must contain'
-                                  'min 6 chars and it cant be longer than 30 characters): ')
+            print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
+                                                       'digit, it must contain min 6 chars and '
+                                                       'it cant be longer than 30 characters): '))
+            user_password = input()
             if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
                 for sign in user_password:
                     if sign.isdigit():
@@ -96,7 +99,8 @@ class RootView:
 
         incorrect_input = True
         while incorrect_input:
-            user_login = input('Enter your login(it must contain 6 characters and cant be longer than 30 characters): ')
+            print(ColorfulView.format_string_to_yellow('Enter your login(it must contain 6 characters and cant be longer than 30 characters): '))
+            user_login = input()
 
             if len(user_login) > min_login_lenght and len(user_login) < max_login_lenght:
                 incorrect_input = False
@@ -116,7 +120,9 @@ class RootView:
 
         incorrect_email_adress = True
         while incorrect_email_adress:
-            user_email = input('Enter your email adress(it cant be longer than 30 characters): ')
+            print(ColorfulView.format_string_to_yellow('Enter your email adress'
+                                                       '(it cant be longer than 30 characters): '))
+            user_email = input()
 
             if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
                 if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
@@ -136,7 +142,8 @@ class RootView:
         incorrect_phone_number = True
 
         while incorrect_phone_number:
-            phone_number = input('Enter your phone number: ')
+            print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
+            phone_number = input()
             if phone_number.isdigit() and len(phone_number) == lenght_number:
                 incorrect_phone_number = False
 
