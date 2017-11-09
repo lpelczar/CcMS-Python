@@ -29,7 +29,11 @@ class MentorView:
     @staticmethod
     def display_students_list(students_list):
         for student in students_list:
-            print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + student.group)
+            if student.group:
+                group_str = student.group
+            else:
+                group_str = "Not assigned"
+            print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
 
     @staticmethod
     def return_assignment_values():
