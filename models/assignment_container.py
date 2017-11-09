@@ -49,5 +49,10 @@ class AssignmentContainer:
         return self.assignments
 
     def add_assignment(self, assignment):
+        if assignment.grade != None or assignment.submission != None:
+            raise AttributeError('You cannot add scheme assignment with defined grade or submission')
+        if self.assignments:
+            for existing_assignment in self.assignments:
+                if existing_assignment.title.lower() == assignment.title.lower(): return
         self.assignments.append(assignment)
         self.save_to_file()
