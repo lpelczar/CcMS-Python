@@ -98,6 +98,11 @@ class UserContainer():
         return None
 
     def get_user_by_login(self, login):
+        """
+        Returns user instances by login
+        :param login: str -> login of user instance to be returned
+        :return: User -> an instance of user
+        """
         for user in self.users:
             if user.login == login:
                 return user
