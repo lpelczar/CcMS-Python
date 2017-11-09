@@ -16,7 +16,7 @@ class MentorController:
     def start(self):
         exit_program = False
         while not exit_program:
-            option = MentorView.menu()
+            option = MentorView.display_menu()
             if option == '1':
                 self.show_students()
             elif option == '2':
@@ -65,7 +65,7 @@ class MentorController:
             deadline_list = deadline.split('-')
             deadline = date(int(deadline_list[0]), int(deadline_list[1]), int(deadline_list[2]))
         except:
-            MentorView.date_error()
+            MentorView.display_date_error()
             return
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
@@ -132,13 +132,13 @@ class MentorController:
             MentorView.display_index_error()
             return
         while value_changing:
-            value_to_change = MentorView.student_value_to_change()
+            value_to_change = MentorView.get_student_value_to_change()
             if value_to_change == '1':
-                student.login = MentorView.new_value('login')
+                student.login = MentorView.get_new_value('login')
             elif value_to_change == '2':
-                student.name = MentorView.new_value('name')
+                student.name = MentorView.get_new_value('name')
             elif value_to_change == '3':
-                student.password = MentorView.new_value('password')
+                student.password = MentorView.get_new_value('password')
             elif value_to_change == '4':
                 additional_days = MentorView.get_additional_attendance()
                 try:
@@ -146,7 +146,7 @@ class MentorController:
                 except:
                     MentorView.show_invalid_input()
             elif value_to_change == '5':
-                student.group = MentorView.new_value('group')
+                student.group = MentorView.get_new_value('group')
             elif value_to_change == '6':
                 return
             else:

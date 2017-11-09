@@ -7,7 +7,7 @@ class EmployeeView:
         print('Wrong input!')
 
     @staticmethod
-    def menu():
+    def display_menu():
         return input('''
         Choose option:
         1. Show students

@@ -3,7 +3,7 @@ import os
 
 class MentorView:
     @staticmethod
-    def date_error():
+    def display_date_error():
         print('Wrong date format!')
         input('Press enter to return')
 
@@ -18,7 +18,7 @@ class MentorView:
         input('Press enter to return')
 
     @staticmethod
-    def menu():
+    def display_menu():
         options = ['1', '2', '3', '4', '5', '6', '7', '8']
         option = ''
         while option not in options:
@@ -128,7 +128,7 @@ Choose option:
         return index
 
     @staticmethod
-    def student_value_to_change():
+    def get_student_value_to_change():
         os.system('clear')
         return input('''
 Which value would you like to change:
@@ -142,7 +142,7 @@ Type in 6 to return to main menu
 ''')
 
     @staticmethod
-    def new_value(string):
+    def get_new_value(string):
         return input('Type in new ' + string)
 
     @staticmethod

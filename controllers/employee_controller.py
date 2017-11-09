@@ -9,7 +9,7 @@ class EmployeeController:
         exit_program = False
         while not exit_program:
             os.system('clear')
-            option = EmployeeView.menu()
+            option = EmployeeView.display_menu()
             if option == "1":
                 self.show_students()
             elif option == "2":
