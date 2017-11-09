@@ -19,5 +19,5 @@ class EmployeeController:
 
     @staticmethod
     def show_students():
-        students_list = UserContainer.get_students_list()
+        students_list = UserContainer.get_instance().get_students_list()
         EmployeeView.display_students_list(students_list)
