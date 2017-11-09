@@ -68,7 +68,7 @@ class MentorController:
     def grade_assignment():
         student_index, assignment_index, grade = MentorView.get_grading_values()
         students_list = UserContainer.get_instance().get_students_list()
-        students_list[student_index].assigments[assignment_index].grade = grade
+        students_list[student_index].assignments[assignment_index].grade = grade
 
     @staticmethod
     def check_attendance():
@@ -84,7 +84,11 @@ class MentorController:
     def change_student_data():
         students_list = UserContainer.get_instance().get_students_list()
         student_index = MentorView.get_student_index()
-        student = students_list[student_index]
+        try:
+            student = students_list[student_index]
+        except IndexError:
+            MentorView.display_index_error()
+            return
         value_to_change = MentorView.student_value_to_change()
         if value_to_change == '1':
             student.login = MentorView.new_value('login')
