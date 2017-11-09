@@ -35,11 +35,11 @@ class RootController:
         """
         Main loop for the program
         """
+        RootView.display_animate_starting_screen()
         while True:
             os.system('clear')
-            RootView.display_starting_screen()
+            RootView.display_main_menu_screen()
             RootView.display_main_menu()
-
             option = getch()  # Todo -> move input to RootView
             if option == '1':
                 self.handle_sign_in()
