@@ -27,7 +27,7 @@ class StudentController:
                 elif user_input == '2':
                     self.show_student_grades()
                 elif user_input == '3':
-                    should_exit == True
+                    should_exit = True
             except IndexError:
                 StudentView.print_wrong_assignment_id_error()
             except ValueError:
@@ -36,6 +36,7 @@ class StudentController:
                 tb = traceback.format_exc()
                 print(tb)
                 input()
+        os.system('clear')
 
 
 
