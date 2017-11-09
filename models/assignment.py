@@ -8,3 +8,6 @@ class Assignment:
 
     def __str__(self):
         return 'Title: {}, Description: {}, Deadline: {}, Grade: {}, Submission: {}'.format(self.title, self.description, self.deadline, self.grade, self.submission)
+
+    def __repr__(self):
+        return 'Title: {}, Description: {}, Deadline: {}, Grade: {}, Submission: {}'.format(self.title, self.description, self.deadline, self.grade, self.submission)

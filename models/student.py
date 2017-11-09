@@ -19,9 +19,16 @@ class Student(User):
         return grades
 
     def add_student_assigment(self, deadline, title, description):
+        if self.assignments:
+            for existing_assignment in self.assignments:
+                if existing_assignment.title.lower() == title.lower():
+                    return
         assignment = Assignment(deadline, title, description)
         self.assignments.append(assignment)
 
-    def add_submission(self, assignment_index, submission):
-        assignment = self.assignments[assignment_index]
-        assignment.submission = submission
+    def add_submission(self, assignment_title, submission):
+        for assignment in self.assignments:
+            if assignment.title.lower() == assignment_title:
+                assignment.submission = submission
+
+

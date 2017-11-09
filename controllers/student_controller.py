@@ -16,6 +16,7 @@ class StudentController:
 
     def start(self):
         should_exit = False
+        self.update_user_assignments()
         while not should_exit:
             try:
                 os.system('clear')
@@ -78,13 +79,14 @@ class StudentController:
         StudentView.display_user_assignments(assignments_as_strings_list)
         submission_id = int(StudentView.get_user_input('Type submission ID: '))
         submission_content = StudentView.get_user_input('Type link to github repository: ')
-        self.student.add_submission(submission_id, submission_content)
+        self.student.add_submission(assignment_without_submission[submission_id].title, submission_content)
+        UserContainer.get_instance().save_users_to_file()
 
     def update_user_assignments(self):
         for global_assignment in AssignmentContainer.get_instance().get_assignments_list():
             add_assignment = True
             for user_assignment in self.student.assignments:
-                if user_assignment.name == global_assignment.name:
+                if user_assignment.title == global_assignment.title:
                     add_assignment = False
                     break
             if add_assignment:
