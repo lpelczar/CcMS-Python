@@ -2,6 +2,9 @@ import os
 
 
 class MentorView:
+    @staticmethod
+    def date_error():
+        print('Wrong date format!')
 
     @staticmethod
     def display_index_error():
@@ -49,7 +52,7 @@ Choose option:
     @staticmethod
     def return_assignment_values():
         os.system('clear')
-        deadline = input('Type in deadline for assignment dd-mm-yyyy: ')
+        deadline = input('Type in deadline for assignment yyyy-mm-dd: ')
         title = input('Type in title of the assignment: ')
         description = input('Describe your assignment: ')
         return deadline, title, description
