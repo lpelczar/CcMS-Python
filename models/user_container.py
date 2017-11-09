@@ -86,14 +86,21 @@ class UserContainer():
                 return user
         return None
 
+    def get_user_by_login(self, login):
+        for user in self.users:
+            if user.login == login:
+                return user
+        return None
+
     def add_user(self, user):
         """
         Methods add user to users and save to file.
         :param user: User -> user object
         :return: None
         """
-        self.users.append(user)
-        self.save_users_to_file()
+        if self.get_user(user.login, user.password) == None :
+            self.users.append(user)
+            self.save_users_to_file()
 
     def remove_user(self, user):
         """
