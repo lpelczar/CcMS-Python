@@ -15,17 +15,22 @@ class ManagerView:
         return input(prompt)
 
     @staticmethod
-    def display_users(users):
+    def display_actual_list(users):
         print('')
+        if not users:
+            print('List is empty!')
         for k, v in enumerate(users):
-            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' + v.get_name() + ' Role: ' + v.__class__.__name__)
+            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
+                  v.get_name() + ' Role: ' + v.__class__.__name__)
 
     @staticmethod
-    def display_students(students):
+    def display_users(users):
         print('')
-        for k, v in enumerate(students):
-            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' + v.get_name() + ' Role: ' + v.__class__.__name__)
-
+        if not users:
+            print('List is empty!')
+        for k, v in enumerate(users):
+            print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
+                  v.get_name() + ' Role: ' + v.__class__.__name__)
         input('\nPress ENTER to continue')
 
     @staticmethod
