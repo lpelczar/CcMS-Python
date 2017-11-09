@@ -41,6 +41,7 @@ Choose option:
         for assignment in assignments:
             print('Index: ' + str(assignments.index(assignment)) + ' Title: ' + assignment.title + '\n'
                   + assignment.description + '\n')
+        input('Press enter to return')
 
     @staticmethod
     def display_students_list(students_list):
@@ -51,6 +52,7 @@ Choose option:
             else:
                 group_str = "Not assigned"
             print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
+        input('Press enter to return')
 
     @staticmethod
     def return_assignment_values():
@@ -132,4 +134,5 @@ Which value would you like to change:
                 print("""
 There are currently no unassigned users
                 """)
+                input('Press enter to return')
                 return
