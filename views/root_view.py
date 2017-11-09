@@ -1,13 +1,14 @@
 import os
 import re
 import time
+import sys
 from views.colorful_view import ColorfulView
 
 
 class RootView:
 
     @staticmethod
-    def display_starting_screen(file_name='views/welcome_screen.txt'):
+    def display_animate_starting_screen(file_name='views/welcome_screen.txt'):
         """
         Argument: str ---> with filename to reader
         Return: None
@@ -15,14 +16,25 @@ class RootView:
         os.system('clear')
         with open(file_name) as f:
             reader = f.readlines()
-            for r in reader:
-                r = list(r)
-                for item in r:
+            for line in reader:
+                line = list(line)
+                for item in line:
+                    item = ColorfulView.format_ascii(item)
                     print(item, end='')
-                    time.sleep(0.001)
+                    sys.stdout.flush()
+                    speed = 0.002
+                    time.sleep(speed)
+
+    def display_main_menu_screen(file_name='views/welcome_screen.txt'):
+        """
+        Argument: str ---> with filename to reader
+        Return: None
+        """
+        os.system('clear')
+        with open(file_name) as f:
+            reader = f.read()
             reader = ColorfulView.format_ascii(reader)
-        # print(reader)
-        # time.sleep(1)
+            print(reader)
 
     @staticmethod
     def display_main_menu():
@@ -205,7 +217,7 @@ class RootView:
         """
         os.system('clear')
         print(ColorfulView.format_string_to_red('Entered user already exists!'))
-        time.sleep(2)
+        time.sleep(0.5)
 
     @staticmethod
     def display_user_not_exist():
@@ -216,8 +228,9 @@ class RootView:
         Method display information about not existing user account
         if someone try to singin with not exist login in database.
         """
+        os.system('clear')
         print(ColorfulView.format_string_to_red('User not exists!'))
-        time.sleep(2)
+        time.sleep(0.5)
 
     @staticmethod
     def display_error_user_singin():
