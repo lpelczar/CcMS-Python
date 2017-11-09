@@ -1,0 +1,4 @@
+(Manager)  1. login: jurek123 ; pass: Jurek123
+(Mentor)   2. login: mentor123 ; pass: Mentor123
+(Employee) 3. login: kati123 ; pass: Kati123
+(Student)  4. login: student123 ; pass: Student123
