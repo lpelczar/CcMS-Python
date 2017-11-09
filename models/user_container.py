@@ -19,7 +19,7 @@ class UserContainer():
     @classmethod
     def get_instance(cls):
         """
-        Retruns the singleton instance of Controller
+        Returns the singleton instance of Controller
         :return: None
         """
         if cls.INSTANCE is None:
@@ -118,7 +118,7 @@ class UserContainer():
             for existing_user in self.get_users_list():
                 if existing_user.login.lower() == user.login.lower():
                     raise AttributeError('User with this login already exists')
-        if self.get_user(user.login, user.password) == None :
+        if self.get_user(user.login, user.password) is None:
             self.users.append(user)
             self.save_users_to_file()
 
