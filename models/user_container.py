@@ -2,6 +2,7 @@ import pickle, os
 from models.student import Student
 from models.employee import Employee
 from models.mentor import Mentor
+from models.user import User
 
 FILE_NAME = 'users.csv'
 
@@ -48,10 +49,17 @@ class UserContainer():
 
     def get_users_list(self):
         """
-        Getter of users.
+        Getter of all users.
         :return:
         """
         return self.users
+
+    def get_users_with_user_range(self):
+        """
+        Getter of User class objects.
+        :return:
+        """
+        return [user for user in self.get_users_list() if user.__class__.__name__ == 'User']
 
     def get_students_list(self):
         """

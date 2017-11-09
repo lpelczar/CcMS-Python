@@ -8,7 +8,8 @@ class ManagerView:
               '2. Remove Mentor\n' +
               '3. Edit Mentor data\n' +
               '4. Display list of Mentors\n' +
-              '5. Display list of Students')
+              '5. Display list of Students\n'
+              '6. Exit manager')
 
     @staticmethod
     def get_user_input(prompt: str):
@@ -22,6 +23,7 @@ class ManagerView:
         for k, v in enumerate(users):
             print(str(k + 1) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
                   v.get_name() + ' Role: ' + v.__class__.__name__)
+        print('')
 
     @staticmethod
     def display_users(users):
@@ -42,6 +44,19 @@ class ManagerView:
         return input('Enter login of the user which do you want to remove: ')
 
     @staticmethod
+    def get_user_edit_input():
+        return input('Enter login of the mentor which do you want to modify: ')
+
+    @staticmethod
+    def get_new_value():
+        return input('Enter new value: ')
+
+    @staticmethod
+    def display_wrong_attribute():
+        print('There is no such attribute to change!')
+        input('\nPress ENTER to continue')
+
+    @staticmethod
     def display_user_promoted(user):
         print('User: {} has been promoted to Mentor'.format(user.get_login()))
         input('\nPress ENTER to continue')
@@ -50,6 +65,10 @@ class ManagerView:
     def display_user_deleted(user):
         print('User: {} has been deleted'.format(user.get_login()))
         input('\nPress ENTER to continue')
+
+    @staticmethod
+    def get_value_to_change():
+        return input('Enter what do you want to change: login, password, phone number, email, name ')
 
     @staticmethod
     def display_user_not_found():
