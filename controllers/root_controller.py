@@ -79,12 +79,16 @@ class RootController:
             if user:
                 if isinstance(user, Student):
                     StudentController(user).start()
+                    sys.exit()
                 elif isinstance(user, Mentor):
-                    MentorController.start()
+                    MentorController().start()
+                    sys.exit()
                 elif isinstance(user, Manager):
                     ManagerController(user).start()
+                    sys.exit()
                 elif isinstance(user, Employee):
                     EmployeeController.start()
+                    sys.exit()
                 elif isinstance(user, User):
                     RootView.display_error_user_singin()
                     sys.exit()
