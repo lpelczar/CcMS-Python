@@ -3,6 +3,7 @@ from models.assignment import Assignment
 from models.assignment_container import AssignmentContainer
 from views.mentor_view import MentorView
 from models.group import Group
+from models.student import Student
 
 
 class MentorController:
@@ -28,10 +29,11 @@ class MentorController:
             elif option == '6':
                 self.change_student_data()
             elif option == '7':
+                self.promote_user_to_student()
+            elif option == '8':
                 exit_program = True
             else:
                 MentorView.show_invalid_input()
-
 
     @classmethod
     def get_instance(cls):
@@ -94,4 +96,14 @@ class MentorController:
             student.attendance += MentorView.new_value('attendance')
         elif value_to_change == '5':
             student.group = MentorView.new_value('group')
+
+    @staticmethod
+    def promote_user_to_student():
+        not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
+        user_to_assign = MentorView.get_user_to_assign(not_assigned_users)
+        user_to_assign = Student(user_to_assign.name, user_to_assign.login, user_to_assign.password,
+                                 user_to_assign.phone_number, user_to_assign.email)
+        UserContainer.get_instance().remove_user(user_to_assign)
+        UserContainer.get_instance().add_user(user_to_assign)
+
 
