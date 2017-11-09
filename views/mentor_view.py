@@ -6,23 +6,34 @@ class MentorView:
 
     @staticmethod
     def menu():
-        options = ['1', '2', '3', '4', '5']
+        options = ['1', '2', '3', '4', '5', '6', '7']
         option = ''
         while option not in options:
             option = input("""
             Choose option:
             1.Show students
             2.Add assignment
-            3.Grade assignment
-            4.Check attendance
-            5.Change student data
-            6.Exit""")
+            3.Show assignments
+            4.Grade assignment
+            5.Check attendance
+            6.Change student data
+            7.Exit""")
         return option
+
+    @staticmethod
+    def display_assignments(assignments):
+        for assignment in assignments:
+            print('Index: ' + str(assignments.index(assignment)) + ' Title: ' + assignment.title + '\n'
+                  + assignment.description + '\n')
 
     @staticmethod
     def display_students_list(students_list):
         for student in students_list:
-            print(students_list.index(student) + student.get_name() + student.group)
+            if student.group:
+                group_str = student.group
+            else:
+                group_str = "Not assigned"
+            print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
 
     @staticmethod
     def return_assignment_values():

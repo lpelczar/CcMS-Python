@@ -41,13 +41,12 @@ class RootController:
             RootView.display_main_menu()
 
             option = getch()  # Todo -> move input to RootView
-            if option in self.OPTIONS.keys():
-                if option == '1':
-                    self.handle_sign_in()
-                elif option == '2':
-                    self.handle_sign_up()
-                elif option == '0':
-                    sys.exit()
+            if option == '1':
+                self.handle_sign_in()
+            elif option == '2':
+                self.handle_sign_up()
+            elif option == '0':
+                sys.exit()
 
     def handle_sign_up(self):
         """
@@ -78,13 +77,16 @@ class RootController:
             login, password = RootView.get_user_login_password()
             user = self.user_container.get_user(login, password)
             if user:
-                if isinstance(User, Student):
+                if isinstance(user, Student):
                     self.student_controller = StudentController(user)
-                elif isinstance(User, Mentor):
+                elif isinstance(user, Mentor):
                     self.mentor_controller = MentorController(user)
-                elif isinstance(User, Manager):
+                elif isinstance(user, Manager):
                     self.manager_controller = ManagerController(user)
-                elif isinstance(User, Employee):
+                elif isinstance(user, Employee):
                     self.employee_controller = EmployeeController(user)
+                elif isinstance(user, User):
+                    RootView.display_error_user_singin()
+                    sys.exit()
             else:
                 RootView.display_user_not_exist()

@@ -158,13 +158,25 @@ class RootView:
         return user_name
 
     @staticmethod
+    """
+    Arguments: str, str, str, str, str
+    Return: none
+
+    Method display information about created user account.
+    """
     def display_user_created(login, password, phone_number, email, name):
         os.system('clear')
-        print('\nYour succesful creat new account!\n Name: {}\n Phone number: {},'.format(name, phone_number) +
-              '\n Login: {}, \nPassword: {} \nEmail!: {}'.format(login, password, email))
+        print('\nYour succesful creat new account!\n Name: {}\nPhone number: {},'.format(name, phone_number) +
+              '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email))
         input('Press enter to back')
 
     @staticmethod
+    """
+    Argument: none
+    Return: none
+
+    Method display information if user already exist.
+    """
     def display_user_already_exists():
         os.system('clear')
         print('Entered user already exists!')
@@ -172,5 +184,25 @@ class RootView:
 
     @staticmethod
     def display_user_not_exist():
+        """
+        Argument: none
+        Return: none
+
+        Method display information about not existing user account
+        if someone try to singin with not exist login in database.
+        """
         print('User not exists!')
         time.sleep(2)
+
+    @staticmethod
+    def display_error_user_singin():
+        """
+        Argument: none
+        Return: none
+
+        Method display infromation when created user try to singin without any status of student, mentor etc.
+        """
+        os.system('clear')
+        print('\nYou try to sing in as random user, please wait for manager or mentor to change your status!')
+        print('\n\nWe will inform you when it will be ready.\n\nThank you for patient!')
+        time.sleep(4)
