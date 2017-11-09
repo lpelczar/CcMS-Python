@@ -35,6 +35,7 @@ class MentorController:
                 exit_program = True
             else:
                 MentorView.show_invalid_input()
+        exit()
 
     @classmethod
     def get_instance(cls):
@@ -73,19 +74,43 @@ class MentorController:
 
     @staticmethod
     def grade_assignment():
-        student_index, assignment_index, grade = MentorView.get_grading_values()
         students_list = UserContainer.get_instance().get_students_list()
-        students_list[student_index].assignments[assignment_index].grade = grade
+        if not students_list:
+            MentorView.display_not_enough_data()
+            return
+        student_index = MentorView.get_student_index(students_list)
+        try:
+            student_index = int(student_index)
+            if not students_list[student_index].assignments:
+                MentorView.display_not_enough_data()
+                return
+            assignment_index, grade = MentorView.get_grade_values(students_list[student_index])
+            assignment_index = int(assignment_index)
+        except:
+            MentorView.show_invalid_input()
+            return
+        students_list = UserContainer.get_instance().get_students_list()
+        try:
+            students_list[student_index].assignments[assignment_index].grade = grade
+        except:
+            MentorView.display_index_error()
+            return
 
     @staticmethod
     def check_attendance():
-        groups = Group.get_groups()
+        groups = Group.groups_list
         if groups:
-            group_name = MentorView.get_group_name(groups)
+            group_index = MentorView.get_group_index(groups)
+            try:
+                group_index = int(group_index)
+                group = groups[group_index]
+            except:
+                MentorView.display_index_error()
+                return
         else:
             return
-        group = Group.get_students_by_group(group_name)
-        for student in group:
+        group_students = Group.get_students_by_group(group.name)
+        for student in group_students:
             student_present = MentorView.get_presence(student)
             if student_present:
                 student.attendance += 1
@@ -93,29 +118,49 @@ class MentorController:
 
     @staticmethod
     def change_student_data():
+        value_changing = True
         students_list = UserContainer.get_instance().get_students_list()
-        student_index = MentorView.get_student_index()
+        if not students_list:
+            MentorView.display_not_enough_data()
+            return
+        student_index = MentorView.get_student_index(students_list)
         try:
+            student_index = int(student_index)
             student = students_list[student_index]
         except IndexError:
             MentorView.display_index_error()
             return
         value_to_change = MentorView.student_value_to_change()
-        if value_to_change == '1':
-            student.login = MentorView.new_value('login')
-        elif value_to_change == '2':
-            student.name = MentorView.new_value('name')
-        elif value_to_change == '3':
-            student.password = MentorView.new_value('password')
-        elif value_to_change == '4':
-            student.attendance += MentorView.new_value('attendance')
-        elif value_to_change == '5':
-            student.group = MentorView.new_value('group')
+        while value_changing:
+            if value_to_change == '1':
+                student.login = MentorView.new_value('login')
+            elif value_to_change == '2':
+                student.name = MentorView.new_value('name')
+            elif value_to_change == '3':
+                student.password = MentorView.new_value('password')
+            elif value_to_change == '4':
+                additional_days = MentorView.get_additional_attendance()
+                try:
+                    student.attendance += int(additional_days)
+                except:
+                    MentorView.show_invalid_input()
+            elif value_to_change == '5':
+                student.group = MentorView.new_value('group')
+            elif value_to_change == '6':
+                return
+            else:
+                MentorView.show_invalid_input()
 
     @staticmethod
     def promote_user_to_student():
         not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
-        user_to_assign = MentorView.get_user_to_assign(not_assigned_users)
+        user_index = MentorView.get_user_index(not_assigned_users)
+        try:
+            user_index = int(user_index)
+            user_to_assign = not_assigned_users[user_index]
+        except:
+            MentorView.display_index_error()
+            return
         name = user_to_assign.name
         login = user_to_assign.login
         password = user_to_assign.password
