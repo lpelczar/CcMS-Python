@@ -19,10 +19,10 @@ class MentorView:
 
     @staticmethod
     def menu():
-        os.system('clear')
         options = ['1', '2', '3', '4', '5', '6', '7', '8']
         option = ''
         while option not in options:
+            os.system('clear')
             option = input("""
 Choose option:
 1.Show students
@@ -30,7 +30,7 @@ Choose option:
 3.Show assignments
 4.Grade assignment
 5.Check attendance
-6.Change student   
+6.Change student data 
 7.Promote user to student 
 8.Exit""")
         return option
@@ -69,8 +69,12 @@ Choose option:
                 grade_str = 'Not graded yet'
             else:
                 grade_str = assignment.grade
-            print('Title: ' + assignment.title + '\nSubmission: ' + assignment.submission + '\n\nGrade:' +
-                  grade_str + '\n\n\n')
+            if not assignment.submission:
+                assignment_str = 'No submission'
+            else:
+                assignment_str = assignment.submission
+            print('Title: ' + assignment.title + '\nSubmission: ' + assignment_str + '\nGrade:' +
+                  grade_str + '\n\n ')
         input('Press enter to return')
 
     @staticmethod
