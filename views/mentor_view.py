@@ -17,7 +17,8 @@ class MentorView:
             4.Grade assignment
             5.Check attendance
             6.Change student data
-            7.Exit""")
+            7.Promote user to student 
+            8.Exit""")
         return option
 
     @staticmethod
