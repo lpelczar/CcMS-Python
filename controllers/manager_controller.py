@@ -2,7 +2,8 @@ from models.user_container import UserContainer
 from models.manager import Manager
 from models.mentor import Mentor
 from views.manager_view import ManagerView
-import os, traceback
+import os
+import traceback
 
 
 class ManagerController:
@@ -51,6 +52,8 @@ class ManagerController:
     def promote_user_to_mentor(self):
         """
         Make selected User a Mentor
+
+        :return: None
         """
         users = self.user_container.get_users_list()
         ManagerView.display_actual_list(users)
@@ -67,7 +70,9 @@ class ManagerController:
 
     def remove_mentor(self):
         """
-        Remove mentor from list
+        Remove mentor from list and display appripriate message
+
+        :return: None
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
@@ -80,9 +85,19 @@ class ManagerController:
             ManagerView.display_user_not_found()
 
     def display_students(self):
+        """
+        Display list of all students
+
+        :return: None
+        """
         students = self.user_container.get_students_list()
         ManagerView.display_users(students)
 
     def display_mentors(self):
+        """
+        Display list of all mentors
+
+        :return: None
+        """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_users(mentors)
