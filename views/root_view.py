@@ -207,7 +207,7 @@ class RootView:
         Method display information about created user account.
             """
         os.system('clear')
-        account_created_info1 = '\nYou have created a new account!\n Name: {}\nPhone number: {},'.format(name, phone_number)
+        account_created_info1 = '\nYou have created a new account!\nName: {}\nPhone number: {},'.format(name, phone_number)
         account_created_info2 = '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email)
         acc_info = account_created_info1 + account_created_info2
         print(ColorfulView.format_string_to_green(acc_info))
