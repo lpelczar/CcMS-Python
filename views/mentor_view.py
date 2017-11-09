@@ -165,3 +165,17 @@ There are currently no unassigned users
                 """)
             input('Press enter to return')
             return
+
+    @staticmethod
+    def get_group_index(group_list):
+        MentorView.display_groups(group_list)
+        group_index = input('Choose group: ')
+
+    @staticmethod
+    def display_groups(group_list, exit_with_enter=False):
+        os.system('clear')
+        print('Current groups: ')
+        for group in group_list:
+            print(str(group_list.index(group)) + group.name)
+        if exit_with_enter:
+            input('Press enter to return')

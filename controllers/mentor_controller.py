@@ -109,6 +109,7 @@ class MentorController:
                 MentorView.display_index_error()
                 return
         else:
+            MentorView.display_not_enough_data()
             return
         group_students = Group.get_students_by_group(group.name)
         for student in group_students:
@@ -146,7 +147,15 @@ class MentorController:
                 except:
                     MentorView.show_invalid_input()
             elif value_to_change == '5':
-                student.group = MentorView.get_new_value('group')
+                groups = Group.groups_list
+                if not groups:
+                    MentorView.display_not_enough_data()
+                group_index = MentorView.get_group_index(groups)
+                try:
+                    group_index = int(group_index)
+                    student.group = groups[group_index]
+                except:
+                    MentorView.show_invalid_input()
             elif value_to_change == '6':
                 return
             else:
