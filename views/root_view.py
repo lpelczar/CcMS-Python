@@ -14,9 +14,15 @@ class RootView:
         """
         os.system('clear')
         with open(file_name) as f:
-            reader = f.read()
+            reader = f.readlines()
+            for r in reader:
+                r = list(r)
+                for item in r:
+                    print(item, end='')
+                    time.sleep(0.001)
             reader = ColorfulView.format_ascii(reader)
-        print(reader)
+        # print(reader)
+        # time.sleep(1)
 
     @staticmethod
     def display_main_menu():
@@ -183,8 +189,10 @@ class RootView:
         Method display information about created user account.
             """
         os.system('clear')
-        print('\nYour succesful creat new account!\n Name: {}\nPhone number: {},'.format(name, phone_number) +
-              '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email))
+        account_created_info1 = '\nYour succesful creat new account!\n Name: {}\nPhone number: {},'.format(name, phone_number)
+        account_created_info2 = '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email)
+        acc_info = account_created_info1 + account_created_info2
+        print(ColorfulView.format_string_to_green(acc_info))
         input('Press enter to back')
 
     @staticmethod
