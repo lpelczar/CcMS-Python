@@ -35,14 +35,6 @@ class StudentView:
         input('\nPress ENTER to continue')
 
     @staticmethod
-    def display_user_assignments(assignments: list):
-        os.system('clear')
-        print('Your assignments: ')
-
-        for id, assignment in enumerate(assignments):
-            print(str(id) + '. ' + assignment)
-
-    @staticmethod
     def display_student_menu(user_login, role):
         greeting_message = 'Logged as {} ({}) \n'.format(user_login, role)
         print(greeting_message,
