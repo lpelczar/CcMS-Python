@@ -44,9 +44,10 @@ class Group:
     def get_students_by_group(group_name:str):
 
         #gets all students from UserContainer's users list using list comprehension
-        students_list = [user for user in UserContainer.get_instance().get_users_list() if isinstance(user, Student)]
+        students_list = UserContainer.get_instance().get_students_list()
 
-        students_by_group_list = [student for student in students_list if student.group.lower() == group_name.lower()]
+        students_by_group_list = [student for student in students_list if student.group != None
+                                  and student.group.name.lower() == group_name.lower()]
 
         return students_by_group_list
 

@@ -37,7 +37,7 @@ Choose option:
 
     @staticmethod
     def display_not_enough_data():
-        print('You have no students and/or assignments added')
+        print('You have no students/groups/assignments added')
 
     @staticmethod
     def display_assignments(assignments):
@@ -112,7 +112,7 @@ Choose option:
         os.system('clear')
         presence = None
         while presence != 'y' or presence != 'n':
-            presence = input('Is ' + student.get_name + ' present? (y/n)')
+            presence = input('Is ' + student.name + ' present? (y/n)')
             if presence == 'y':
                 return True
             if presence == 'n':
