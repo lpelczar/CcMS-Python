@@ -46,6 +46,7 @@ class RootController:
             elif option == '2':
                 self.handle_sign_up()
             elif option == '0':
+                UserContainer.get_instance().save_users_to_file()
                 sys.exit()
 
     def handle_sign_up(self):

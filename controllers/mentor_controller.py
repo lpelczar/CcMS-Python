@@ -35,6 +35,7 @@ class MentorController:
                 exit_program = True
             else:
                 MentorView.show_invalid_input()
+        UserContainer.get_instance().save_users_to_file()
         exit()
 
     @classmethod

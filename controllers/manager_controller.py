@@ -39,6 +39,7 @@ class ManagerController:
                 tb = traceback.format_exc()
                 print(tb)
                 input()
+        UserContainer.get_instance().save_users_to_file()
         os.system('clear')
 
     @classmethod

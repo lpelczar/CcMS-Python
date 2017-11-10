@@ -16,6 +16,7 @@ class EmployeeController:
                 exit_program = True
             else:
                 EmployeeView.display_input_error()
+        UserContainer.get_instance().save_users_to_file()
         exit()
 
     @staticmethod
