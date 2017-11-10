@@ -100,7 +100,7 @@ class MentorController:
 
     @staticmethod
     def check_attendance():
-        groups = Group.groups_list
+        groups = Group.get_groups()
         if groups:
             group_index = MentorView.get_group_index(groups)
             try:
@@ -117,6 +117,7 @@ class MentorController:
             student_present = MentorView.get_presence(student)
             if student_present:
                 student.attendance += 1
+        UserContainer.get_instance().save_users_to_file()
         group.attendance_check_count += 1
 
     @staticmethod
@@ -148,13 +149,14 @@ class MentorController:
                 except:
                     MentorView.show_invalid_input()
             elif value_to_change == '5':
-                groups = Group.groups_list
+                groups = Group.get_groups()
                 if not groups:
                     MentorView.display_not_enough_data()
                 group_index = MentorView.get_group_index(groups)
                 try:
                     group_index = int(group_index)
                     student.group = groups[group_index]
+                    UserContainer.get_instance().save_users_to_file()
                 except:
                     MentorView.show_invalid_input()
             elif value_to_change == '6':
