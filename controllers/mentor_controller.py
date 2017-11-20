@@ -37,16 +37,6 @@ class MentorController:
         UserContainer.get_instance().save_users_to_file()
         exit()
 
-    @classmethod
-    def get_instance(cls):
-        """
-        Returns the singleton instance of Controller
-        :return: None
-        """
-        if cls.INSTANCE is None:
-            cls.INSTANCE = MentorController()
-        return cls.INSTANCE
-
     @staticmethod
     def show_students():
         students_list = UserContainer.get_instance().get_students_list()
