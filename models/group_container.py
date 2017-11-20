@@ -4,6 +4,8 @@ import pickle
 from models.group import Group
 from models.student import Student
 
+STUDENT_ALREADY_IN_GROUP = 'This student already belongs to group {} !'
+
 GROUP_DOES_NOT_EXIST = "Such group does not exist !"
 
 ALREADY_EXISTS = "An instantiation already exists!"
@@ -118,11 +120,9 @@ class GroupContainer:
         :param student: Student -> Student instance
         :return: str -> name of the group to which student belongs
         """
-        if not self.groups: return None
         for group in self.groups:
             if student.login in group.student_login_list:
                 return group.name
-        return None
 
     def add_student_to_group(self, group_name: str, student: Student):
         """
@@ -132,6 +132,7 @@ class GroupContainer:
         :return: None
         """
         self.__raises_error_if_group_does_not_exist(group_name)
+        self.__raises_error_if_student_already_in_group(student)
         group = self.get_group(group_name)
         group.student_login_list.append(student.login)
         self.save_groups_to_file()
@@ -157,3 +158,13 @@ class GroupContainer:
         """
         if not self.does_group_exist(group_name):
             raise AttributeError(GROUP_DOES_NOT_EXIST)
+
+    def __raises_error_if_student_already_in_group(self, student: Student):
+        """
+        Private method that raises an exception if given student is already in group.
+        :param student: Student -> the Student instance to check
+        :return:
+        """
+        current_student_group = self.get_student_group_name(student)
+        if current_student_group:
+            raise AttributeError(STUDENT_ALREADY_IN_GROUP.format(current_student_group))
