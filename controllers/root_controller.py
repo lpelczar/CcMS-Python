@@ -47,7 +47,7 @@ class RootController:
             login = RootView.create_user_login()
             password = PasswordService.encrypt_password(RootView.create_user_password())
 
-            if self.user_container.get_user(login, password):
+            if self.user_container.get_user_by_login(login):
                 RootView.display_user_already_exists()
             else:
                 phone_number = RootView.create_user_phone_number()
