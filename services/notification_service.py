@@ -1,5 +1,6 @@
 from services.smsapi.client import SmsAPI
 from services.smsapi.responses import ApiError
+import smtplib
 
 
 class SmsService:
@@ -23,3 +24,15 @@ class SmsService:
 
         except ApiError:
             print('Error encountered while sending message!')
+
+
+class EmailService:
+
+    @staticmethod
+    def send_email(email_text, email):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login("kreatywnoscaktywnosc@gmail.com", "kreatywnosc")
+
+        msg = email_text
+        server.sendmail("kreatywnoscaktywnosc@gmail.com", email, msg)
