@@ -1,6 +1,8 @@
-import pickle
 import os
+import pickle
+
 from models.group import Group
+from models.student import Student
 
 GROUP_DOES_NOT_EXIST = "Such group does not exist !"
 
@@ -109,6 +111,43 @@ class GroupContainer:
             if group.name.upper() == group_name.upper():
                 return True
         return False
+
+    def get_student_group_name(self, student: Student):
+        """
+        Method returns student group name, otherwise it returns None
+        :param student: Student -> Student instance
+        :return: str -> name of the group to which student belongs
+        """
+        if not self.groups: return None
+        for group in self.groups:
+            if student.login in group.student_login_list:
+                return group.name
+        return None
+
+    def add_student_to_group(self, group_name: str, student: Student):
+        """
+        Methods add student to group.
+        :param group_name: str -> name of group to which student should be added
+        :param student: Student - > instance of student to be added to given group
+        :return: None
+        """
+        self.__raises_error_if_group_does_not_exist(group_name)
+        group = self.get_group(group_name)
+        group.student_login_list.append(student.login)
+        self.save_groups_to_file()
+
+    def remove_student_from_group(self, group_name: str, student: Student):
+        """
+        Remove add student from group.
+        :param group_name: str -> name of group to which student should be added
+        :param student: Student - > instance of student to be added to given group
+        :return: None
+        """
+        self.__raises_error_if_group_does_not_exist(group_name)
+        group = self.get_student_group_name(student)
+        if not group:
+            raise AttributeError('This user does not belong to any group !')
+        group.remove(student.login)
 
     def __raises_error_if_group_does_not_exist(self, group_name: str):
         """
