@@ -37,18 +37,15 @@ class MentorController:
         UserContainer.get_instance().save_users_to_file()
         exit()
 
-    @staticmethod
-    def show_students():
+    def show_students(self):
         students_list = UserContainer.get_instance().get_students_list()
         MentorView.display_students_list(students_list)
 
-    @staticmethod
-    def show_assignments():
+    def show_assignments(self):
         assignments = AssignmentContainer.get_instance().get_assignments_list()
         MentorView.display_assignments(assignments)
 
-    @staticmethod
-    def add_assignment():
+    def add_assignment(self):
         students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.return_assignment_values()
         try:
@@ -62,8 +59,7 @@ class MentorController:
         for student in students_list:
             student.add_student_assignment(deadline, title, description)
 
-    @staticmethod
-    def grade_assignment():
+    def grade_assignment(self):
         students_list = UserContainer.get_instance().get_students_list()
         if not students_list:
             MentorView.display_not_enough_data()
@@ -87,8 +83,7 @@ class MentorController:
             MentorView.display_index_error()
             return
 
-    @staticmethod
-    def check_attendance():
+    def check_attendance(self):
         groups = Group.get_groups()
         if groups:
             group_index = MentorView.get_group_index(groups)
@@ -109,8 +104,7 @@ class MentorController:
         UserContainer.get_instance().save_users_to_file()
         group.attendance_check_count += 1
 
-    @staticmethod
-    def change_student_data():
+    def change_student_data(self):
         value_changing = True
         students_list = UserContainer.get_instance().get_students_list()
         if not students_list:
@@ -153,8 +147,7 @@ class MentorController:
             else:
                 MentorView.show_invalid_input()
 
-    @staticmethod
-    def promote_user_to_student():
+    def promote_user_to_student(self):
         not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
         user_index = MentorView.get_user_index(not_assigned_users)
         try:
