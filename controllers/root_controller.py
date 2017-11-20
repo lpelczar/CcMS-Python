@@ -46,7 +46,8 @@ class RootController:
         user_created = False
         while not user_created:
             login = RootView.create_user_login()
-            password = PasswordService.encrypt_password(RootView.create_user_password())
+            password = RootView.create_user_password()
+            hashed_password = PasswordService.encrypt_password(password)
 
             if self.user_container.get_user_by_login(login):
                 RootView.display_user_already_exists()
@@ -54,7 +55,7 @@ class RootController:
                 phone_number = RootView.create_user_phone_number()
                 email = RootView.create_user_email()
                 name = RootView.add_user_name()
-                self.user_container.add_user(User(login, password, phone_number, email, name))
+                self.user_container.add_user(User(login, hashed_password, phone_number, email, name))
                 RootView.display_user_created(login, password, phone_number, email, name)
                 user_created = True
 
