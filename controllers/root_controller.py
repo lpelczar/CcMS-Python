@@ -43,7 +43,8 @@ class RootController:
         Handle creating new User
         """
         RootView.display_sign_menu(True)
-        while True:
+        user_created = False
+        while not user_created:
             login = RootView.create_user_login()
             password = PasswordService.encrypt_password(RootView.create_user_password())
 
@@ -55,6 +56,7 @@ class RootController:
                 name = RootView.add_user_name()
                 self.user_container.add_user(User(login, password, phone_number, email, name))
                 RootView.display_user_created(login, password, phone_number, email, name)
+                user_created = True
 
     def handle_sign_in(self):
         """
