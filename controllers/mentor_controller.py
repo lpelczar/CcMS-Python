@@ -8,10 +8,9 @@ from datetime import date
 
 
 class MentorController:
+
     def __init__(self):
-        self.INSTANCE = None
-        if self.INSTANCE is not None:
-            raise ValueError("An instantiation already exists!")
+        ...
 
     def start(self):
         exit_program = False
