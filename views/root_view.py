@@ -165,16 +165,32 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        lenght_number = 9
         incorrect_phone_number = True
 
         while incorrect_phone_number:
             print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
             phone_number = input()
-            if phone_number.isdigit() and len(phone_number) == lenght_number:
+
+            if re.match(r'\d{3}[\s\\\/\-]?\d{3}[\s\\\/\-]?\d{3}', phone_number):
                 incorrect_phone_number = False
 
+        phone_number = RootView.convert_phone_number_to_data_format(phone_number)
         return phone_number
+
+    @staticmethod
+    def convert_phone_number_to_data_format(phone_number):
+        """
+        Method convert phone number to database format.
+
+        Param: str
+        Return: str
+        """
+        format_phone_number = '+48'
+        for number in phone_number:
+            if number.isdigit():
+                format_phone_number += number
+
+        return format_phone_number
 
     @staticmethod
     def get_user_login_password():

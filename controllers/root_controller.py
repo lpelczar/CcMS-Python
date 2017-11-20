@@ -54,7 +54,7 @@ class RootController:
                 email = RootView.create_user_email()
                 name = RootView.add_user_name()
                 self.user_container.add_user(User(login, password, phone_number, email, name))
-                RootView.display_user_created(login, password, phone_number, email, name)  # Todo -> in RootView 'User has been created!'
+                RootView.display_user_created(login, password, phone_number, email, name)
                 break
 
     def handle_sign_in(self):
