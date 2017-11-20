@@ -64,25 +64,22 @@ class RootController:
         Handle logging to existing user
         """
         RootView.display_sign_menu(False)
-        while True:
+        logged_in = False
+        while not logged_in:
             login, password = RootView.get_user_login_password()
             password = PasswordService.encrypt_password(password)
             user = self.user_container.get_user(login, password)
             if user:
+                logged_in = True
                 if isinstance(user, Student):
                     StudentController(user).start()
-                    sys.exit()
                 elif isinstance(user, Mentor):
                     MentorController().start()
-                    sys.exit()
                 elif isinstance(user, Manager):
                     ManagerController(user).start()
-                    sys.exit()
                 elif isinstance(user, Employee):
                     EmployeeController().start()
-                    sys.exit()
                 elif isinstance(user, User):
                     RootView.display_error_user_singin()
-                    sys.exit()
             else:
                 RootView.display_user_not_exist()
