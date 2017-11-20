@@ -101,20 +101,15 @@ class RootView:
         max_pass_length = 30
         min_pass_lenght = 5
 
-        incorrect_input = True
-        while incorrect_input:
+        incorrect_password = True
+        while incorrect_password:
             print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
                                                        'digit, it must contain min 6 chars and '
                                                        'it cant be longer than 30 characters): '))
             user_password = input()
             if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
-                for sign in user_password:
-                    if sign.isdigit():
-                        for sign in user_password:
-                            if sign.isupper():
-                                for sign in user_password:
-                                    if sign.islower():
-                                        incorrect_input = False
+                if re.match(r'[A-Za-z]+[\d]+', user_password):
+                    incorrect_password = False
 
         return user_password
 
@@ -170,16 +165,32 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        lenght_number = 9
         incorrect_phone_number = True
 
         while incorrect_phone_number:
             print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
             phone_number = input()
-            if phone_number.isdigit() and len(phone_number) == lenght_number:
+
+            if re.match(r'\d{3}[\s\\\/\-]?\d{3}[\s\\\/\-]?\d{3}', phone_number):
                 incorrect_phone_number = False
 
+        phone_number = RootView.convert_phone_number_to_data_format(phone_number)
         return phone_number
+
+    @staticmethod
+    def convert_phone_number_to_data_format(phone_number):
+        """
+        Method convert phone number to database format.
+
+        Param: str
+        Return: str
+        """
+        format_phone_number = '+48'
+        for number in phone_number:
+            if number.isdigit():
+                format_phone_number += number
+
+        return format_phone_number
 
     @staticmethod
     def get_user_login_password():
