@@ -16,20 +16,8 @@ import os
 
 class RootController:
 
-    INSTANCE = None
-
     def __init__(self):
         self.user_container = UserContainer.get_instance()
-
-    @classmethod
-    def get_instance(cls):
-        """
-        Returns the singleton instance of Controller
-        :return: None
-        """
-        if cls.INSTANCE is None:
-            cls.INSTANCE = RootController()
-        return cls.INSTANCE
 
     def start(self):
         """
