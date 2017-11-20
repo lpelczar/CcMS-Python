@@ -6,11 +6,7 @@ from models.assignment_container import AssignmentContainer
 
 class StudentController:
 
-    INSTANCE = None
-
     def __init__(self, student:Student):
-        if self.INSTANCE is not None:
-            raise ValueError("An instantiation already exists!")
         self.user_container = UserContainer.get_instance()
         self.student = student
 
@@ -44,17 +40,6 @@ class StudentController:
         UserContainer.get_instance().save_users_to_file()
         os.system('clear')
 
-
-
-    @classmethod
-    def get_instance(cls, student:Student):
-        """
-        Returns the singleton instance of Controller
-        :return: None
-        """
-        if cls.INSTANCE is None:
-            cls.INSTANCE = StudentController(student)
-        return cls.INSTANCE
 
     def show_student_grades(self):
         """

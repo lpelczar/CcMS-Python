@@ -8,10 +8,9 @@ from datetime import date
 
 
 class MentorController:
+
     def __init__(self):
-        self.INSTANCE = None
-        if self.INSTANCE is not None:
-            raise ValueError("An instantiation already exists!")
+        ...
 
     def start(self):
         exit_program = False
@@ -37,16 +36,6 @@ class MentorController:
                 MentorView.show_invalid_input()
         UserContainer.get_instance().save_users_to_file()
         exit()
-
-    @classmethod
-    def get_instance(cls):
-        """
-        Returns the singleton instance of Controller
-        :return: None
-        """
-        if cls.INSTANCE is None:
-            cls.INSTANCE = MentorController()
-        return cls.INSTANCE
 
     @staticmethod
     def show_students():
