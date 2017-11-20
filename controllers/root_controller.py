@@ -10,6 +10,7 @@ from models.mentor import Mentor
 from models.manager import Manager
 from models.employee import Employee
 from controllers.key_getch import getch
+from services.password_service import PasswordService
 import sys
 import os
 
@@ -44,18 +45,16 @@ class RootController:
         RootView.display_sign_menu(True)
         while True:
             login = RootView.create_user_login()
-            password = RootView.create_user_password()
+            password = PasswordService.encrypt_password(RootView.create_user_password())
 
             if self.user_container.get_user(login, password):
                 RootView.display_user_already_exists()
-                continue
             else:
                 phone_number = RootView.create_user_phone_number()
                 email = RootView.create_user_email()
                 name = RootView.add_user_name()
                 self.user_container.add_user(User(login, password, phone_number, email, name))
-                RootView.display_user_created(login, password, phone_number, email, name)  # Todo -> in RootView 'User has been created!'
-                break
+                RootView.display_user_created(login, password, phone_number, email, name)
 
     def handle_sign_in(self):
         """
@@ -64,6 +63,7 @@ class RootController:
         RootView.display_sign_menu(False)
         while True:
             login, password = RootView.get_user_login_password()
+            password = PasswordService.encrypt_password(password)
             user = self.user_container.get_user(login, password)
             if user:
                 if isinstance(user, Student):
