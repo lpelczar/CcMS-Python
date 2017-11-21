@@ -109,7 +109,7 @@ class RootView:
             if re.match(r'^(?=.*?\d)(?=.*?[A-Z])(?=.*?[a-z])[A-Za-z\d]{6,30}$', user_password):
                 incorrect_password = False
 
-        return PasswordService.encrypt_password(user_password)
+        return user_password
 
     @staticmethod
     def create_user_login():
