@@ -211,8 +211,15 @@ class RootView:
 
         Method create users name and return it.
         """
-        print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
-        user_name = input()
+        incorrect = True
+        while incorrect:
+
+            print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
+            user_name = input()
+
+            if re.match(r'^(?=[A-Za-z])[\sA-Za-z]{5,30}$', user_name):
+                incorrect = False
+
         return user_name
 
     @staticmethod
