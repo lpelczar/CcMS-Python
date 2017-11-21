@@ -1,8 +1,11 @@
-import os, traceback
+import os
+import traceback
+
+from models.assignment_container import AssignmentContainer
 from models.student import Student
 from models.user_container import UserContainer
 from views.student_view import StudentView
-from models.assignment_container import AssignmentContainer
+
 
 class StudentController:
 
@@ -78,13 +81,20 @@ class StudentController:
         :return:
         """
         for global_assignment in AssignmentContainer.get_instance().get_assignments_list():
-            add_assignment = True
-            for user_assignment in self.student.assignments:
-                if user_assignment.title == global_assignment.title:
-                    add_assignment = False
-                    break
-            if add_assignment:
+            if self.does_user_have_assignment(global_assignment):
                 self.student.add_student_assignment(global_assignment.deadline, global_assignment.title,
                                                     global_assignment.description)
 
 
+    def does_user_have_assignment(self, global_assignment):
+        """
+        Method checks if user already have given assignment
+        :param global_assignment: Assignment -> assignment to check
+        :return: bool
+        """
+        add_assignment = True
+        for user_assignment in self.student.assignments:
+            if user_assignment.title == global_assignment.title:
+                add_assignment = False
+                break
+        return add_assignment
