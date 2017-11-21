@@ -1,4 +1,4 @@
-from colorful_view import ColorfulView
+from views.colorful_view import ColorfulView
 STARTING_INDEX = 1
 
 
@@ -42,6 +42,14 @@ class ManagerView:
         input('\nPress ENTER to continue')
 
     @staticmethod
+    def display_mentor_information(mentor_data):
+        print(ColorfulView.format_string_to_yellow('Name: ') + mentor_data.name
+              + ColorfulView.format_string_to_green('\nLogin: ') + mentor_data.login
+              + ColorfulView.format_string_to_green('\nPassword: ') + mentor_data.password
+              + ColorfulView.format_string_to_green('\nPhone number: ') + mentor_data.phone_number
+              + ColorfulView.format_string_to_green('\nEmail: ') + mentor_data.email)
+
+    @staticmethod
     def get_promotion_input():
         return input('Enter login of the user which do you want to promote to Mentor: ')
 
@@ -74,7 +82,8 @@ class ManagerView:
 
     @staticmethod
     def get_value_to_change():
-        return input('Enter what do you want to change: login, password, phone number, email, name ')
+        return input('Enter what do you want to change('
+                     + ColorfulView.format_string_to_green('login, password, phone number, email, name') + '):')
 
     @staticmethod
     def display_user_not_found():
