@@ -1,6 +1,8 @@
-from models.user_container import UserContainer
 import uuid
+
+from models.user_container import UserContainer
 from services.notification_service import EmailService, SmsService
+from services.password_service import PasswordService
 
 TOKEN_LENGTH = 8
 
@@ -54,7 +56,7 @@ class RecoveryService:
 
     def change_password(self, password: str, token: str):
         self.raise_exception_if_user_token_is_not_correct(token)
-        self.user.password = password
+        self.user.password = PasswordService.encrypt_password(password)
         delattr(self.user, 'token')
         UserContainer.get_instance().save_users_to_file()
 
