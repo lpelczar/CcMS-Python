@@ -1,5 +1,6 @@
 from views.colorful_view import ColorfulView
 import os
+import time
 STARTING_INDEX = 1
 
 
@@ -8,13 +9,13 @@ class ManagerView:
     @staticmethod
     def display_manager_menu(user_login, role):
         greeting_message = ColorfulView.format_string_to_yellow('Logged as {} ({}) \n'.format(user_login, role))
-        print(ColorfulView.format_string_to_green(greeting_message +
+        print(ColorfulView.format_string_to_green(greeting_message) +
               '1. Promote user to Mentor\n' +
               '2. Remove Mentor\n' +
               '3. Edit Mentor data\n' +
               '4. Display list of Mentors\n' +
               '5. Display list of Students\n'
-              '6. Exit manager'))
+              '6. Exit manager')
 
     @staticmethod
     def get_user_input(prompt: str):
@@ -25,6 +26,7 @@ class ManagerView:
         print('')
         if not users:
             print(ColorfulView.format_string_to_red('List is empty!'))
+            return True
         for k, v in enumerate(users):
             print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
                   + ColorfulView.format_string_to_green(' Name: ') +
@@ -36,6 +38,7 @@ class ManagerView:
         print('')
         if not users:
             print(ColorfulView.format_string_to_red('List is empty!'))
+            time.sleep(2)
         for k, v in enumerate(users):
             print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
                   + ColorfulView.format_string_to_green(' Name: ') +

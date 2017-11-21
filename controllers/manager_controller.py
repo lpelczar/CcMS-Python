@@ -40,17 +40,19 @@ class ManagerController:
         :return: None
         """
         users = self.user_container.get_users_with_user_range()
-        ManagerView.display_actual_list(users)
-        user_login = ManagerView.get_promotion_input()
-        try:
-            user = self.user_container.get_user_by_login(user_login)
-            self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
-                                                    user.get_phone_number(), user.get_email(),
-                                                    user.get_name()))
-            self.user_container.remove_user(user)
-            ManagerView.display_user_promoted(user)
-        except AttributeError:
-            ManagerView.display_user_not_found()
+        is_empty = ManagerView.display_actual_list(users)
+
+        if not is_empty:
+            user_login = ManagerView.get_promotion_input()
+            try:
+                user = self.user_container.get_user_by_login(user_login)
+                self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
+                                                        user.get_phone_number(), user.get_email(),
+                                                        user.get_name()))
+                self.user_container.remove_user(user)
+                ManagerView.display_user_promoted(user)
+            except:
+                ManagerView.display_user_not_found()
 
     def edit_mentor_data(self):
         """
