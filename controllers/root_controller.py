@@ -1,17 +1,19 @@
-from controllers.mentor_controller import MentorController
-from controllers.manager_controller import ManagerController
-from controllers.employee_controller import EmployeeController
-from controllers.student_controller import StudentController
-from views.root_view import RootView
-from models.user_container import UserContainer
-from models.user import User
-from models.student import Student
-from models.mentor import Mentor
-from models.manager import Manager
-from models.employee import Employee
-from controllers.key_getch import getch
-import sys
 import os
+import sys
+
+from controllers.employee_controller import EmployeeController
+from controllers.key_getch import getch
+from controllers.manager_controller import ManagerController
+from controllers.mentor_controller import MentorController
+from controllers.recovery_controller import RecoveryController
+from controllers.student_controller import StudentController
+from models.employee import Employee
+from models.manager import Manager
+from models.mentor import Mentor
+from models.student import Student
+from models.user import User
+from models.user_container import UserContainer
+from views.root_view import RootView
 
 
 class RootController:
@@ -33,6 +35,8 @@ class RootController:
                 self.handle_sign_in()
             elif option == '2':
                 self.handle_sign_up()
+            elif option == '3':
+                RecoveryController().start()
             elif option == '0':
                 UserContainer.get_instance().save_users_to_file()
                 sys.exit()
