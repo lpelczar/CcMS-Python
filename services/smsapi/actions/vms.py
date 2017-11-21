@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import os
+
+from services.smsapi.responses import ApiResponse
 from .action import ApiAction
 from .message import ApiSendAction
-from smsapi.responses import ApiResponse
 
 LECTORS = (
    'agnieszka', 

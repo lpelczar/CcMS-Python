@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from smsapi.responses import ApiResponse
+from services.smsapi.responses import ApiResponse
 
 class ApiAction(object):
     
