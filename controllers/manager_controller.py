@@ -48,7 +48,7 @@ class ManagerController:
                                                     user.get_name()))
             self.user_container.remove_user(user)
             ManagerView.display_user_promoted(user)
-        except:
+        except AttributeError:
             ManagerView.display_user_not_found()
 
     def edit_mentor_data(self):
