@@ -28,7 +28,8 @@ class PasswordService:
                 print('')
                 password_created = True
             elif x == '\x7f':
-                del password[-1]
+                if password:
+                    del password[-1]
             else:
                 password.append(x)
         return ''.join(password)
