@@ -1,20 +1,21 @@
+from views.colorful_view import ColorfulView
 import os
 
 
 class MentorView:
     @staticmethod
     def display_date_error():
-        print('Wrong date format!')
+        print(ColorfulView.format_string_to_red('Wrong date format!'))
         input('Press enter to return')
 
     @staticmethod
     def display_index_error():
-        print('Wrong index!')
+        print(ColorfulView.format_string_to_red('Wrong index!'))
         input('Press enter to return')
 
     @staticmethod
     def show_invalid_input():
-        print('Invalid input!')
+        print(ColorfulView.format_string_to_red('Invalid input!'))
         input('Press enter to return')
 
     @staticmethod
@@ -30,14 +31,14 @@ Choose option:
 3.Show assignments
 4.Grade assignment
 5.Check attendance
-6.Change student data 
-7.Promote user to student 
+6.Change student data
+7.Promote user to student
 8.Exit""")
         return option
 
     @staticmethod
     def display_not_enough_data():
-        print('You have no students/groups/assignments added')
+        print(ColorfulView.format_string_to_red('You have no students/groups/assignments added'))
 
     @staticmethod
     def display_assignments(assignments):
@@ -50,7 +51,7 @@ Choose option:
     @staticmethod
     def display_students_list(students_list):
         if not students_list:
-            print('No students found!')
+            print(ColorfulView.format_string_to_red('No students found!'))
             return
         os.system('clear')
         for student in students_list:
@@ -118,7 +119,7 @@ Choose option:
             if presence == 'n':
                 return False
             else:
-                print('Invalid input!')
+                print(ColorfulView.format_string_to_red('Invalid input!'))
 
     @staticmethod
     def get_student_value_to_change():
@@ -157,7 +158,6 @@ Type in 6 to return to main menu
 There are currently no unassigned users
                 """)
             input('Press enter to return')
-            return
 
     @staticmethod
     def get_group_index(group_list):
@@ -168,7 +168,7 @@ There are currently no unassigned users
     @staticmethod
     def display_groups(group_list, exit_with_enter=False):
         os.system('clear')
-        print('Current groups: ')
+        print(ColorfulView.format_string_to_yellow('Current groups: '))
         for group in group_list:
             print(str(group_list.index(group)) + group.name)
         if exit_with_enter:

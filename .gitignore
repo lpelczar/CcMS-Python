@@ -1,4 +1,6 @@
 # Created by https://www.gitignore.io/api/python,pycharm,osx
+.idea/
+testy.py
 test.py
 users.csv
 

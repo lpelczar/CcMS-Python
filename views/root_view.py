@@ -1,8 +1,8 @@
 import os
 import re
 import sys
-import time
 
+from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
 
 
@@ -99,13 +99,12 @@ class RootView:
 
         Method let to create user his account password and check if it contain requirements.
         """
-
         incorrect_password = True
         while incorrect_password:
             print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
                                                        'digit, it must contain min 6 chars and '
                                                        'it cant be longer than 30 characters): '))
-            user_password = input()
+            user_password = PasswordService.get_password_with_asterisks()
             if re.match(r'^(?=.*?\d)(?=.*?[A-Z])(?=.*?[a-z])[A-Za-z\d]{6,30}$', user_password):
                 incorrect_password = False
 
@@ -150,7 +149,7 @@ class RootView:
             user_email = input()
 
             if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
-                if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                if re.match(r'([A-Za-z\d\.]{1,})([\@]{1})([a-z\d]{1,}[\.]{1}[a-z]{2,})', user_email):
                     incorrect_email_adress = False
 
         return user_email
@@ -163,16 +162,33 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        lenght_number = 9
+        os.system('clear')
         incorrect_phone_number = True
 
         while incorrect_phone_number:
             print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
             phone_number = input()
-            if phone_number.isdigit() and len(phone_number) == lenght_number:
+
+            if re.match(r'\d{3}[\s\\\/\-]?\d{3}[\s\\\/\-]?\d{3}', phone_number):
                 incorrect_phone_number = False
 
+        phone_number = RootView.convert_phone_number_to_data_format(phone_number)
         return phone_number
+
+    @staticmethod
+    def convert_phone_number_to_data_format(phone_number):
+        """
+        Method convert phone number to database format.
+
+        Param: str
+        Return: str
+        """
+        format_phone_number = '+48'
+        for number in phone_number:
+            if number.isdigit():
+                format_phone_number += number
+
+        return format_phone_number
 
     @staticmethod
     def get_user_login_password():
@@ -183,7 +199,7 @@ class RootView:
         Method take users login and password and return it as a tuple.
         """
         user_login = input('Enter your login: ')
-        user_password = input('Enter your password: ')
+        user_password = PasswordService.get_password_with_asterisks()
         login_password = (user_login, user_password)
         return login_password
 
@@ -195,8 +211,15 @@ class RootView:
 
         Method create users name and return it.
         """
-        print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
-        user_name = input()
+        incorrect = True
+        while incorrect:
+
+            print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
+            user_name = input()
+
+            if re.match(r'^(?=[A-Za-z])[\sA-Za-z]{5,30}$', user_name):
+                incorrect = False
+
         return user_name
 
     @staticmethod
