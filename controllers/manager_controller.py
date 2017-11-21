@@ -93,7 +93,9 @@ class ManagerController:
             user = self.user_container.get_user_by_login(user_login)
             self.user_container.remove_user(user)
             ManagerView.display_user_deleted(user)
-        except:
+        except ValueError:
+            ManagerView.display_user_not_found()
+        except AttributeError:
             ManagerView.display_user_not_found()
 
     def display_students(self):
