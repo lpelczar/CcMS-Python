@@ -59,7 +59,7 @@ class RootController:
             password = RootView.create_user_password()
             hashed_password = PasswordService.encrypt_password(password)
 
-            if self.user_container.get_user_by_login(login):
+            if self.user_container.get_user_by_login_or_email(login):
                 RootView.display_user_already_exists()
 
             else:
@@ -68,7 +68,7 @@ class RootController:
                 name = RootView.add_user_name()
 
                 self.user_container.add_user(User(login, hashed_password, phone_number, email, name))
-                RootView.display_user_created(login, password, phone_number, email, name)
+                RootView.display_user_created(login, phone_number, email, name)
                 user_created = True
 
     def handle_sign_in(self):

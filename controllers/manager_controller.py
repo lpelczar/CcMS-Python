@@ -1,12 +1,10 @@
 import os
-import traceback
 
 from models.manager import Manager
 from models.mentor import Mentor
 from models.user_container import UserContainer
 from views.manager_view import ManagerView
 from views.root_view import RootView
-import os
 
 
 class ManagerController:
@@ -48,7 +46,7 @@ class ManagerController:
         if not is_empty:
             user_login = ManagerView.get_promotion_input()
             try:
-                user = self.user_container.get_user_by_login(user_login)
+                user = self.user_container.get_user_by_login_or_email(user_login)
                 self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
                                                         user.get_phone_number(), user.get_email(),
                                                         user.get_name()))
@@ -69,7 +67,7 @@ class ManagerController:
             mentor_login = ManagerView.get_user_edit_input()
 
         try:
-            user = self.user_container.get_user_by_login(mentor_login)
+            user = self.user_container.get_user_by_login_or_email(mentor_login)
             ManagerView.display_mentor_information(user)
             value_to_change = ManagerView.get_value_to_change()
 
