@@ -84,7 +84,7 @@ class ManagerView:
     @staticmethod
     def get_value_to_change():
         return input('Enter what do you want to change('
-                     + ColorfulView.format_string_to_green('login, password, phone number, email, name') + '):')
+                     + ColorfulView.format_string_to_green('login, phone, email, name') + '):')
 
     @staticmethod
     def display_user_not_found():

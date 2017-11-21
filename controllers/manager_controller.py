@@ -2,6 +2,7 @@ from models.user_container import UserContainer
 from models.manager import Manager
 from models.mentor import Mentor
 from views.manager_view import ManagerView
+from views.root_view import RootView
 import os
 
 
@@ -53,7 +54,7 @@ class ManagerController:
 
     def edit_mentor_data(self):
         """
-        Modify selected mentor data: login, password, phone number, email, name
+        Modify selected mentor data: login, phone number, email, name
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
@@ -61,25 +62,20 @@ class ManagerController:
 
         try:
             user = self.user_container.get_user_by_login(mentor_login)
-
             ManagerView.display_mentor_information(user)
             value_to_change = ManagerView.get_value_to_change()
 
-            value = ManagerView.get_new_value()
-
             if value_to_change == 'login':
-                user.set_login(value)
-            elif value_to_change == 'password':
-                user.set_password(value)
-            elif value_to_change == 'phone_number':
-                user.set_phone_number(value)
+                user.set_login(RootView.create_user_login())
+            elif value_to_change == 'phone':
+                user.set_phone_number(RootView.create_user_phone_number())
             elif value_to_change == 'email':
-                user.set_email(value)
+                user.set_email(RootView.create_user_email())
             elif value_to_change == 'name':
-                user.set_name(value)
+                user.set_name(RootView.add_user_name())
             else:
                 ManagerView.display_wrong_attribute()
-        except:
+        except AttributeError:
             ManagerView.display_user_not_found()
 
     def remove_mentor(self):
