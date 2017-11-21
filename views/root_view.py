@@ -99,8 +99,6 @@ class RootView:
 
         Method let to create user his account password and check if it contain requirements.
         """
-        max_pass_length = 30
-        min_pass_lenght = 5
 
         incorrect_password = True
         while incorrect_password:
@@ -108,9 +106,8 @@ class RootView:
                                                        'digit, it must contain min 6 chars and '
                                                        'it cant be longer than 30 characters): '))
             user_password = input()
-            if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
-                if re.match(r'[A-Za-z]+[\d]+', user_password):
-                    incorrect_password = False
+            if re.match(r'^(?=.*?\d)(?=.*?[A-Z])(?=.*?[a-z])[A-Za-z\d]{6,30}$', user_password):
+                incorrect_password = False
 
         return user_password
 
