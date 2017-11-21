@@ -1,3 +1,4 @@
+from colorful_view import ColorfulView
 STARTING_INDEX = 1
 
 
@@ -5,14 +6,14 @@ class ManagerView:
 
     @staticmethod
     def display_manager_menu(user_login, role):
-        greeting_message = 'Logged as {} ({}) \n'.format(user_login, role)
-        print(greeting_message +
+        greeting_message = ColorfulView.format_string_to_yellow('Logged as {} ({}) \n'.format(user_login, role))
+        print(ColorfulView.format_string_to_green(greeting_message +
               '1. Promote user to Mentor\n' +
               '2. Remove Mentor\n' +
               '3. Edit Mentor data\n' +
               '4. Display list of Mentors\n' +
               '5. Display list of Students\n'
-              '6. Exit manager')
+              '6. Exit manager'))
 
     @staticmethod
     def get_user_input(prompt: str):
@@ -22,20 +23,22 @@ class ManagerView:
     def display_actual_list(users):
         print('')
         if not users:
-            print('List is empty!')
+            print(ColorfulView.format_string_to_red('List is empty!'))
         for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
-                  v.get_name() + ' Role: ' + v.__class__.__name__)
+            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
+                  + ColorfulView.format_string_to_green(' Name: ') +
+                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
         print('')
 
     @staticmethod
     def display_users(users):
         print('')
         if not users:
-            print('List is empty!')
+            print(ColorfulView.format_string_to_red('List is empty!'))
         for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + 'Login: ' + v.get_login() + ' Name: ' +
-                  v.get_name() + ' Role: ' + v.__class__.__name__)
+            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
+                  + ColorfulView.format_string_to_green(' Name: ') +
+                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
         input('\nPress ENTER to continue')
 
     @staticmethod
@@ -56,17 +59,17 @@ class ManagerView:
 
     @staticmethod
     def display_wrong_attribute():
-        print('There is no such attribute to change!')
+        print(ColorfulView.format_string_to_red('There is no such attribute to change!'))
         input('\nPress ENTER to continue')
 
     @staticmethod
     def display_user_promoted(user):
-        print('User: {} has been promoted to Mentor'.format(user.get_login()))
+        print(ColorfulView.format_string_to_green('User: {} has been promoted to Mentor'.format(user.get_login())))
         input('\nPress ENTER to continue')
 
     @staticmethod
     def display_user_deleted(user):
-        print('User: {} has been deleted'.format(user.get_login()))
+        print(ColorfulView.format_string_to_red('User: {} has been deleted'.format(user.get_login())))
         input('\nPress ENTER to continue')
 
     @staticmethod
@@ -75,5 +78,5 @@ class ManagerView:
 
     @staticmethod
     def display_user_not_found():
-        print('User with that name not found!')
+        print(ColorfulView.format_string_to_red('User with that name not found!'))
         input('\nPress ENTER to continue')
