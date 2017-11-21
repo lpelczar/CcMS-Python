@@ -1,7 +1,7 @@
 import os
 import re
-import time
 import sys
+
 from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
 
@@ -55,7 +55,7 @@ class RootView:
         """
         welcome_information = '\nWelcome in Canvas, patch 0.-2XYZ.4C version.'
         exit_program = '0. Exit'
-        menu_options = ['Sign in', 'Sign up']
+        menu_options = ['Sign in', 'Sign up', 'Restore password']
         number_option = 1
         welcome_information = ColorfulView.format_string_to_yellow(welcome_information)
         exit_program = ColorfulView.format_string_to_red(exit_program)

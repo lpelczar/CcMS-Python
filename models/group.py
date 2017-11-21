@@ -14,5 +14,5 @@ class Group:
         """
         student_instances = []
         for login in self.__student_login_list:
-            student = UserContainer.get_instance().get_user_by_login(login)
+            student = UserContainer.get_instance().get_user_by_login_or_email(login)
             student_instances.append(student)

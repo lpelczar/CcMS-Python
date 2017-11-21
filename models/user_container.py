@@ -1,8 +1,9 @@
-import pickle, os
-from models.student import Student
+import os
+import pickle
+
 from models.employee import Employee
 from models.mentor import Mentor
-from models.user import User
+from models.student import Student
 
 FILE_NAME = 'users.csv'
 
@@ -105,16 +106,17 @@ class UserContainer():
                 return user
         return None
 
-    def get_user_by_login(self, login):
+    def get_user_by_login_or_email(self, login_or_email):
         """
-        Returns user instances by login
-        :param login: str -> login of user instance to be returned
+        Returns user instances by login or email
+        :param login_or_email: str -> login or email of user instance to be returned
         :return: User -> an instance of user
         """
         for user in self.users:
-            if user.login == login:
+            if user.login == login_or_email or user.email == login_or_email:
                 return user
         return None
+
 
     def add_user(self, user):
         """

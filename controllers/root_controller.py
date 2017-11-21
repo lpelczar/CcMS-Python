@@ -1,13 +1,12 @@
-from controllers.mentor_controller import MentorController
-from controllers.manager_controller import ManagerController
+import os
+import sys
+
 from controllers.employee_controller import EmployeeController
+from controllers.key_getch import getch
+from controllers.manager_controller import ManagerController
+from controllers.mentor_controller import MentorController
+from controllers.recovery_controller import RecoveryController
 from controllers.student_controller import StudentController
-from views.root_view import RootView
-from models.user_container import UserContainer
-from models.user import User
-from models.student import Student
-from models.mentor import Mentor
-from models.manager import Manager
 from models.employee import Employee
 from controllers.key_getch import getch
 from services.password_service import PasswordService
@@ -38,7 +37,8 @@ class RootController:
 
             elif option == '2':
                 self.handle_sign_up()
-
+            elif option == '3':
+                RecoveryController().start()
             elif option == '0':
                 UserContainer.get_instance().save_users_to_file()
                 exit_program = False
