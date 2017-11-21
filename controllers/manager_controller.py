@@ -51,7 +51,7 @@ class ManagerController:
                                                         user.get_name()))
                 self.user_container.remove_user(user)
                 ManagerView.display_user_promoted(user)
-            except:
+            except AttributeError:
                 ManagerView.display_user_not_found()
 
     def edit_mentor_data(self):
@@ -60,7 +60,10 @@ class ManagerController:
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
-        mentor_login = ManagerView.get_user_edit_input()
+        is_empty = ManagerView.display_actual_list(users)
+
+        if not is_empty:
+            mentor_login = ManagerView.get_user_edit_input()
 
         try:
             user = self.user_container.get_user_by_login(mentor_login)
@@ -88,7 +91,10 @@ class ManagerController:
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
-        user_login = ManagerView.get_user_remove_input()
+        is_empty = ManagerView.display_actual_list(users)
+
+        if not is_empty:
+            user_login = ManagerView.get_user_remove_input()
         try:
             user = self.user_container.get_user_by_login(user_login)
             self.user_container.remove_user(user)
