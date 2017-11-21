@@ -168,7 +168,7 @@ There are currently no unassigned users
     @staticmethod
     def display_groups(group_list, exit_with_enter=False):
         os.system('clear')
-        print('Current groups: ')
+        print(ColorfulView.format_string_to_yellow('Current groups: '))
         for group in group_list:
             print(str(group_list.index(group)) + group.name)
         if exit_with_enter:

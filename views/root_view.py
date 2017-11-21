@@ -108,7 +108,7 @@ class RootView:
                                                        'it cant be longer than 30 characters): '))
             user_password = input()
             if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
-                if re.match(r'[A-Za-z]+[\d]+', user_password):
+                if re.match(r'[A-Z]+[a-z]+[\d]+', user_password):
                     incorrect_password = False
 
         return user_password
