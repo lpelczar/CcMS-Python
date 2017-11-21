@@ -1,5 +1,4 @@
 import os
-import sys
 
 from controllers.employee_controller import EmployeeController
 from controllers.key_getch import getch
@@ -8,9 +7,13 @@ from controllers.mentor_controller import MentorController
 from controllers.recovery_controller import RecoveryController
 from controllers.student_controller import StudentController
 from models.employee import Employee
-from controllers.key_getch import getch
+from models.manager import Manager
+from models.mentor import Mentor
+from models.student import Student
+from models.user import User
+from models.user_container import UserContainer
 from services.password_service import PasswordService
-import os
+from views.root_view import RootView
 
 
 class RootController:

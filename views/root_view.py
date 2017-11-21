@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import time
 
 from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
