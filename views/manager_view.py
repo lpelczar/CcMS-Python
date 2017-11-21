@@ -1,4 +1,5 @@
 from views.colorful_view import ColorfulView
+import os
 STARTING_INDEX = 1
 
 
@@ -43,11 +44,14 @@ class ManagerView:
 
     @staticmethod
     def display_mentor_information(mentor_data):
-        print(ColorfulView.format_string_to_yellow('Name: ') + mentor_data.name
-              + ColorfulView.format_string_to_green('\nLogin: ') + mentor_data.login
-              + ColorfulView.format_string_to_green('\nPassword: ') + mentor_data.password
-              + ColorfulView.format_string_to_green('\nPhone number: ') + mentor_data.phone_number
-              + ColorfulView.format_string_to_green('\nEmail: ') + mentor_data.email)
+        os.system('clear')
+        try:
+            print(ColorfulView.format_string_to_yellow('Name: ') + mentor_data.get_name()
+                  + ColorfulView.format_string_to_green('\nLogin: ') + mentor_data.get_login()
+                  + ColorfulView.format_string_to_green('\nPhone number: ') + mentor_data.get_phone_number()
+                  + ColorfulView.format_string_to_green('\nEmail: ') + mentor_data.get_email())
+        except:
+            print('TUTAJ!!')
 
     @staticmethod
     def get_promotion_input():
