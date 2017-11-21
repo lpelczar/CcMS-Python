@@ -166,6 +166,7 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
+        os.system('clear')
         incorrect_phone_number = True
 
         while incorrect_phone_number:

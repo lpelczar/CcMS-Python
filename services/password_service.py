@@ -22,8 +22,10 @@ class PasswordService:
             time.sleep(0.3)
             os.system('clear')
             print('*' * len(password))
+            print('Enter password: ', end='')
             x = getch()
             if x == '\r':
-                password_created = True
+                print('')
+                break
             password.append(x)
         return ''.join(password)
