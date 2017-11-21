@@ -152,7 +152,7 @@ class RootView:
             user_email = input()
 
             if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
-                if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                if re.match(r'([A-Za-z\d\.]*)([\@])([a-z]*[\.]{1}[a-z]{2,})', user_email):
                     incorrect_email_adress = False
 
         return user_email
