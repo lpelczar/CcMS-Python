@@ -2,6 +2,7 @@ import os
 import re
 import time
 import sys
+from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
 
 
@@ -106,7 +107,7 @@ class RootView:
             print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
                                                        'digit, it must contain min 6 chars and '
                                                        'it cant be longer than 30 characters): '))
-            user_password = input()
+            user_password = PasswordService.get_password_with_asterisks()
             if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
                 if re.match(r'[A-Z]+[a-z]+[\d]+', user_password):
                     incorrect_password = False
@@ -165,6 +166,7 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
+        os.system('clear')
         incorrect_phone_number = True
 
         while incorrect_phone_number:
@@ -201,7 +203,7 @@ class RootView:
         Method take users login and password and return it as a tuple.
         """
         user_login = input('Enter your login: ')
-        user_password = input('Enter your password: ')
+        user_password = PasswordService.get_password_with_asterisks()
         login_password = (user_login, user_password)
         return login_password
 
