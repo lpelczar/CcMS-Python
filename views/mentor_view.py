@@ -1,4 +1,4 @@
-from colorful_view import ColorfulView
+from views.colorful_view import ColorfulView
 import os
 
 

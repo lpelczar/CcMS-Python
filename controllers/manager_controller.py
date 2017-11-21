@@ -64,10 +64,15 @@ class ManagerController:
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
         mentor_login = ManagerView.get_user_edit_input()
+
         try:
             user = self.user_container.get_user_by_login(mentor_login)
+
+            ManagerView.display_mentor_information(user)
             value_to_change = ManagerView.get_value_to_change()
+
             value = ManagerView.get_new_value()
+
             if value_to_change == 'login':
                 user.set_login(value)
             elif value_to_change == 'password':
