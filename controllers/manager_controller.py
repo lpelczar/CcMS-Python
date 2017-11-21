@@ -1,9 +1,10 @@
-from models.user_container import UserContainer
-from models.manager import Manager
-from models.mentor import Mentor
-from views.manager_view import ManagerView
 import os
 import traceback
+
+from models.manager import Manager
+from models.mentor import Mentor
+from models.user_container import UserContainer
+from views.manager_view import ManagerView
 
 
 class ManagerController:
@@ -48,7 +49,7 @@ class ManagerController:
         ManagerView.display_actual_list(users)
         user_login = ManagerView.get_promotion_input()
         try:
-            user = self.user_container.get_user_by_login(user_login)
+            user = self.user_container.get_user_by_login_or_email(user_login)
             self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
                                                     user.get_phone_number(), user.get_email(),
                                                     user.get_name()))
@@ -65,7 +66,7 @@ class ManagerController:
         ManagerView.display_actual_list(mentors)
         mentor_login = ManagerView.get_user_edit_input()
         try:
-            user = self.user_container.get_user_by_login(mentor_login)
+            user = self.user_container.get_user_by_login_or_email(mentor_login)
             value_to_change = ManagerView.get_value_to_change()
             value = ManagerView.get_new_value()
             if value_to_change == 'login':
@@ -93,7 +94,7 @@ class ManagerController:
         ManagerView.display_actual_list(mentors)
         user_login = ManagerView.get_user_remove_input()
         try:
-            user = self.user_container.get_user_by_login(user_login)
+            user = self.user_container.get_user_by_login_or_email(user_login)
             self.user_container.remove_user(user)
             ManagerView.display_user_deleted(user)
         except:
