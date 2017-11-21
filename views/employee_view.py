@@ -23,6 +23,6 @@ class EmployeeView:
             else:
                 group_str = student.group
             print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.get_name() + ' Group: ' +
-                  group_str + '\n' + 'Phone number:' + student.get_phone_number() + ' Email: ' '\n'
+                  group_str + '\n' + 'Phone number:' + str(student.get_phone_number()) + ' Email: ' + '\n'
                   + student.get_email())
         input('Press enter to return')
