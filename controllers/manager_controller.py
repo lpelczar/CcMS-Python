@@ -60,7 +60,7 @@ class ManagerController:
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
-        is_empty = ManagerView.display_actual_list(users)
+        is_empty = ManagerView.display_actual_list(mentors)
 
         if not is_empty:
             mentor_login = ManagerView.get_user_edit_input()
@@ -91,7 +91,7 @@ class ManagerController:
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_actual_list(mentors)
-        is_empty = ManagerView.display_actual_list(users)
+        is_empty = ManagerView.display_actual_list(mentors)
 
         if not is_empty:
             user_login = ManagerView.get_user_remove_input()

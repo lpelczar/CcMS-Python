@@ -26,6 +26,7 @@ class ManagerView:
         print('')
         if not users:
             print(ColorfulView.format_string_to_red('List is empty!'))
+            time.sleep(2)
             return True
         for k, v in enumerate(users):
             print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
