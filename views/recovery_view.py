@@ -1,9 +1,9 @@
 import os
+
 from views.colorful_view import ColorfulView
 
-MENU_OPTIONS = {'1.': 'Start restoring password process',
-                '2.': 'Restore password using token',
-                '3.': 'Exit'}
+MENU_OPTIONS = {'1.': 'Restore your password by using token.',
+                '2.': 'Exit'}
 
 CONFIRM_MESSAGE = '\nType ENTER...'
 
@@ -28,7 +28,8 @@ class RecoveryView:
         """
         return input(prompt)
 
-    def display_error_message(self, error_msg: str):
+    @staticmethod
+    def display_error_message( error_msg: str):
         """
         Method displays error message
         :param error_msg: str -> An error message.
@@ -38,6 +39,16 @@ class RecoveryView:
         print(ColorfulView.format_string_to_red(error_msg))
         input(ColorfulView.format_string_to_green(CONFIRM_MESSAGE))
 
-    def display_user_token_is_correct_msg(self):
+    @staticmethod
+    def display_user_token_is_correct_msg():
         print(ColorfulView.format_string_to_green('\nYour token is correct !'))
 
+    @staticmethod
+    def display_password_changed_successfully():
+        os.system('clear')
+        print(ColorfulView.format_string_to_green('You password have been changed successfully'))
+        input(ColorfulView.format_string_to_green(CONFIRM_MESSAGE))
+
+    @staticmethod
+    def display_that_token_have_been_sent():
+        print(ColorfulView.format_string_to_green("You can find the token in your e-mail or SMS box."))
