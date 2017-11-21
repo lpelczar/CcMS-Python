@@ -26,6 +26,9 @@ class PasswordService:
             x = getch()
             if x == '\r':
                 print('')
-                break
-            password.append(x)
+                password_created = True
+            elif x == '\x7f':
+                del password[-1]
+            else:
+                password.append(x)
         return ''.join(password)
