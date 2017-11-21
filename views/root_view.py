@@ -109,7 +109,7 @@ class RootView:
             if re.match(r'^(?=.*?\d)(?=.*?[A-Z])(?=.*?[a-z])[A-Za-z\d]{6,30}$', user_password):
                 incorrect_password = False
 
-        return user_password
+        return PasswordService.encrypt_password(user_password)
 
     @staticmethod
     def create_user_login():
@@ -224,7 +224,7 @@ class RootView:
         return user_name
 
     @staticmethod
-    def display_user_created(login, password, phone_number, email, name):
+    def display_user_created(login, phone_number, email, name):
         """
         Param: str, str, str, str, str
         Return: none
@@ -233,7 +233,7 @@ class RootView:
             """
         os.system('clear')
         account_created_info1 = '\nYou have created a new account!\nName: {}\nPhone number: {},'.format(name, phone_number)
-        account_created_info2 = '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email)
+        account_created_info2 = '\nLogin: {}, \nEmail: {}'.format(login, email)
         acc_info = account_created_info1 + account_created_info2
         print(ColorfulView.format_string_to_green(acc_info))
         input('Press enter to back')
