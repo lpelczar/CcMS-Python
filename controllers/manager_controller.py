@@ -3,7 +3,6 @@ from models.manager import Manager
 from models.mentor import Mentor
 from views.manager_view import ManagerView
 import os
-import traceback
 
 
 class ManagerController:
@@ -15,26 +14,21 @@ class ManagerController:
     def start(self):
         should_exit = False
         while not should_exit:
-            try:
-                os.system('clear')
-                ManagerView.display_manager_menu(self.manager.login, 'Manager')
-                user_input = ManagerView.get_user_input('Choose an option: ')
-                if user_input == '1':
-                    self.promote_user_to_mentor()
-                elif user_input == '2':
-                    self.remove_mentor()
-                elif user_input == '3':
-                    self.edit_mentor_data()
-                elif user_input == '4':
-                    self.display_mentors()
-                elif user_input == '5':
-                    self.display_students()
-                elif user_input == '6':
-                    should_exit = True
-            except Exception:
-                tb = traceback.format_exc()
-                print(tb)
-                input()
+            os.system('clear')
+            ManagerView.display_manager_menu(self.manager.login, 'Manager')
+            user_input = ManagerView.get_user_input('Choose an option: ')
+            if user_input == '1':
+                self.promote_user_to_mentor()
+            elif user_input == '2':
+                self.remove_mentor()
+            elif user_input == '3':
+                self.edit_mentor_data()
+            elif user_input == '4':
+                self.display_mentors()
+            elif user_input == '5':
+                self.display_students()
+            elif user_input == '6':
+                should_exit = True
         UserContainer.get_instance().save_users_to_file()
         os.system('clear')
 
