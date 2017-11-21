@@ -124,13 +124,11 @@ class UserContainer():
         :param user: User -> user object
         :return: None
         """
-        if self.get_users_list():
-            for existing_user in self.get_users_list():
-                if existing_user.login.lower() == user.login.lower():
-                    raise AttributeError('User with this login already exists')
         if self.get_user(user.login, user.password) is None:
             self.users.append(user)
             self.save_users_to_file()
+        else:
+            raise AttributeError('User with this login already exists')
 
     def remove_user(self, user):
         """
