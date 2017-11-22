@@ -1,6 +1,7 @@
 from views.colorful_view import ColorfulView
+from texttable import Texttable
 import os
-import time
+
 STARTING_INDEX = 1
 
 
@@ -24,11 +25,16 @@ class ManagerView:
     @staticmethod
     def display_actual_list(users):
         print('')
-        for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
-                  + ColorfulView.format_string_to_green(' Name: ') +
-                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
+        ManagerView.print_table(users)
         print('')
+
+    @staticmethod
+    def print_table(users):
+        t = Texttable()
+        t.add_rows([['Index', 'Login', 'Name', 'Role', 'Phone Number', 'E-mail']] +
+                   [[i + STARTING_INDEX, u.get_login(), u.get_name(), u.__class__.__name__, u.get_phone_number(),
+                     u.get_email()] for i, u in enumerate(users)])
+        print(t.draw())
 
     @staticmethod
     def display_empty_list_message():
@@ -39,10 +45,7 @@ class ManagerView:
     @staticmethod
     def display_users(users):
         print('')
-        for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
-                  + ColorfulView.format_string_to_green(' Name: ') +
-                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
+        ManagerView.print_table(users)
         input('\nPress ENTER to continue')
 
     @staticmethod
