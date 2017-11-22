@@ -5,7 +5,6 @@ from views.mentor_view import MentorView
 from models.group_container import GroupContainer
 from models.group import Group
 from models.student import Student
-from datetime import date
 import traceback
 
 
@@ -15,6 +14,11 @@ class MentorController:
         ...
 
     def start(self):
+        """
+        Starts controller
+
+        :return: None
+        """
         exit_program = False
         while not exit_program:
             try:
@@ -59,14 +63,29 @@ class MentorController:
         exit()
 
     def show_students(self):
+        """
+        Displays students data
+
+        :return: None
+        """
         students_list = UserContainer.get_instance().get_students_list()
         MentorView.display_students_list(students_list)
 
     def show_assignments(self):
+        """
+        Displsys assigments data
+
+        :return: None
+        """
         assignments = AssignmentContainer.get_instance().get_assignments_list()
         MentorView.display_assignments(assignments)
 
     def add_assignment(self):
+        """
+        Adds new assigments
+
+        :return: None
+        """
         students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.return_assignment_values()
         new_assignment = Assignment(deadline, title, description)
@@ -75,6 +94,11 @@ class MentorController:
             student.add_student_assignment(deadline, title, description)
 
     def grade_assignment(self):
+        """
+        Adds grade to chosen assigment
+
+        :return: None
+        """
         students_list = UserContainer.get_instance().get_students_list()
         if not students_list:
             MentorView.display_not_enough_data()
@@ -87,6 +111,11 @@ class MentorController:
         students_list[student_index].assignments[assignment_index].grade = grade
 
     def check_attendance(self):
+        """
+        Checks if students from certain group are present and adds attendance count to group
+
+        :return: None
+        """
         groups = GroupContainer.get_instance().get_groups_list()
         if groups:
             group_index = MentorView.get_group_index(groups)
@@ -105,6 +134,11 @@ class MentorController:
         GroupContainer.get_instance().save_groups_to_file()
 
     def change_student_data(self):
+        """
+        Edits student data
+
+        :return: None
+        """
         value_changing = True
         students_list = UserContainer.get_instance().get_students_list()
         if not students_list:
@@ -140,6 +174,11 @@ class MentorController:
                 MentorView.show_invalid_input()
 
     def promote_user_to_student(self):
+        """
+        Assignes user to students list
+
+        :return: None
+        """
         not_assigned_users = UserContainer.get_instance().get_not_assigned_users_list()
         user_index = MentorView.get_user_index(not_assigned_users)
         user_index = int(user_index)
@@ -156,6 +195,12 @@ class MentorController:
         UserContainer.get_instance().add_user(user_to_assign)
 
     def edit_groups(self, create_new=True):
+        """
+        Creates or edits group
+
+        :param create_new: bool -> Decides if method will create new or edit existing group
+        :return: None
+        """
         if create_new:
             new_group_name = MentorView.get_group_name()
             group = Group(new_group_name)
