@@ -1,5 +1,7 @@
 from views.colorful_view import ColorfulView
+from texttable import Texttable
 import os
+STARTING_INDEX = 1
 
 
 class EmployeeView:
@@ -20,20 +22,8 @@ class EmployeeView:
     @staticmethod
     def display_students_list(students_list):
         os.system('clear')
-
-        for student in students_list:
-
-            if not student.group:
-                group_str = ColorfulView.format_string_to_red('Not assigned')
-
-            else:
-                group_str = student.group
-
-            print(ColorfulView.format_string_to_green('Index: ') + str(students_list.index(student))
-                  + ColorfulView.format_string_to_green(' Name: ') + student.get_name() + '\nGroup: ' +
-                  str(group_str) + '\nPhone number:' + str(student.get_phone_number()) + '\nEmail: '
-                  + student.get_email())
-        input('Press enter to return')
+        EmployeeView.print_table(students_list)
+        input('\nPress ENTER to return')
 
     @staticmethod
     def display_chose_user_to_promote(users):
@@ -46,3 +36,12 @@ class EmployeeView:
 
         get_user_index = input('Enter user index to promote: ')
         return get_user_index
+
+    @staticmethod
+    def print_table(users):
+        t = Texttable()
+        t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
+        t.add_rows([['Index', 'Login', 'Name', 'Group', 'Phone Number', 'E-mail']] +
+                   [[i + STARTING_INDEX, u.get_login(), u.get_name(), 'Not assigned' if not u.group else u.group,
+                     u.get_phone_number(), u.get_email()] for i, u in enumerate(users)])
+        print(t.draw())
