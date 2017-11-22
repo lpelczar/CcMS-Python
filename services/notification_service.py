@@ -19,8 +19,8 @@ class SmsService:
 
             result = api.execute()
 
-            for r in result:
-                print(r.id, r.points, r.status)
+            # for r in result:
+            #     print(r.id, r.points, r.status)
 
         except ApiError:
             print('Error encountered while sending message!')
