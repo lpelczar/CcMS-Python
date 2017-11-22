@@ -12,15 +12,10 @@ class SmsService:
 
         try:
             api.service('sms').action('send')
-
             api.set_content(sms_text)
             api.set_to(phone_number)
             api.set_from(sender)
-
-            result = api.execute()
-
-            # for r in result:
-            #     print(r.id, r.points, r.status)
+            api.execute()
 
         except ApiError:
             print('Error encountered while sending message!')
