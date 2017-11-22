@@ -62,9 +62,9 @@ class EmployeeView:
     def ask_coffe_fundarising():
         send_emails = input('Would you like to send an email to stundents about coffe fundarising?')
         if send_emails.uppercase() == 'YES':
-            return True
-        else:
-            return False
+            message = 'Hello dear students!\nWe are going out off coffe in next few days!\n If you don\'t pay yet,\
+                       please do this as soon as it possible! It\'s cost as always 123.5 pln!\nGreetings, \nyour Katarzyna!
+            return message
 
     @staticmethod
     def print_table(users):

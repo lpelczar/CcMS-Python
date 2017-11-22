@@ -37,9 +37,13 @@ class EmployeeController:
                         self.user_container.remove_user(user)
 
             elif option == "3":
-                # coffe fundarising
-                send_emails = EmployeeView.ask_coffe_fundarising()
-                if send_emails:
+                email_message = EmployeeView.ask_coffe_fundarising()
+
+                if email_message is not None:
+                    students_emails = self.get_students_emails()
+                    for email in students_emails:
+                        EmailService.send_email(email_message, email)
+
 
                 else:
                     EmployeeView.display_emails_input_error()
@@ -69,4 +73,5 @@ class EmployeeController:
             return False
 
     def get_students_emails(self):
-        for 
+        emails = [user.email for user in self.user_container if isinstance(user, Student)]
+        return emails
