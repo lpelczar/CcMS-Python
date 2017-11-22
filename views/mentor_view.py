@@ -20,11 +20,7 @@ class MentorView:
 
     @staticmethod
     def display_menu():
-        options = ['1', '2', '3', '4', '5', '6', '7', '8']
-        option = ''
-        while option not in options:
-            os.system('clear')
-            option = input("""
+        option = input("""
 Choose option:
 1.Show students
 2.Add assignment
@@ -33,7 +29,9 @@ Choose option:
 5.Check attendance
 6.Change student data
 7.Promote user to student
-8.Exit""")
+8.Add group
+9.Rename group
+0.Exit""")
         return option
 
     @staticmethod
@@ -56,7 +54,7 @@ Choose option:
         os.system('clear')
         for student in students_list:
             if student.group:
-                group_str = student.group.name
+                group_str = student.group
             else:
                 group_str = "Not assigned"
             print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
@@ -99,8 +97,8 @@ Choose option:
     @staticmethod
     def get_grade_values(student):
         while True:
-            assignment_index = input("Type in assignment's index or s to show "
-                                     "list of current assignments (with indexes): ")
+            assignment_index = input("""Type in assignment's index or s to show
+                                     list of current assignments (with indexes): """)
             if assignment_index == 's':
                 MentorView.display_student_assignments(student)
                 continue
@@ -173,3 +171,12 @@ There are currently no unassigned users
             print(str(group_list.index(group)) + group.name)
         if exit_with_enter:
             input('Press enter to return')
+
+    @staticmethod
+    def get_group_name():
+        return input('Type in group name: ')
+
+    @staticmethod
+    def display_group_exists():
+        print('Group with that name already exists!')
+        input('Press enter to return')

@@ -3,6 +3,7 @@ from models.assignment import Assignment
 from models.assignment_container import AssignmentContainer
 from views.mentor_view import MentorView
 from models.group_container import GroupContainer
+from models.group import Group
 from models.student import Student
 from datetime import date
 import traceback
@@ -33,6 +34,10 @@ class MentorController:
                 elif option == '7':
                     self.promote_user_to_student()
                 elif option == '8':
+                    self.edit_groups()
+                elif option == '9':
+                    self.edit_groups(False)
+                elif option == '0':
                     exit_program = True
                 else:
                     MentorView.show_invalid_input()
@@ -43,6 +48,8 @@ class MentorController:
                     MentorView.show_invalid_input()
                 else:
                     MentorView.display_date_error()
+            except AttributeError:
+                MentorView.display_group_exists()
             except Exception:
                 tb = traceback.format_exc()
                 print(tb)
@@ -76,9 +83,6 @@ class MentorController:
             return
         student_index = MentorView.get_student_index(students_list)
         student_index = int(student_index)
-        if not students_list[student_index].assignments:
-            MentorView.display_not_enough_data()
-            return
         student = students_list[student_index]
         assignment_index, grade = MentorView.get_grade_values(student)
         assignment_index = int(assignment_index)
@@ -94,13 +98,14 @@ class MentorController:
         else:
             MentorView.display_not_enough_data()
             return
-        group_students = GroupContainer.get_instance().get_group(group.name)
+        group_students = GroupContainer.get_instance().get_group(group.name).get_student_list()
         for student in group_students:
             student_present = MentorView.get_presence(student)
             if student_present:
                 student.attendance += 1
         UserContainer.get_instance().save_users_to_file()
         group.attendance_check_count += 1
+        GroupContainer.get_instance().save_groups_to_file()
 
     def change_student_data(self):
         value_changing = True
@@ -127,9 +132,10 @@ class MentorController:
                 groups = GroupContainer.get_instance().get_groups_list()
                 if not groups:
                     MentorView.display_not_enough_data()
+                    return
                 group_index = MentorView.get_group_index(groups)
                 group_index = int(group_index)
-                student.group = groups[group_index]
+                GroupContainer.get_instance().add_student_to_group(groups[group_index].name, student)
                 UserContainer.get_instance().save_users_to_file()
             elif value_to_change == '6':
                 return
@@ -151,5 +157,20 @@ class MentorController:
             return
         user_to_assign = Student(name, login, password, phone_number, email)
         UserContainer.get_instance().add_user(user_to_assign)
+
+    def edit_groups(self, create_new=True):
+        if create_new:
+            new_group_name = MentorView.get_group_name()
+            group = Group(new_group_name)
+            GroupContainer.get_instance().add_group(group.name)
+        else:
+            groups_list = GroupContainer.get_instance().get_groups_list()
+            group_index = int(MentorView.get_group_index(groups_list))
+            new_group_name = MentorView.get_group_name()
+            for group in groups_list:
+                if group.name == new_group_name:
+                    raise AttributeError
+            groups_list[group_index].name = new_group_name
+
 
 
