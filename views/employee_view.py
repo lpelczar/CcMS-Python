@@ -53,6 +53,7 @@ class EmployeeView:
 
     @staticmethod
     def get_user_by_index(user_index, users):
+        user_index = int(user_index)
         user_index -= 1
         return users[user_index]
 

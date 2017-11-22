@@ -1,4 +1,5 @@
 from models.user_container import UserContainer
+from models.student import Student
 from views.employee_view import EmployeeView
 import os
 
@@ -21,9 +22,15 @@ class EmployeeController:
 
             elif option == "2":
                 user = self.show_users_to_promote()
+                is_student_exist = self.is_student_already_exist(user)
 
-                if self.is_student_already_exist(user):
+                if is_student_exist:
                     EmployeeView.display_user_already_exist()
+
+                else:
+                    self.user_container.users.append(Student(user.login, user.password,
+                                                     user.phone_number, user.email, user.name))
+                    self.user_container.remove_user(user)
 
             elif option == "3":
                 exit_program = True
@@ -44,8 +51,7 @@ class EmployeeController:
         return get_user_account_index
 
     def is_student_already_exist(self, user):
-        is_user_exist = self.user_container.get_user_by_login_or_email(user.login)
-        if is_user_exist is None:
-            return False
-        else:
+        if isinstance(user, Student):
             return True
+        else:
+            return False
