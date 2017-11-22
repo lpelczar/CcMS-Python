@@ -1,13 +1,11 @@
-from views.recovery_view import RecoveryView
-from views.root_view import RootView
-from services.recovery_service import RecoveryService
 import os
 
+from services.recovery_service import RecoveryService
+from views.recovery_view import RecoveryView
+from views.root_view import RootView
+
+
 class RecoveryController:
-
-    def __init__(self):
-        ...
-
 
     def start(self):
         """

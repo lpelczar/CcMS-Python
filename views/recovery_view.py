@@ -7,8 +7,8 @@ MENU_OPTIONS = {'1.': 'Restore your password by using token.',
 
 CONFIRM_MESSAGE = '\nType ENTER...'
 
-class RecoveryView:
 
+class RecoveryView:
 
     @staticmethod
     def display_main_menu():
@@ -29,7 +29,7 @@ class RecoveryView:
         return input(prompt)
 
     @staticmethod
-    def display_error_message( error_msg: str):
+    def display_error_message(error_msg: str):
         """
         Method displays error message
         :param error_msg: str -> An error message.
