@@ -7,12 +7,15 @@ STARTING_INDEX = 1
 
 
 class EmployeeView:
-    @staticmethod
-    def display_input_error():
-        print(ColorfulView.format_string_to_red('Wrong input!'))
 
     @staticmethod
     def display_menu(name_of_user):
+        """
+        Method display menu of Employee account.
+
+        Param: str ---> object of Employee Class, attribute name
+        Return: str
+        """
         welcome = ColorfulView.format_string_to_yellow('\tWelcome {}, this is your account options.\n'.format(name_of_user))
         title = ColorfulView.format_string_to_blue('\nChoose option:\n')
         options = '\n1. Show students\n2. Promote user to student\n3. Ask for send email about cofee fundarising\n0. Exit'
@@ -23,12 +26,24 @@ class EmployeeView:
 
     @staticmethod
     def display_students_list(students_list):
+        """
+        Method display list of students.
+
+        Param: list
+        Return: None
+        """
         os.system('clear')
         EmployeeView.print_table(students_list)
         input('\nPress ENTER to return')
 
     @staticmethod
     def display_chose_user_to_promote(users):
+        """
+        Method display users to promote to students.
+
+        Param: list ----> object of user container
+        Return: object of User class / None
+        """
         os.system('clear')
         index = 1
 
@@ -51,17 +66,32 @@ class EmployeeView:
 
     @staticmethod
     def get_user_by_index(user_index, users):
+        """
+        Method convert user input index to integer and decrease it by 1, and return User object by index from list.
+
+        Param: str, list ----> object of UserContainer class
+        Return: object ----> UserClass
+        """
         user_index = int(user_index)
         user_index -= 1
         return users[user_index]
 
     @staticmethod
     def display_user_already_exist():
+        """
+        Method display information about user already exist.
+        """
         exist_info = ColorfulView.format_string_to_red('This user already exist as stundet!')
         print(exist_info)
 
     @staticmethod
     def ask_coffe_fundarising():
+        """
+        Method get user input about sending emails to students about coffe fundarising.
+
+        Param:
+        Return: str/none
+        """
         send_emails = input('Would you like to send an email to stundents about coffe fundarising?(yes)\n')
 
         if send_emails.upper() == 'YES':
@@ -73,6 +103,12 @@ class EmployeeView:
 
     @staticmethod
     def print_table(users):
+        """
+        Method display formated table from object of UserContainer class.
+
+        Param: list --> UserContainer Class
+        Return: None
+        """
         t = Texttable()
         t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
 
@@ -87,10 +123,26 @@ class EmployeeView:
 
     @staticmethod
     def display_emails_input_error():
+        """
+        Method display input error message.
+        """
         print(ColorfulView.format_string_to_red('You type wrong input! Why you dont spam students by emails!'))
         input()
 
     @staticmethod
     def display_is_email_sent(email):
+        """
+        Method display infromation about emails is it send.
+
+        Param: str
+        Return: None
+        """
         email = ColorfulView.format_string_to_yellow(email)
         print(email + ColorfulView.format_string_to_green(' - email has been sent!'))
+
+    @staticmethod
+    def display_input_error():
+        """
+        Method display wrong input message.
+        """
+        print(ColorfulView.format_string_to_red('Wrong input!'))
