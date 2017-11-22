@@ -31,6 +31,8 @@ class ManagerView:
     @staticmethod
     def print_table(users):
         t = Texttable()
+        t.set_deco(Texttable.HEADER)
+        t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
         t.add_rows([['Index', 'Login', 'Name', 'Role', 'Phone Number', 'E-mail']] +
                    [[i + STARTING_INDEX, u.get_login(), u.get_name(), u.__class__.__name__, u.get_phone_number(),
                      u.get_email()] for i, u in enumerate(users)])
