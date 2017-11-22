@@ -31,7 +31,7 @@ class EmployeeView:
         index = 1
 
         for person in users:
-            print(str(index) + '. ' + ColorfulView.format_string_to_green(person.name) + ', Login: '
+            print('\n' + str(index) + '. ' + ColorfulView.format_string_to_green(person.name) + ', Login: '
                   + ColorfulView.format_string_to_yellow(person.login) + ', Email: '
                   + ColorfulView.format_string_to_yellow(person.email))
             index += 1
@@ -62,7 +62,12 @@ class EmployeeView:
     def print_table(users):
         t = Texttable()
         t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
-        t.add_rows([['Index', 'Login', 'Name', 'Group', 'Phone Number', 'E-mail']] +
-                   [[i + STARTING_INDEX, u.get_login(), u.get_name(), 'Not assigned' if not u.group else u.group,
-                     u.get_phone_number(), u.get_email()] for i, u in enumerate(users)])
+
+        tittles = ['Index', 'Login', 'Name', 'Group', 'Phone Number', 'E-mail']
+        tittles = [ColorfulView.format_string_to_green(i) for i in tittles]
+
+        t.add_rows([tittles] + [[i + STARTING_INDEX, ColorfulView.format_string_to_yellow(u.get_login()), u.get_name(),
+                   'Not assigned' if not u.group else u.group, u.get_phone_number(),
+                   u.get_email()] for i, u in enumerate(users)])
+
         print(t.draw())
