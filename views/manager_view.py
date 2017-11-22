@@ -51,8 +51,8 @@ class ManagerView:
     @staticmethod
     def display_mentor_information(mentor_data):
         os.system('clear')
-        print(ColorfulView.format_string_to_yellow('Name: ') + mentor_data.get_name()
-              + ColorfulView.format_string_to_green('\nLogin: ') + mentor_data.get_login()
+        print(ColorfulView.format_string_to_yellow('Login: ') + mentor_data.get_login()
+              + ColorfulView.format_string_to_green('\nName: ') + mentor_data.get_name()
               + ColorfulView.format_string_to_green('\nPhone number: ') + mentor_data.get_phone_number()
               + ColorfulView.format_string_to_green('\nEmail: ') + mentor_data.get_email())
 
