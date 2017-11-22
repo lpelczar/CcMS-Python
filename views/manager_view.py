@@ -1,6 +1,7 @@
 from views.colorful_view import ColorfulView
+from texttable import Texttable
 import os
-import time
+
 STARTING_INDEX = 1
 
 
@@ -24,33 +25,36 @@ class ManagerView:
     @staticmethod
     def display_actual_list(users):
         print('')
-        if not users:
-            print(ColorfulView.format_string_to_red('List is empty!'))
-            time.sleep(2)
-            return True
-        for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
-                  + ColorfulView.format_string_to_green(' Name: ') +
-                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
+        ManagerView.print_table(users)
         print('')
+
+    @staticmethod
+    def print_table(users):
+        t = Texttable()
+        t.set_deco(Texttable.HEADER)
+        t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
+        t.add_rows([['Index', 'Login', 'Name', 'Role', 'Phone Number', 'E-mail']] +
+                   [[i + STARTING_INDEX, u.get_login(), u.get_name(), u.__class__.__name__, u.get_phone_number(),
+                     u.get_email()] for i, u in enumerate(users)])
+        print(t.draw())
+
+    @staticmethod
+    def display_empty_list_message():
+        print('')
+        print(ColorfulView.format_string_to_red('List is empty!'))
+        input('\nPress ENTER to continue')
 
     @staticmethod
     def display_users(users):
         print('')
-        if not users:
-            print(ColorfulView.format_string_to_red('List is empty!'))
-            time.sleep(2)
-        for k, v in enumerate(users):
-            print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
-                  + ColorfulView.format_string_to_green(' Name: ') +
-                  v.get_name() + ColorfulView.format_string_to_green(' Role: ') + v.__class__.__name__)
+        ManagerView.print_table(users)
         input('\nPress ENTER to continue')
 
     @staticmethod
     def display_mentor_information(mentor_data):
         os.system('clear')
-        print(ColorfulView.format_string_to_yellow('Name: ') + mentor_data.get_name()
-              + ColorfulView.format_string_to_green('\nLogin: ') + mentor_data.get_login()
+        print(ColorfulView.format_string_to_yellow('Login: ') + mentor_data.get_login()
+              + ColorfulView.format_string_to_green('\nName: ') + mentor_data.get_name()
               + ColorfulView.format_string_to_green('\nPhone number: ') + mentor_data.get_phone_number()
               + ColorfulView.format_string_to_green('\nEmail: ') + mentor_data.get_email())
 

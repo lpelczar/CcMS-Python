@@ -135,6 +135,7 @@ class GroupContainer:
         self.__raises_error_if_student_already_in_group(student)
         group = self.get_group(group_name)
         group.student_login_list.append(student.login)
+        student.group = group_name
         self.save_groups_to_file()
 
     def remove_student_from_group(self, group_name: str, student: Student):
@@ -148,7 +149,9 @@ class GroupContainer:
         group = self.get_student_group_name(student)
         if not group:
             raise AttributeError('This user does not belong to any group !')
+        student.group = None
         group.remove(student.login)
+        self.save_groups_to_file()
 
     def __raises_error_if_group_does_not_exist(self, group_name: str):
         """
