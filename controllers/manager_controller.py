@@ -5,6 +5,7 @@ from models.mentor import Mentor
 from models.user_container import UserContainer
 from views.manager_view import ManagerView
 from views.root_view import RootView
+from views.colorful_view import ColorfulView
 
 
 class ManagerController:
@@ -18,7 +19,7 @@ class ManagerController:
         while not should_exit:
             os.system('clear')
             ManagerView.display_manager_menu(self.manager.login, 'Manager')
-            user_input = ManagerView.get_user_input('Choose an option: ')
+            user_input = ManagerView.get_user_input(ColorfulView.format_string_to_yellow('\nChoose an option: '))
             if user_input == '1':
                 self.promote_user_to_mentor()
             elif user_input == '2':

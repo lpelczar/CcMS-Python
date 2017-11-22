@@ -4,7 +4,7 @@ from models.user_container import UserContainer
 class Group:
 
     def __init__(self, name: str):
-        self.__student_login_list = []
+        self.student_login_list = []
         self.name = name
 
     def get_student_list(self):
@@ -13,6 +13,6 @@ class Group:
         :return: list -> list of student instances
         """
         student_instances = []
-        for login in self.__student_login_list:
+        for login in self.student_login_list:
             student = UserContainer.get_instance().get_user_by_login_or_email(login)
             student_instances.append(student)
