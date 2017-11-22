@@ -83,3 +83,8 @@ class EmployeeView:
     @staticmethod
     def display_emails_input_error():
         print(ColorfulView.format_string_to_red('You type wrong input! Why you dont spam students by emails!'))
+
+    @staticmethod
+    def display_is_email_sent(email):
+        email = ColorfulView.format_string_to_yellow(email)
+        print(email + ColorfulView.format_string_to_green(' - email has been sent!'))

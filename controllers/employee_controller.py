@@ -41,9 +41,10 @@ class EmployeeController:
 
                 if email_message is not None:
                     students_emails = self.get_students_emails()
+
                     for email in students_emails:
                         EmailService.send_email(email_message, email)
-
+                        EmployeeView.display_is_email_sent(email)
 
                 else:
                     EmployeeView.display_emails_input_error()
