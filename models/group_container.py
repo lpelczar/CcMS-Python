@@ -135,6 +135,7 @@ class GroupContainer:
         self.__raises_error_if_student_already_in_group(student)
         group = self.get_group(group_name)
         group.student_login_list.append(student.login)
+        student.group = group_name
         self.save_groups_to_file()
 
     def remove_student_from_group(self, group_name: str, student: Student):
