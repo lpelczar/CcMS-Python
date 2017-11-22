@@ -8,6 +8,8 @@ STUDENT_ALREADY_IN_GROUP = 'This student already belongs to group {} !'
 
 GROUP_DOES_NOT_EXIST = "Such group does not exist !"
 
+GROUP_ALREADY_EXISTS = "Such group already exists !"
+
 ALREADY_EXISTS = "An instantiation already exists!"
 
 FILE_NAME = 'groups.csv'
@@ -78,7 +80,7 @@ class GroupContainer:
         :param group_name: str -> group
         :return: None
         """
-        self.__raises_error_if_group_does_not_exist(group_name)
+        self.__raises_error_if_group_exists(group_name)
         new_group = Group(group_name)
         self.groups.append(new_group)
         self.save_groups_to_file()
@@ -155,12 +157,21 @@ class GroupContainer:
 
     def __raises_error_if_group_does_not_exist(self, group_name: str):
         """
-        Private method that raises an exception if group with given name exists.
+        Private method that raises an exception if group with given name does not exist.
         :param group_name: str -> the group name to check
         :return:
         """
         if not self.does_group_exist(group_name):
             raise AttributeError(GROUP_DOES_NOT_EXIST)
+
+    def __raises_error_if_group_exists(self, group_name: str):
+        """
+        Private method that raises an exception if group with given name exists.
+        :param group_name: str -> the group name to check
+        :return:
+        """
+        if self.does_group_exist(group_name):
+            raise AttributeError(GROUP_ALREADY_EXISTS)
 
     def __raises_error_if_student_already_in_group(self, student: Student):
         """
