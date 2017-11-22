@@ -3,20 +3,24 @@ from texttable import Texttable
 import os
 
 STARTING_INDEX = 1
+MENU_OPTIONS = {'1': 'Promote user to Mentor',
+                '2': 'Remove Mentor',
+                '3': 'Edit Mentor data',
+                '4': 'Display list of Mentors',
+                '5': 'Display list of Students',
+                '6': 'Exit manager'}
 
 
 class ManagerView:
 
     @staticmethod
     def display_manager_menu(user_login, role):
-        greeting_message = ColorfulView.format_string_to_yellow('Logged as {} ({}) \n'.format(user_login, role))
-        print(ColorfulView.format_string_to_green(greeting_message) +
-              '1. Promote user to Mentor\n' +
-              '2. Remove Mentor\n' +
-              '3. Edit Mentor data\n' +
-              '4. Display list of Mentors\n' +
-              '5. Display list of Students\n'
-              '6. Exit manager')
+        greeting_message = ColorfulView.format_string_to_yellow('Logged as {} ({})'.format(user_login, role))
+        t = Texttable()
+        t.set_deco(Texttable.HEADER)
+        t.add_rows([['', greeting_message]] +
+                   [[k, v] for k, v in MENU_OPTIONS.items()])
+        print(t.draw())
 
     @staticmethod
     def get_user_input(prompt: str):
@@ -31,7 +35,6 @@ class ManagerView:
     @staticmethod
     def print_table(users):
         t = Texttable()
-        t.set_deco(Texttable.HEADER)
         t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
         t.add_rows([['Index', 'Login', 'Name', 'Role', 'Phone Number', 'E-mail']] +
                    [[i + STARTING_INDEX, u.get_login(), u.get_name(), u.__class__.__name__, u.get_phone_number(),
