@@ -1,7 +1,7 @@
 import smtplib
 
-from dependecies.smsapi.client import SmsAPI
-from dependecies.smsapi.responses import ApiError
+from dependencies.smsapi.client import SmsAPI
+from dependencies.smsapi.responses import ApiError
 
 
 class SmsService:

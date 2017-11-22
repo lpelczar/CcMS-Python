@@ -1,6 +1,6 @@
 import os
 
-from dependecies.texttable import Texttable, get_color_string, bcolors
+from dependencies.texttable import Texttable, get_color_string, bcolors
 from views.colorful_view import ColorfulView
 
 STARTING_INDEX = 1

@@ -2,7 +2,7 @@
 
 import os
 
-from dependecies.smsapi.responses import ApiResponse
+from dependencies.smsapi.responses import ApiResponse
 from .action import ApiAction
 from .message import ApiSendAction
 
