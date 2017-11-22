@@ -32,6 +32,7 @@ class ManagerView:
 
     @staticmethod
     def display_empty_list_message():
+        print('')
         print(ColorfulView.format_string_to_red('List is empty!'))
         input('\nPress ENTER to continue')
 
