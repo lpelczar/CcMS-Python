@@ -1,6 +1,7 @@
 import hashlib
 import os
 import time
+
 from controllers.key_getch import getch
 
 
@@ -24,7 +25,9 @@ class PasswordService:
             print('*' * len(password))
             print('Enter password: ', end='')
             x = getch()
-            if x == '\r':
+            if x == chr(27):
+                raise RuntimeError("User pressed ESC in password creator")
+            elif x == '\r':
                 print('')
                 password_created = True
             elif x == '\x7f':

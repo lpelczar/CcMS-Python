@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 
 from controllers.employee_controller import EmployeeController
@@ -10,10 +11,10 @@ from controllers.student_controller import StudentController
 from models.employee import Employee
 from models.manager import Manager
 from models.mentor import Mentor
+from models.playsound import playsound
 from models.student import Student
 from models.user import User
 from models.user_container import UserContainer
-from models.playsound import playsound
 from services.notification_service import EmailService
 from services.password_service import PasswordService
 from views.root_view import RootView
@@ -34,22 +35,25 @@ class RootController:
         RootView.display_animate_starting_screen()
 
         while exit_program:
-            os.system('clear')
+            try:
+                os.system('clear')
 
-            RootView.display_main_menu_screen()
-            RootView.display_main_menu()
-            option = getch()
+                RootView.display_main_menu_screen()
+                RootView.display_main_menu()
+                option = getch()
 
-            if option == '1':
-                self.handle_sign_in()
+                if option == '1':
+                    self.handle_sign_in()
+                elif option == '2':
+                    self.handle_sign_up()
+                elif option == '3':
+                    RecoveryController().start()
+                elif option == '0':
+                    UserContainer.get_instance().save_users_to_file()
+                    exit_program = False
+            except RuntimeError:
+                sys.stdout.flush()
 
-            elif option == '2':
-                self.handle_sign_up()
-            elif option == '3':
-                RecoveryController().start()
-            elif option == '0':
-                UserContainer.get_instance().save_users_to_file()
-                exit_program = False
 
     def handle_sign_up(self):
         """
