@@ -26,6 +26,10 @@ class RecoveryController:
                 should_exit = True
 
     def new_recovery_password_process(self):
+        """
+        Method handles new password recovery process.
+        :return: None
+        """
         is_process_finished = False
         while not is_process_finished:
             os.system('clear')
