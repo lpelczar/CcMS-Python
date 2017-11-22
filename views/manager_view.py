@@ -24,10 +24,6 @@ class ManagerView:
     @staticmethod
     def display_actual_list(users):
         print('')
-        if not users:
-            print(ColorfulView.format_string_to_red('List is empty!'))
-            time.sleep(2)
-            return True
         for k, v in enumerate(users):
             print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
                   + ColorfulView.format_string_to_green(' Name: ') +
@@ -35,11 +31,13 @@ class ManagerView:
         print('')
 
     @staticmethod
+    def display_empty_list_message():
+        print(ColorfulView.format_string_to_red('List is empty!'))
+        input('\nPress ENTER to continue')
+
+    @staticmethod
     def display_users(users):
         print('')
-        if not users:
-            print(ColorfulView.format_string_to_red('List is empty!'))
-            time.sleep(2)
         for k, v in enumerate(users):
             print(str(k + STARTING_INDEX) + '. ' + ColorfulView.format_string_to_green('Login: ') + v.get_login()
                   + ColorfulView.format_string_to_green(' Name: ') +
