@@ -69,8 +69,6 @@ class MentorController:
     def add_assignment(self):
         students_list = UserContainer.get_instance().get_students_list()
         deadline, title, description = MentorView.return_assignment_values()
-        deadline_list = deadline.split('-')
-        deadline = date(int(deadline_list[0]), int(deadline_list[1]), int(deadline_list[2]))
         new_assignment = Assignment(deadline, title, description)
         AssignmentContainer.get_instance().add_assignment(new_assignment)
         for student in students_list:

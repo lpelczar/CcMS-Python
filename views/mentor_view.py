@@ -1,5 +1,6 @@
 from views.colorful_view import ColorfulView
 import os
+from datetime import date
 
 
 class MentorView:
@@ -80,6 +81,8 @@ Choose option:
     def return_assignment_values():
         os.system('clear')
         deadline = input('Type in deadline for assignment yyyy-mm-dd: ')
+        deadline_list = deadline.split('-')
+        deadline = date(int(deadline_list[0]), int(deadline_list[1]), int(deadline_list[2]))
         title = input('Type in title of the assignment: ')
         description = input('Describe your assignment: ')
         return deadline, title, description
