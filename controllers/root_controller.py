@@ -94,7 +94,7 @@ class RootController:
                 elif isinstance(user, Manager):
                     ManagerController(user).start()
                 elif isinstance(user, Employee):
-                    EmployeeController().start()
+                    EmployeeController().start(user)
                 elif isinstance(user, User):
                     RootView.display_error_user_singin()
 
