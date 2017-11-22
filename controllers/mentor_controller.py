@@ -83,7 +83,6 @@ class MentorController:
         student_index = int(student_index)
         student = students_list[student_index]
         assignment_index, grade = MentorView.get_grade_values(student)
-        assignment_index = int(assignment_index)
         students_list = UserContainer.get_instance().get_students_list()
         students_list[student_index].assignments[assignment_index].grade = grade
 

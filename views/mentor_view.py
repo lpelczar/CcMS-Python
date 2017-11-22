@@ -1,6 +1,7 @@
 from views.colorful_view import ColorfulView
 import os
 from datetime import date
+from models.group_container import GroupContainer
 
 
 class MentorView:
@@ -21,6 +22,7 @@ class MentorView:
 
     @staticmethod
     def display_menu():
+        os.system('clear')
         option = input("""
 Choose option:
 1.Show students
@@ -54,9 +56,8 @@ Choose option:
             return
         os.system('clear')
         for student in students_list:
-            if student.group:
-                group_str = student.group
-            else:
+            group_str = GroupContainer.get_instance().get_student_group_name(student)
+            if not group_str:
                 group_str = "Not assigned"
             print('Index: ' + str(students_list.index(student)) + ' Name: ' + student.name + ' Group: ' + group_str)
         input('Press enter to return')
@@ -100,8 +101,9 @@ Choose option:
     @staticmethod
     def get_grade_values(student):
         while True:
-            assignment_index = input("""Type in assignment's index or s to show
-                                     list of current assignments (with indexes): """)
+            assignment_index = input("Type in assignment's index or s to show" +
+                                     "list of current assignments (with indexes):")
+            assignment_index = int(assignment_index)
             if assignment_index == 's':
                 MentorView.display_student_assignments(student)
                 continue
