@@ -16,6 +16,9 @@ class EmployeeController:
             if option == "1":
                 self.show_students()
 
+            elif option == "3":
+                user_index = self.show_users_to_promote()
+
             elif option == "2":
                 exit_program = True
 
@@ -28,3 +31,8 @@ class EmployeeController:
     def show_students():
         students_list = UserContainer.get_instance().get_students_list()
         EmployeeView.display_students_list(students_list)
+
+    @staticmethod
+    def show_users_to_promote():
+        users = UserContainer.get_instance().get_users_with_user_range()
+        get_user_account_index = EmployeeView.display_chose_user_to_promote(users)
