@@ -1,13 +1,11 @@
-from views.recovery_view import RecoveryView
-from views.root_view import RootView
-from services.recovery_service import RecoveryService
 import os
 
+from services.recovery_service import RecoveryService
+from views.recovery_view import RecoveryView
+from views.root_view import RootView
+
+
 class RecoveryController:
-
-    def __init__(self):
-        ...
-
 
     def start(self):
         """
@@ -28,6 +26,10 @@ class RecoveryController:
                 should_exit = True
 
     def new_recovery_password_process(self):
+        """
+        Method handles new password recovery process.
+        :return: None
+        """
         is_process_finished = False
         while not is_process_finished:
             os.system('clear')

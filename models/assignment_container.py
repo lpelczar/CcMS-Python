@@ -1,6 +1,8 @@
-import os, pickle
+import os
+import pickle
 
 FILE_NAME = 'assignments.csv'
+
 
 class AssignmentContainer:
 
@@ -12,7 +14,6 @@ class AssignmentContainer:
         self.assignments = []
         self.load_from_file()
 
-    
     @classmethod
     def get_instance(cls):
         """
@@ -30,10 +31,10 @@ class AssignmentContainer:
         """
         if not os.path.exists(FILE_NAME) or os.stat(FILE_NAME).st_size == 0:
             return  # checks if the data file exists, if not it does not load it
-        if self.assignments: return  # checks if the list have been loaded before if so it does not load again
-        with open(FILE_NAME, 'rb') as input:
-            self.assignments = pickle.load(input)  # load object from file
-
+        if self.assignments:
+            return  # checks if the list have been loaded before if so it does not load again
+        with open(FILE_NAME, 'rb') as file:
+            self.assignments = pickle.load(file)  # load object from file
 
     def save_to_file(self):
         """

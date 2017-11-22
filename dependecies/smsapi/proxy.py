@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import base64
+import mimetypes
 import os
 import sys
-import mimetypes
-import base64
 from io import BytesIO
 
 try:

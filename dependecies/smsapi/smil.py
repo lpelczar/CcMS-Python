@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import os
-import re
 import base64
 import mimetypes
+import os
+import re
 import xml.etree.ElementTree as ET
 
 try:

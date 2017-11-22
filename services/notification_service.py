@@ -1,6 +1,7 @@
-from services.smsapi.client import SmsAPI
-from services.smsapi.responses import ApiError
 import smtplib
+
+from dependecies.smsapi.client import SmsAPI
+from dependecies.smsapi.responses import ApiError
 
 
 class SmsService:
@@ -12,18 +13,15 @@ class SmsService:
 
         try:
             api.service('sms').action('send')
-
             api.set_content(sms_text)
             api.set_to(phone_number)
             api.set_from(sender)
-
-            result = api.execute()
-
-            # for r in result:
-            #     print(r.id, r.points, r.status)
+            api.execute()
 
         except ApiError:
             print('Error encountered while sending message!')
+        except:
+            print('''Unable to send sms, check internet connection or/and contact developer''')
 
 
 class EmailService:
@@ -36,3 +34,5 @@ class EmailService:
 
         msg = email_text
         server.sendmail("kreatywnoscaktywnosc@gmail.com", email, msg)
+
+SmsService().send_sms('+48577524527', 'Bez internetu')

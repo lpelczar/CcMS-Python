@@ -1,6 +1,7 @@
-from views.colorful_view import ColorfulView
-from texttable import Texttable
 import os
+
+from dependecies.texttable import Texttable, get_color_string, bcolors
+from views.colorful_view import ColorfulView
 
 STARTING_INDEX = 1
 MENU_OPTIONS = {'1': 'Promote user to Mentor',
@@ -9,17 +10,19 @@ MENU_OPTIONS = {'1': 'Promote user to Mentor',
                 '4': 'Display list of Mentors',
                 '5': 'Display list of Students',
                 '6': 'Exit manager'}
+COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
+                        for k, v in MENU_OPTIONS.items()}
 
 
 class ManagerView:
 
     @staticmethod
     def display_manager_menu(user_login, role):
-        greeting_message = ColorfulView.format_string_to_yellow('Logged as {} ({})'.format(user_login, role))
+        greeting_message = get_color_string(bcolors.BLUE, 'Logged as {} ({})'.format(user_login, role))
         t = Texttable()
         t.set_deco(Texttable.HEADER)
         t.add_rows([['', greeting_message]] +
-                   [[k, v] for k, v in MENU_OPTIONS.items()])
+                   [[k, v] for k, v in COLORED_MENU_OPTIONS.items()])
         print(t.draw())
 
     @staticmethod
@@ -36,7 +39,9 @@ class ManagerView:
     def print_table(users):
         t = Texttable()
         t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
-        t.add_rows([['Index', 'Login', 'Name', 'Role', 'Phone Number', 'E-mail']] +
+        colored_titles = [get_color_string(bcolors.BLUE, i) for i in ['Index', 'Login', 'Name', 'Role',
+                                                                      'Phone Number', 'E-mail']]
+        t.add_rows([colored_titles] +
                    [[i + STARTING_INDEX, u.get_login(), u.get_name(), u.__class__.__name__, u.get_phone_number(),
                      u.get_email()] for i, u in enumerate(users)])
         print(t.draw())
