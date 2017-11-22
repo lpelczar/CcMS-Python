@@ -13,7 +13,7 @@ class EmployeeView:
     def display_menu(name_of_user):
         welcome = ColorfulView.format_string_to_yellow('\tWelcome {}, this is your account options.\n'.format(name_of_user))
         title = ColorfulView.format_string_to_blue('\nChoose option:\n')
-        options = '\n1. Show students\n2. Promote user to student\n0. Exit'
+        options = '\n1. Show students\n2. Promote user to student\n3. Ask for send email about cofee fundarising\n0. Exit'
 
         print(welcome, title, options)
 
@@ -60,10 +60,13 @@ class EmployeeView:
 
     @staticmethod
     def ask_coffe_fundarising():
-        send_emails = input('Would you like to send an email to stundents about coffe fundarising?')
-        if send_emails.uppercase() == 'YES':
-            message = 'Hello dear students!\nWe are going out off coffe in next few days!\n If you don\'t pay yet,\
-                       please do this as soon as it possible! It\'s cost as always 123.5 pln!\nGreetings, \nyour Katarzyna!
+        send_emails = input('Would you like to send an email to stundents about coffe fundarising?(yes)\n')
+
+        if send_emails.upper() == 'YES':
+            message = 'Hello dear students!\nWe are going out off coffe in next few days!\n If you don\'t pay yet, '\
+                      'please do this as soon as it possible! It\'s cost as always 123.5 pln!\nGreetings, \nyour Katarzyna!'
+
+            print('Please wait for information about send emails!')
             return message
 
     @staticmethod

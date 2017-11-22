@@ -74,5 +74,5 @@ class EmployeeController:
             return False
 
     def get_students_emails(self):
-        emails = [user.email for user in self.user_container if isinstance(user, Student)]
+        emails = [user.email for user in self.user_container.get_users_list() if isinstance(user, Student)]
         return emails
