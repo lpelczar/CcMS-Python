@@ -58,21 +58,43 @@ class EmployeeController:
         exit()
 
     def show_students(self):
+        """
+        Method get students list from container and give it to View for display.
+        """
         students_list = self.user_container.get_students_list()
         EmployeeView.display_students_list(students_list)
 
     def show_users_to_promote(self):
+        """
+        Method get students list from container and give it to view wchich return index of account in list.
+
+        Param:
+        Return: integer
+        """
         users = self.user_container.get_users_with_user_range()
         get_user_account_index = EmployeeView.display_chose_user_to_promote(users)
 
         return get_user_account_index
 
     def is_student_already_exist(self, user):
-        if isinstance(user, Student):
-            return True
-        else:
-            return False
+        """
+        Method check if user name which you want to promote is already exist in database.
+
+        Param: instance of User class
+        Return: bool
+        """
+        for student in self.user_container.get_students_list():
+            if user.name == student.name:
+                return True
+            else:
+                return False
 
     def get_students_emails(self):
+        """
+        Method make list with emails adress of students.
+
+        Param:
+        Return: list
+        """
         emails = [user.email for user in self.user_container.get_users_list() if isinstance(user, Student)]
         return emails
