@@ -18,6 +18,10 @@ class RecoveryService:
             self.raise_exception_if_user_token_is_not_correct()
 
     def send_token_to_user(self):
+        """
+        Method sends token to user as email and SMS.
+        :return: None
+        """
         user_email = self.user.email
         message = TOKEN_MESSAGE.format(self.generated_token)
         EmailService.send_email(message, user_email)
@@ -25,6 +29,10 @@ class RecoveryService:
 
 
     def __set_token(self):
+        """
+        Method sets token to new generated one if player starts new recovery password process
+        :return: None
+        """
         if 'token' in self.user.__dict__:
             self.generated_token = self.user.token
         else:
@@ -42,7 +50,7 @@ class RecoveryService:
 
     def __raise_exception_if_user_login_or_email_is_incorrect(self):
         """
-        Method raises exception if player is not ready for password recovery process
+        Method raises exception if user's login or email is incorrect.
         :param user: User -> user to check
         :return: None
         """
@@ -50,11 +58,22 @@ class RecoveryService:
             raise AttributeError('User with given login or email does not exist !')
 
     def raise_exception_if_user_token_is_not_correct(self, token: str):
+        """
+        Method raises exception if token that user types is incorrect.
+        :param token:
+        :return: None
+        """
         if not self.generated_token == token:
             raise ValueError('This token is not correct !')
 
 
     def change_password(self, password: str, token: str):
+        """
+        Method changes password.
+        :param password: str -> user's new password
+        :param token: str -> token needed to auth
+        :return: None
+        """
         self.raise_exception_if_user_token_is_not_correct(token)
         self.user.password = PasswordService.encrypt_password(password)
         delattr(self.user, 'token')
