@@ -32,6 +32,7 @@ class RootView:
 
         return main_screen_colored
 
+    @staticmethod
     def display_main_menu_screen(file_name='views/welcome_screen.txt'):
         """
         Param: str ---> with filename to reader
@@ -101,6 +102,7 @@ class RootView:
         Method let to create user his account password and check if it contain requirements.
         """
         incorrect_password = True
+        user_password = ''
         while incorrect_password:
             print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
                                                        'digit, it must contain min 6 chars and '
@@ -123,8 +125,10 @@ class RootView:
         min_login_lenght = 5
 
         incorrect_input = True
+        user_login = ''
         while incorrect_input:
-            print(ColorfulView.format_string_to_yellow('Enter your login(it must contain 6 characters and cant be longer than 30 characters): '))
+            print(ColorfulView.format_string_to_yellow('Enter your login(it must contain 6 '
+                                                       'characters and cant be longer than 30 characters): '))
             user_login = input()
 
             if len(user_login) > min_login_lenght and len(user_login) < max_login_lenght:
@@ -165,7 +169,7 @@ class RootView:
         """
         os.system('clear')
         incorrect_phone_number = True
-
+        phone_number = ''
         while incorrect_phone_number:
             print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
             phone_number = input()
@@ -213,6 +217,7 @@ class RootView:
         Method create users name and return it.
         """
         incorrect = True
+        user_name = ''
         while incorrect:
 
             print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
@@ -232,7 +237,8 @@ class RootView:
         Method display information about created user account.
             """
         os.system('clear')
-        account_created_info1 = '\nYou have created a new account!\nName: {}\nPhone number: {},'.format(name, phone_number)
+        account_created_info1 = '\nYou have created a new account!' \
+                                '\nName: {}\nPhone number: {},'.format(name, phone_number)
         account_created_info2 = '\nLogin: {}, \nEmail: {}'.format(login, email)
         acc_info = account_created_info1 + account_created_info2
         print(ColorfulView.format_string_to_green(acc_info))

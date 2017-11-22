@@ -1,5 +1,6 @@
-from views.colorful_view import ColorfulView
 import os
+
+from views.colorful_view import ColorfulView
 
 INDEX_INCREMENTOR = 1
 
@@ -22,16 +23,16 @@ class StudentView:
         os.system('clear')
         print(ColorfulView.format_string_to_yellow('Assignments without your submission: '))
 
-        for id, assignment in enumerate(assignments):
-            print(str(id) + '. ' + assignment)
+        for index, assignment in enumerate(assignments):
+            print(str(index) + '. ' + assignment)
 
     @staticmethod
     def display_user_grades(assignments: list):
         os.system('clear')
         print(ColorfulView.format_string_to_green('Your grades:'))
-        for id, assignment in enumerate(assignments):
-            id += INDEX_INCREMENTOR
-            print(ColorfulView.format_string_to_blue(str(id) + '. ') + assignment)
+        for index, assignment in enumerate(assignments):
+            index += INDEX_INCREMENTOR
+            print(ColorfulView.format_string_to_blue(str(index) + '. ') + assignment)
 
         input('\nPress ENTER to continue')
 
