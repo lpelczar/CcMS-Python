@@ -41,14 +41,26 @@ class RecoveryView:
 
     @staticmethod
     def display_user_token_is_correct_msg():
+        """
+        Method displays that token is correct
+        :return: None
+        """
         print(ColorfulView.format_string_to_green('\nYour token is correct !'))
 
     @staticmethod
     def display_password_changed_successfully():
+        """
+        Method displays that password have been changed successfully.
+        :return: None
+        """
         os.system('clear')
         print(ColorfulView.format_string_to_green('You password have been changed successfully'))
         input(ColorfulView.format_string_to_green(CONFIRM_MESSAGE))
 
     @staticmethod
     def display_that_token_have_been_sent():
+        """
+        Method display that token has been sent.
+        :return: None
+        """
         print(ColorfulView.format_string_to_green("You can find the token in your e-mail or SMS box."))
