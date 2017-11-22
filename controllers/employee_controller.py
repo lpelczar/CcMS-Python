@@ -6,33 +6,36 @@ import os
 
 class EmployeeController:
 
-    def __init__(self):
+    def __init__(self, employee):
         self.user_container = UserContainer.get_instance()
+        self.employee = employee
 
-    def start(self, user):
+    def start(self):
         exit_program = False
 
         while not exit_program:
             os.system('clear')
 
-            option = EmployeeView.display_menu(user.name)
+            option = EmployeeView.display_menu(self.employee.name)
 
             if option == "1":
                 self.show_students()
 
             elif option == "2":
                 user = self.show_users_to_promote()
-                is_student_exist = self.is_student_already_exist(user)
 
-                if is_student_exist:
-                    EmployeeView.display_user_already_exist()
+                if user is not None:
+                    is_student_exist = self.is_student_already_exist(user)
 
-                else:
-                    self.user_container.users.append(Student(user.login, user.password,
-                                                     user.phone_number, user.email, user.name))
-                    self.user_container.remove_user(user)
+                    if is_student_exist:
+                        EmployeeView.display_user_already_exist()
 
-            elif option == "3":
+                    else:
+                        self.user_container.users.append(Student(user.login, user.password,
+                                                         user.phone_number, user.email, user.name))
+                        self.user_container.remove_user(user)
+
+            elif option == "0":
                 exit_program = True
 
             else:

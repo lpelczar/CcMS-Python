@@ -11,7 +11,7 @@ class EmployeeView:
     def display_menu(name_of_user):
         welcome = ColorfulView.format_string_to_yellow('\tWelcome {}, this is your account options.\n'.format(name_of_user))
         title = ColorfulView.format_string_to_blue('\nChoose option:\n')
-        options = '\n1. Show students\n2. Promote user to student\n3. Exit'
+        options = '\n1. Show students\n2. Promote user to student\n0. Exit'
 
         print(welcome, title, options)
 
@@ -46,10 +46,16 @@ class EmployeeView:
                   + ColorfulView.format_string_to_yellow(person.email))
             index += 1
 
-        user_index = input('Enter user index to promote: ')
-        user = EmployeeView.get_user_by_index(user_index, users)
+        incorrect = True
+        while incorrect:
+            user_index = input('Enter user index to promote(or back): ')
 
-        return user
+            if user_index.isdigit():
+                user = EmployeeView.get_user_by_index(user_index, users)
+                return user
+
+            elif user_index == 'back':
+                incorrect = False
 
     @staticmethod
     def get_user_by_index(user_index, users):
