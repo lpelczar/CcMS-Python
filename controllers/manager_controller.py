@@ -1,11 +1,11 @@
 import os
 
+from dependecies.texttable import get_color_string, bcolors
 from models.manager import Manager
 from models.mentor import Mentor
 from models.user_container import UserContainer
 from views.manager_view import ManagerView
 from views.root_view import RootView
-from texttable import get_color_string, bcolors
 
 
 class ManagerController:

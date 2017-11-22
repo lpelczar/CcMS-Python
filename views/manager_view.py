@@ -1,6 +1,7 @@
-from views.colorful_view import ColorfulView
-from texttable import Texttable, get_color_string, bcolors
 import os
+
+from dependecies.texttable import Texttable, get_color_string, bcolors
+from views.colorful_view import ColorfulView
 
 STARTING_INDEX = 1
 MENU_OPTIONS = {'1': 'Promote user to Mentor',

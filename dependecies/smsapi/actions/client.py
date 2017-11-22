@@ -2,7 +2,7 @@
 
 from hashlib import md5
 
-from services.smsapi.responses import ApiResponse
+from dependecies.smsapi.responses import ApiResponse
 from .action import ApiAction
 
 

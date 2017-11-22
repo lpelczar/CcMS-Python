@@ -90,10 +90,9 @@ Brian Peterson:
     - better handling of unicode errors
 """
 
-import re
 import math
+import re
 import sys
-import string
 from functools import reduce
 
 try:

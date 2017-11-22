@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from services.smsapi.responses import ApiResponse
 from services.smsapi.smil import Smil
+
+from dependecies.smsapi.responses import ApiResponse
 from .action import ApiAction
 from .message import ApiSendAction
 

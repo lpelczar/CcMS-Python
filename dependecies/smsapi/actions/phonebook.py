@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from services.smsapi.decorators import deprecated
-from services.smsapi.responses import ApiResponse
+
+from dependecies.smsapi.responses import ApiResponse
 from .action import ApiAction
 
 GENDERS = ('unknown', 'female', 'male')

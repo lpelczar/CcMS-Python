@@ -1,6 +1,8 @@
-from views.colorful_view import ColorfulView
-from texttable import Texttable
 import os
+
+from dependecies.texttable import Texttable
+from views.colorful_view import ColorfulView
+
 STARTING_INDEX = 1
 
 
