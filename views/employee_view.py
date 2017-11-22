@@ -59,6 +59,14 @@ class EmployeeView:
         print(exist_info)
 
     @staticmethod
+    def ask_coffe_fundarising():
+        send_emails = input('Would you like to send an email to stundents about coffe fundarising?')
+        if send_emails.uppercase() == 'YES':
+            return True
+        else:
+            return False
+
+    @staticmethod
     def print_table(users):
         t = Texttable()
         t.set_cols_dtype(['a', 'a', 'a', 'a', 'i', 'a'])
@@ -71,3 +79,7 @@ class EmployeeView:
                    u.get_email()] for i, u in enumerate(users)])
 
         print(t.draw())
+
+    @staticmethod
+    def display_emails_input_error():
+        print(ColorfulView.format_string_to_red('You type wrong input! Why you dont spam students by emails!'))

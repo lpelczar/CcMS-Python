@@ -1,5 +1,6 @@
 from models.user_container import UserContainer
 from models.student import Student
+from services.notification_service import EmailService
 from views.employee_view import EmployeeView
 import os
 
@@ -35,6 +36,14 @@ class EmployeeController:
                                                          user.phone_number, user.email, user.name))
                         self.user_container.remove_user(user)
 
+            elif option == "3":
+                # coffe fundarising
+                send_emails = EmployeeView.ask_coffe_fundarising()
+                if send_emails:
+
+                else:
+                    EmployeeView.display_emails_input_error()
+
             elif option == "0":
                 exit_program = True
 
@@ -58,3 +67,6 @@ class EmployeeController:
             return True
         else:
             return False
+
+    def get_students_emails(self):
+        for 
