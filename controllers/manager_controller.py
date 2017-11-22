@@ -41,9 +41,8 @@ class ManagerController:
         :return: None
         """
         users = self.user_container.get_users_with_user_range()
-        is_empty = ManagerView.display_actual_list(users)
-
-        if not is_empty:
+        if users:
+            ManagerView.display_actual_list(users)
             user_login = ManagerView.get_promotion_input()
             try:
                 user = self.user_container.get_user_by_login_or_email(user_login)
@@ -54,35 +53,36 @@ class ManagerController:
                 ManagerView.display_user_promoted(user)
             except AttributeError:
                 ManagerView.display_user_not_found()
+        else:
+            ManagerView.display_empty_list_message()
 
     def edit_mentor_data(self):
         """
         Modify selected mentor data: login, phone number, email, name
         """
         mentors = self.user_container.get_mentor_list()
-        ManagerView.display_actual_list(mentors)
-        is_empty = ManagerView.display_actual_list(mentors)
-
-        if not is_empty:
+        if mentors:
+            ManagerView.display_actual_list(mentors)
             mentor_login = ManagerView.get_user_edit_input()
+            try:
+                user = self.user_container.get_user_by_login_or_email(mentor_login)
+                ManagerView.display_mentor_information(user)
+                value_to_change = ManagerView.get_value_to_change()
 
-        try:
-            user = self.user_container.get_user_by_login_or_email(mentor_login)
-            ManagerView.display_mentor_information(user)
-            value_to_change = ManagerView.get_value_to_change()
-
-            if value_to_change == 'login':
-                user.set_login(RootView.create_user_login())
-            elif value_to_change == 'phone':
-                user.set_phone_number(RootView.create_user_phone_number())
-            elif value_to_change == 'email':
-                user.set_email(RootView.create_user_email())
-            elif value_to_change == 'name':
-                user.set_name(RootView.add_user_name())
-            else:
-                ManagerView.display_wrong_attribute()
-        except AttributeError:
-            ManagerView.display_user_not_found()
+                if value_to_change == 'login':
+                    user.set_login(RootView.create_user_login())
+                elif value_to_change == 'phone':
+                    user.set_phone_number(RootView.create_user_phone_number())
+                elif value_to_change == 'email':
+                    user.set_email(RootView.create_user_email())
+                elif value_to_change == 'name':
+                    user.set_name(RootView.add_user_name())
+                else:
+                    ManagerView.display_wrong_attribute()
+            except AttributeError:
+                ManagerView.display_user_not_found()
+        else:
+            ManagerView.display_empty_list_message()
 
     def remove_mentor(self):
         """
@@ -91,19 +91,19 @@ class ManagerController:
         :return: None
         """
         mentors = self.user_container.get_mentor_list()
-        ManagerView.display_actual_list(mentors)
-        is_empty = ManagerView.display_actual_list(mentors)
-
-        if not is_empty:
+        if mentors:
+            ManagerView.display_actual_list(mentors)
             user_login = ManagerView.get_user_remove_input()
-        try:
-            user = self.user_container.get_user_by_login_or_email(user_login)
-            self.user_container.remove_user(user)
-            ManagerView.display_user_deleted(user)
-        except ValueError:
-            ManagerView.display_user_not_found()
-        except AttributeError:
-            ManagerView.display_user_not_found()
+            try:
+                user = self.user_container.get_user_by_login_or_email(user_login)
+                self.user_container.remove_user(user)
+                ManagerView.display_user_deleted(user)
+            except ValueError:
+                ManagerView.display_user_not_found()
+            except AttributeError:
+                ManagerView.display_user_not_found()
+        else:
+            ManagerView.display_empty_list_message()
 
     def display_students(self):
         """
