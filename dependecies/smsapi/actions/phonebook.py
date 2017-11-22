@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from services.smsapi.decorators import deprecated
+from dependecies.smsapi.decorators import deprecated
 
 from dependecies.smsapi.responses import ApiResponse
 from .action import ApiAction
