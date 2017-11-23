@@ -2,6 +2,8 @@ import os
 
 from dependencies.texttable import get_color_string, bcolors
 from models.manager import Manager
+from models.student import Student
+from models.employee import Employee
 from models.mentor import Mentor
 from models.user_container import UserContainer
 from views.manager_view import ManagerView
@@ -112,7 +114,7 @@ class ManagerController:
 
     def change_user_role(self):
         roles = {'M': 'Mentor', 'S': 'Student', 'E': 'Employee', 'Man': 'Manager'}
-        users = self.user_container.get_users_with_user_range()
+        users = self.user_container.get_users_list()
         if not users:
             ManagerView.display_empty_list_message()
         else:
