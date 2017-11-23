@@ -171,6 +171,7 @@ class ManagerController:
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_users(mentors)
 
-    def send_promotion_info_email(self, username, new_rank, email):
+    @staticmethod
+    def send_promotion_info_email(username, new_rank, email):
         msg = 'Welcome {}! Your role has been changed to {}'.format(username, new_rank)
         EmailService.send_email(msg, email)
