@@ -54,7 +54,8 @@ Choose option:
 7.Promote user to student
 8.Add group
 9.Rename group
-0.Exit""")
+0.Exit
+""")
         return option
 
     @staticmethod
@@ -274,7 +275,7 @@ There are currently no unassigned users
         os.system('clear')
         print(ColorfulView.format_string_to_yellow('Current groups: '))
         for group in group_list:
-            print(str(group_list.index(group)) + group.name)
+            print(str(group_list.index(group)) + '. ' + group.name)
         if exit_with_enter:
             input('Press enter to return')
 

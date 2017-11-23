@@ -10,7 +10,8 @@ MENU_OPTIONS = {'1': 'Promote user to Mentor',
                 '4': 'Display list of Mentors',
                 '5': 'Display list of Students',
                 '6': 'Display all Canvas members',
-                '7': 'Change user role',
+                '7': 'Change Canvas member role',
+                '8': 'Send email to all',
                 '0': 'Exit manager'}
 COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
                         for k, v in MENU_OPTIONS.items()}
@@ -122,3 +123,12 @@ class ManagerView:
     def display_wrong_role():
         print('There is no such role.')
         input('\nPress ENTER to continue ')
+
+    @staticmethod
+    def display_email_sent():
+        print('Email has been sent to everyone!')
+        input('\nPress ENTER to continue ')
+
+    @staticmethod
+    def get_message_input():
+        return input('Enter message do you want to send to everyone in Canvas: ')
