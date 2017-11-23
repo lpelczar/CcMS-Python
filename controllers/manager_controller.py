@@ -27,7 +27,7 @@ class ManagerController:
         while not should_exit:
             os.system('clear')
             ManagerView.display_manager_menu(self.manager.login, 'Manager')
-            user_input = ManagerView.get_user_input(get_color_string(bcolors.BLUE,'\nChoose an option: '))
+            user_input = ManagerView.get_option_input()
             if user_input == '1':
                 self.promote_user_to_mentor()
             elif user_input == '2':
