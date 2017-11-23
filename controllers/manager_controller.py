@@ -8,6 +8,7 @@ from models.mentor import Mentor
 from models.user_container import UserContainer
 from views.manager_view import ManagerView
 from views.root_view import RootView
+from services.notification_service import EmailService
 
 
 class ManagerController:
@@ -36,6 +37,8 @@ class ManagerController:
                 self.display_all_canvas_members()
             elif user_input == '7':
                 self.change_user_role()
+            elif user_input == '8':
+                self.send_email_to_all()
             elif user_input == '0':
                 should_exit = True
         UserContainer.get_instance().save_users_to_file()
@@ -136,6 +139,13 @@ class ManagerController:
                         ManagerView.display_user_promoted(user)
                     except AttributeError:
                         ManagerView.display_user_not_found()
+
+    def send_email_to_all(self):
+        email_message = ManagerView.get_message_input()
+        emails = [user.get_email() for user in self.user_container.get_users_list()]
+        for email in emails:
+            EmailService.send_email(email_message, email)
+        ManagerView.display_email_sent()
 
     def display_all_canvas_members(self):
         users = self.user_container.get_users_list()
