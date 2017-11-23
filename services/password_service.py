@@ -9,11 +9,20 @@ class PasswordService:
 
     @staticmethod
     def encrypt_password(password):
+        """
+        Hash password using sha256
+        :param password: string -> user password
+        :return:
+        """
         secure_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
         return secure_hash
 
     @staticmethod
     def get_password_with_asterisks():
+        """
+        Hide password while typing
+        :return:
+        """
         password = []
         password_created = False
         while not password_created:
