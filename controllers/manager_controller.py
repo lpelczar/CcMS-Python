@@ -59,6 +59,7 @@ class ManagerController:
                 self.user_container.users.append(Mentor(user.get_login(), user.get_password(),
                                                         user.get_phone_number(), user.get_email(),
                                                         user.get_name()))
+                self.send_promotion_info_email(user.get_login(), 'Mentor', user.get_email())
                 self.user_container.remove_user(user)
                 ManagerView.display_user_promoted(user)
             except AttributeError:
@@ -135,6 +136,7 @@ class ManagerController:
                         self.user_container.users.append(eval(roles[user_role])(user.get_login(), user.get_password(),
                                                                                 user.get_phone_number(), user.get_email(),
                                                                                 user.get_name()))
+                        self.send_promotion_info_email(user.get_login(), roles[user_role], user.get_email())
                         self.user_container.remove_user(user)
                         ManagerView.display_user_promoted(user)
                     except AttributeError:
@@ -168,3 +170,8 @@ class ManagerController:
         """
         mentors = self.user_container.get_mentor_list()
         ManagerView.display_users(mentors)
+
+    @staticmethod
+    def send_promotion_info_email(username, new_rank, email):
+        msg = 'Welcome {}! Your role has been changed to {}'.format(username, new_rank)
+        EmailService.send_email(msg, email)
