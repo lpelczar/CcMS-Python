@@ -30,7 +30,7 @@ class RootController:
         """
         exit_program = True
         RootView.display_animate_starting_screen()
-        p = subprocess.Popen(['java', '-jar', 'music.jar'])
+        p = subprocess.Popen(['java', '-jar', 'dependencies/music.jar'])
         while exit_program:
             try:
                 os.system('clear')
