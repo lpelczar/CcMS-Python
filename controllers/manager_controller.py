@@ -195,7 +195,7 @@ class ManagerController:
         :param username: name of the user
         :param new_rank: role of the user
         :param email: email of the user
-        :return: 
+        :return:
         """
         msg = 'Welcome {}! Your role has been changed to {}'.format(username, new_rank)
         EmailService.send_email(msg, email)
