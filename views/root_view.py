@@ -2,7 +2,7 @@ import os
 import re
 import sys
 import time
-
+from controllers.key_getch import getch
 from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
 
@@ -203,10 +203,33 @@ class RootView:
 
         Method take users login and password and return it as a tuple.
         """
-        user_login = input('Enter your login: ')
+        user_login = RootView.get_user_login()
         user_password = PasswordService.get_password_with_asterisks()
         login_password = (user_login, user_password)
         return login_password
+
+    @staticmethod
+    def get_user_login():
+        login = []
+        login_created = False
+        while not login_created:
+            os.system('clear')
+            print(ColorfulView.format_string_to_yellow('Enter your login') + '(ESC to back to menu):', end='')
+            print(''.join(login))
+
+            x = getch()
+            if x == chr(27):
+                raise RuntimeError("User pressed ESC in password creator")
+            elif x == '\r':
+                print('')
+                login_created = True
+
+            elif x == '\x7f':
+                if login:
+                    del login[-1]
+            else:
+                login.append(x)
+        return ''.join(login)
 
     @staticmethod
     def add_user_name():

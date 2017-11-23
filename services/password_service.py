@@ -19,11 +19,11 @@ class PasswordService:
         while not password_created:
             os.system('clear')
             print('*' * (len(password if password else 1) - 1) + password[-1] if password else '')
-            print(ColorfulView.format_string_to_yellow('Enter password(press ESC to back): '), end='')
+            print(ColorfulView.format_string_to_yellow('Enter password') + '(press ESC to back):', end='')
             time.sleep(0.1)
             os.system('clear')
             print('*' * len(password))
-            print(ColorfulView.format_string_to_yellow('Enter password(press ESC to back): '), end='')
+            print(ColorfulView.format_string_to_yellow('Enter password') + '(press ESC to back):', end='')
             x = getch()
             if x == chr(27):
                 raise RuntimeError("User pressed ESC in password creator")
