@@ -106,7 +106,7 @@ class ManagerView:
     @staticmethod
     def display_user_not_found():
         print(ColorfulView.format_string_to_red('User with that name not found!'))
-        input('\nPress ENTER to continue')
+        input('\nPress ENTER to continue ')
 
     @staticmethod
     def get_user_login():
@@ -115,9 +115,9 @@ class ManagerView:
     @staticmethod
     def get_new_role():
         return input('Choose new role: \033[91mS\033[0mtudent, \033[91mE\033[0mmployee, '
-                     '\033[91mM\033[0mentor, \033[91mM\033[0manager')
+                     '\033[91mM\033[0mentor, \033[91mMan\033[0mager ')
 
     @staticmethod
     def display_wrong_role():
         print('There is no such role.')
-        input('\nPress ENTER to continue')
+        input('\nPress ENTER to continue ')

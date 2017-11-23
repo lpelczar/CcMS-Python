@@ -109,26 +109,29 @@ class ManagerController:
             ManagerView.display_empty_list_message()
 
     def change_user_role(self):
-        roles = ['Mentor', 'Student', 'Employee', 'Manager']
+        roles = {'M': 'Mentor', 'S': 'Student', 'E': 'Employee', 'Man': 'Manager'}
         users = self.user_container.get_users_with_user_range()
-        if users:
+        if not users:
+            ManagerView.display_empty_list_message()
+        else:
             ManagerView.display_actual_list(users)
             user_login = ManagerView.get_user_login()
-            user_role = ManagerView.get_new_role()
-            if user_role in roles:
-                try:
-                    user = self.user_container.get_user_by_login(user_login)
-                    self.user_container.users.append(eval(user_role)(user.get_login(), user.get_password(),
-                                                                     user.get_phone_number(), user.get_email(),
-                                                                     user.get_name()))
-                    self.user_container.remove_user(user)
-                    ManagerView.display_user_promoted(user)
-                except AttributeError:
-                    ManagerView.display_user_not_found()
+            user = self.user_container.get_user_by_login_or_email(user_login)
+            if not user:
+                ManagerView.display_user_not_found()
             else:
-                ManagerView.display_wrong_role()
-        else:
-            ManagerView.display_empty_list_message()
+                user_role = ManagerView.get_new_role()
+                if user_role not in roles.keys():
+                    ManagerView.display_wrong_role()
+                else:
+                    try:
+                        self.user_container.users.append(eval(roles[user_role])(user.get_login(), user.get_password(),
+                                                                                user.get_phone_number(), user.get_email(),
+                                                                                user.get_name()))
+                        self.user_container.remove_user(user)
+                        ManagerView.display_user_promoted(user)
+                    except AttributeError:
+                        ManagerView.display_user_not_found()
 
     def display_students(self):
         """
