@@ -210,6 +210,12 @@ class RootView:
 
     @staticmethod
     def get_user_login():
+        """
+        Param: none
+        Return: str
+
+        Method make string of user login using key getch.
+        """
         login = []
         login_created = False
         while not login_created:
