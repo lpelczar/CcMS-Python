@@ -37,7 +37,7 @@ class EmployeeController:
                         self.user_container.remove_user(user)
 
             elif option == "3":
-                email_message = EmployeeView.ask_coffe_fundarising()
+                email_message = EmployeeView.send_mail_about_coffe_fundarising()
 
                 if email_message is not None:
                     students_emails = self.get_students_emails()
@@ -72,9 +72,9 @@ class EmployeeController:
         Return: integer
         """
         users = self.user_container.get_users_with_user_range()
-        get_user_account_index = EmployeeView.display_chose_user_to_promote(users)
+        user_account = EmployeeView.display_chose_user_to_promote(users)
 
-        return get_user_account_index
+        return user_account
 
     def is_student_already_exist(self, user):
         """

@@ -85,7 +85,7 @@ class EmployeeView:
         print(exist_info)
 
     @staticmethod
-    def ask_coffe_fundarising():
+    def send_mail_about_coffe_fundarising():
         """
         Method get user input about sending emails to students about coffe fundarising.
 
