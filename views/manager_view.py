@@ -4,15 +4,15 @@ from dependencies.texttable import Texttable, get_color_string, bcolors
 from views.colorful_view import ColorfulView
 
 STARTING_INDEX = 1
-MENU_OPTIONS = {'1': 'Promote user to Mentor',
-                '2': 'Remove Mentor',
-                '3': 'Edit Mentor data',
-                '4': 'Display list of Mentors',
-                '5': 'Display list of Students',
-                '6': 'Display all Canvas members',
-                '7': 'Change Canvas member role',
-                '8': 'Send email to all',
-                '0': 'Exit manager'}
+MENU_OPTIONS = {'1.': 'Promote user to Mentor',
+                '2.': 'Remove Mentor',
+                '3.': 'Edit Mentor data',
+                '4.': 'Display list of Mentors',
+                '5.': 'Display list of Students',
+                '6.': 'Display all Canvas members',
+                '7.': 'Change Canvas member role',
+                '8.': 'Send email to all',
+                '0.': 'Log out'}
 COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
                         for k, v in MENU_OPTIONS.items()}
 
