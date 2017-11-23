@@ -9,7 +9,7 @@ class SmsService:
     @staticmethod
     def send_sms(phone_number, sms_text,  sender='Info'):
         api = SmsAPI()
-        api.auth_token = 'ZOqy0r9lKB6sf0HlYnNFtATGUqjaavTPnJFDx1Hx'
+        api.auth_token = 'QKClng1uYip49EiipXQW1m2AAAi9KgopS9GEnLGP'
 
         try:
             api.service('sms').action('send')
