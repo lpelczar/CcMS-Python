@@ -1,9 +1,16 @@
 import os
 
+from dependencies.texttable import Texttable, get_color_string, bcolors
 from views.colorful_view import ColorfulView
 
 INDEX_INCREMENTOR = 1
 
+MENU_OPTIONS = {'1': 'Submit submission',
+                '2': 'View grades',
+                '3': 'Exit system',}
+
+COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
+                        for k, v in MENU_OPTIONS.items()}
 
 class StudentView:
     @staticmethod
@@ -38,11 +45,12 @@ class StudentView:
 
     @staticmethod
     def display_student_menu(user_login, role):
-        greeting_message = 'Logged as {} ({}) \n'.format(user_login, role)
-        print(greeting_message,
-              '\n1. Submit submission'
-              '\n2. View grades'
-              '\n3. Exit system')
+        greeting_message = get_color_string(bcolors.BLUE, 'Logged as {} ({})'.format(user_login, role))
+        t = Texttable()
+        t.set_deco(Texttable.HEADER)
+        t.add_rows([['', greeting_message]] +
+                   [[k, v] for k, v in COLORED_MENU_OPTIONS.items()])
+        print(t.draw())
 
     @staticmethod
     def get_user_input(prompt: str):
