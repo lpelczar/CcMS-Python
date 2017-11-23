@@ -1,12 +1,10 @@
 import sys
-import tty
 import termios
+import tty
 
 
 def getch():
     """Get key which user has entered and return it
-    Args:
-        none
     Returns:
         ch: key user has enetered
     """

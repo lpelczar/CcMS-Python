@@ -1,16 +1,15 @@
-import os, traceback
+import os
+import traceback
+
+from models.assignment_container import AssignmentContainer
 from models.student import Student
 from models.user_container import UserContainer
 from views.student_view import StudentView
-from models.assignment_container import AssignmentContainer
+
 
 class StudentController:
 
-    INSTANCE = None
-
-    def __init__(self, student:Student):
-        if self.INSTANCE is not None:
-            raise ValueError("An instantiation already exists!")
+    def __init__(self, student: Student):
         self.user_container = UserContainer.get_instance()
         self.student = student
 
@@ -44,39 +43,26 @@ class StudentController:
         UserContainer.get_instance().save_users_to_file()
         os.system('clear')
 
-
-
-    @classmethod
-    def get_instance(cls, student:Student):
-        """
-        Returns the singleton instance of Controller
-        :return: None
-        """
-        if cls.INSTANCE is None:
-            cls.INSTANCE = StudentController(student)
-        return cls.INSTANCE
-
     def show_student_grades(self):
         """
         Show grades for student with given student login
         """
-        assignments_with_grades = [assignment for assignment in self.student.assignments if
-                                         assignment.grade != None]
+        assignments_with_grades = [assignment for assignment in self.student.assignments
+                                   if assignment.grade is not None]
         if not self.student.assignments:
             StudentView.print_user_have_no_grades()
         assignments_as_strings_list = []
         for assignment in assignments_with_grades:
-            grade_with_assignment_name = 'Grade: {}, Assignment title: {}'.format(assignment.grade,assignment.title)
+            grade_with_assignment_name = 'Grade: {}, Assignment title: {}'.format(assignment.grade, assignment.title)
             assignments_as_strings_list.append(grade_with_assignment_name)
         StudentView.display_user_grades(assignments_as_strings_list)
-
 
     def submit_assignment(self):
         """
         Add new key to submissions with assignment_name
         """
         assignment_without_submission = [assignment for assignment in self.student.assignments if
-                                         assignment.submission == None]
+                                         assignment.submission is None]
         if not assignment_without_submission:
             StudentView.print_user_assignments_list_empty_error()
             return
@@ -93,13 +79,19 @@ class StudentController:
         :return:
         """
         for global_assignment in AssignmentContainer.get_instance().get_assignments_list():
-            add_assignment = True
-            for user_assignment in self.student.assignments:
-                if user_assignment.title == global_assignment.title:
-                    add_assignment = False
-                    break
-            if add_assignment:
+            if self.does_user_have_assignment(global_assignment):
                 self.student.add_student_assignment(global_assignment.deadline, global_assignment.title,
                                                     global_assignment.description)
 
-
+    def does_user_have_assignment(self, global_assignment):
+        """
+        Method checks if user already have given assignment
+        :param global_assignment: Assignment -> assignment to check
+        :return: bool
+        """
+        add_assignment = True
+        for user_assignment in self.student.assignments:
+            if user_assignment.title == global_assignment.title:
+                add_assignment = False
+                break
+        return add_assignment

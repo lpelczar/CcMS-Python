@@ -1,7 +1,9 @@
 import os
 import re
-import time
 import sys
+import time
+from controllers.key_getch import getch
+from services.password_service import PasswordService
 from views.colorful_view import ColorfulView
 
 
@@ -30,6 +32,7 @@ class RootView:
 
         return main_screen_colored
 
+    @staticmethod
     def display_main_menu_screen(file_name='views/welcome_screen.txt'):
         """
         Param: str ---> with filename to reader
@@ -54,7 +57,7 @@ class RootView:
         """
         welcome_information = '\nWelcome in Canvas, patch 0.-2XYZ.4C version.'
         exit_program = '0. Exit'
-        menu_options = ['Sign in', 'Sign up']
+        menu_options = ['Sign in', 'Sign up', 'Restore password']
         number_option = 1
         welcome_information = ColorfulView.format_string_to_yellow(welcome_information)
         exit_program = ColorfulView.format_string_to_red(exit_program)
@@ -98,23 +101,15 @@ class RootView:
 
         Method let to create user his account password and check if it contain requirements.
         """
-        max_pass_length = 30
-        min_pass_lenght = 5
-
-        incorrect_input = True
-        while incorrect_input:
+        incorrect_password = True
+        user_password = ''
+        while incorrect_password:
             print(ColorfulView.format_string_to_yellow('Enter your password(it must contain big, small characters and '
                                                        'digit, it must contain min 6 chars and '
                                                        'it cant be longer than 30 characters): '))
-            user_password = input()
-            if len(user_password) > min_pass_lenght and len(user_password) < max_pass_length:
-                for sign in user_password:
-                    if sign.isdigit():
-                        for sign in user_password:
-                            if sign.isupper():
-                                for sign in user_password:
-                                    if sign.islower():
-                                        incorrect_input = False
+            user_password = PasswordService.get_password_with_asterisks()
+            if re.match(r'^(?=.*?\d)(?=.*?[A-Z])(?=.*?[a-z])[A-Za-z\d]{6,30}$', user_password):
+                incorrect_password = False
 
         return user_password
 
@@ -130,8 +125,10 @@ class RootView:
         min_login_lenght = 5
 
         incorrect_input = True
+        user_login = ''
         while incorrect_input:
-            print(ColorfulView.format_string_to_yellow('Enter your login(it must contain 6 characters and cant be longer than 30 characters): '))
+            print(ColorfulView.format_string_to_yellow('Enter your login(it must contain 6 '
+                                                       'characters and cant be longer than 30 characters): '))
             user_login = input()
 
             if len(user_login) > min_login_lenght and len(user_login) < max_login_lenght:
@@ -157,7 +154,7 @@ class RootView:
             user_email = input()
 
             if len(user_email) > min_email_lenght and len(user_email) < max_email_lenght:
-                if re.match(r'[^@]+@[^@]+\.[^@]+', user_email):
+                if re.match(r'([A-Za-z\d\.]{1,})([\@]{1})([a-z\d]{1,}[\.]{1}[a-z]{2,})', user_email):
                     incorrect_email_adress = False
 
         return user_email
@@ -170,16 +167,33 @@ class RootView:
 
         Method check if user phone number is digits, and its lenght is 9.
         """
-        lenght_number = 9
+        os.system('clear')
         incorrect_phone_number = True
-
+        phone_number = ''
         while incorrect_phone_number:
             print(ColorfulView.format_string_to_yellow('Enter your phone number: '))
             phone_number = input()
-            if phone_number.isdigit() and len(phone_number) == lenght_number:
+
+            if re.match(r'\d{3}[\s\\\/\-]?\d{3}[\s\\\/\-]?\d{3}', phone_number):
                 incorrect_phone_number = False
 
+        phone_number = RootView.convert_phone_number_to_data_format(phone_number)
         return phone_number
+
+    @staticmethod
+    def convert_phone_number_to_data_format(phone_number):
+        """
+        Method convert phone number to database format.
+
+        Param: str
+        Return: str
+        """
+        format_phone_number = '+48'
+        for number in phone_number:
+            if number.isdigit():
+                format_phone_number += number
+
+        return format_phone_number
 
     @staticmethod
     def get_user_login_password():
@@ -189,10 +203,39 @@ class RootView:
 
         Method take users login and password and return it as a tuple.
         """
-        user_login = input('Enter your login: ')
-        user_password = input('Enter your password: ')
+        user_login = RootView.get_user_login()
+        user_password = PasswordService.get_password_with_asterisks()
         login_password = (user_login, user_password)
         return login_password
+
+    @staticmethod
+    def get_user_login():
+        """
+        Param: none
+        Return: str
+
+        Method make string of user login using key getch.
+        """
+        login = []
+        login_created = False
+        while not login_created:
+            os.system('clear')
+            print(ColorfulView.format_string_to_yellow('Enter your login') + '(ESC to back to menu):', end='')
+            print(''.join(login))
+
+            x = getch()
+            if x == chr(27):
+                raise RuntimeError("User pressed ESC in password creator")
+            elif x == '\r':
+                print('')
+                login_created = True
+
+            elif x == '\x7f':
+                if login:
+                    del login[-1]
+            else:
+                login.append(x)
+        return ''.join(login)
 
     @staticmethod
     def add_user_name():
@@ -202,12 +245,20 @@ class RootView:
 
         Method create users name and return it.
         """
-        print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
-        user_name = input()
+        incorrect = True
+        user_name = ''
+        while incorrect:
+
+            print(ColorfulView.format_string_to_yellow('Enter your name and surname: '))
+            user_name = input()
+
+            if re.match(r'^(?=[A-Za-z])[\sA-Za-z]{5,30}$', user_name):
+                incorrect = False
+
         return user_name
 
     @staticmethod
-    def display_user_created(login, password, phone_number, email, name):
+    def display_user_created(login, phone_number, email, name):
         """
         Param: str, str, str, str, str
         Return: none
@@ -215,8 +266,9 @@ class RootView:
         Method display information about created user account.
             """
         os.system('clear')
-        account_created_info1 = '\nYou have created a new account!\nName: {}\nPhone number: {},'.format(name, phone_number)
-        account_created_info2 = '\nLogin: {}, \nPassword: {}\nEmail: {}'.format(login, password, email)
+        account_created_info1 = '\nYou have created a new account!' \
+                                '\nName: {}\nPhone number: {},'.format(name, phone_number)
+        account_created_info2 = '\nLogin: {}, \nEmail: {}'.format(login, email)
         acc_info = account_created_info1 + account_created_info2
         print(ColorfulView.format_string_to_green(acc_info))
         input('Press enter to back')
