@@ -1,6 +1,5 @@
 import os
 import sys
-import threading
 
 from controllers.employee_controller import EmployeeController
 from controllers.key_getch import getch
@@ -11,7 +10,6 @@ from controllers.student_controller import StudentController
 from models.employee import Employee
 from models.manager import Manager
 from models.mentor import Mentor
-from models.playsound import playsound
 from models.student import Student
 from models.user import User
 from models.user_container import UserContainer
@@ -30,8 +28,6 @@ class RootController:
         Main loop for the program
         """
         exit_program = True
-        thread = threading.Thread(target=self.play_music)
-        thread.start()
         RootView.display_animate_starting_screen()
 
         while exit_program:
@@ -121,10 +117,6 @@ class RootController:
         message = "Welcome {}, \nYou have been registered successfully. " \
                   "You are now an user. Wait to be promoted to higher rank".format(user_name)
         EmailService.send_email(message, email_adress)
-
-    def play_music(self):
-        while True:
-            playsound('models/kahoot_music.mp3')
 
 
 
