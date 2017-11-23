@@ -1,11 +1,12 @@
-from models.user_container import UserContainer
+import traceback
+
 from models.assignment import Assignment
 from models.assignment_container import AssignmentContainer
-from views.mentor_view import MentorView
-from models.group_container import GroupContainer
 from models.group import Group
+from models.group_container import GroupContainer
 from models.student import Student
-import traceback
+from models.user_container import UserContainer
+from views.mentor_view import MentorView
 
 
 class MentorController:
@@ -60,7 +61,6 @@ class MentorController:
                 input()
 
         UserContainer.get_instance().save_users_to_file()
-        exit()
 
     def show_students(self):
         """
