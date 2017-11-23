@@ -18,6 +18,11 @@ class ManagerController:
         self.manager = manager
 
     def start(self):
+        """
+        Starts the menu of the manager
+
+        :return:
+        """
         should_exit = False
         while not should_exit:
             os.system('clear')
@@ -117,6 +122,10 @@ class ManagerController:
             ManagerView.display_empty_list_message()
 
     def change_user_role(self):
+        """
+        Change user to other chosen role: Mentor, Student, Employee, Manager
+        :return:
+        """
         roles = {'M': 'Mentor', 'S': 'Student', 'E': 'Employee', 'Man': 'Manager'}
         users = self.user_container.get_users_list()
         if not users:
@@ -143,6 +152,10 @@ class ManagerController:
                         ManagerView.display_user_not_found()
 
     def send_email_to_all(self):
+        """
+        Sending the email to all members of the canvas
+        :return:
+        """
         email_message = ManagerView.get_message_input()
         emails = [user.get_email() for user in self.user_container.get_users_list()]
         for email in emails:
@@ -150,6 +163,10 @@ class ManagerController:
         ManagerView.display_email_sent()
 
     def display_all_canvas_members(self):
+        """
+        Display all members of the canvas
+        :return:
+        """
         users = self.user_container.get_users_list()
         ManagerView.display_users(users)
 
@@ -173,5 +190,12 @@ class ManagerController:
 
     @staticmethod
     def send_promotion_info_email(username, new_rank, email):
+        """
+        Send information about changing the role of the user.
+        :param username: name of the user
+        :param new_rank: role of the user
+        :param email: email of the user
+        :return: 
+        """
         msg = 'Welcome {}! Your role has been changed to {}'.format(username, new_rank)
         EmailService.send_email(msg, email)
