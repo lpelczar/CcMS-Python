@@ -18,7 +18,7 @@ class EmployeeView:
         """
         welcome = ColorfulView.format_string_to_yellow('\tWelcome {}, this is your account options.\n'.format(name_of_user))
         title = ColorfulView.format_string_to_blue('\nChoose option:\n')
-        options = '\n1. Show students\n2. Promote user to student\n3. Ask for send email about cofee fundarising\n0. Exit'
+        options = '\n1. Show students\n2. Promote user to student\n3. Ask for send email about cofee fundarising\n0. Log out'
 
         print(welcome, title, options)
 
@@ -85,7 +85,7 @@ class EmployeeView:
         print(exist_info)
 
     @staticmethod
-    def ask_coffe_fundarising():
+    def send_mail_about_coffe_fundarising():
         """
         Method get user input about sending emails to students about coffe fundarising.
 
