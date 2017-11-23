@@ -55,7 +55,6 @@ class EmployeeController:
             else:
                 EmployeeView.display_input_error()
         self.user_container.get_instance().save_users_to_file()
-        exit()
 
     def show_students(self):
         """
