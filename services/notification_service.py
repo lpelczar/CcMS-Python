@@ -34,5 +34,3 @@ class EmailService:
 
         msg = email_text
         server.sendmail("kreatywnoscaktywnosc@gmail.com", email, msg)
-
-SmsService().send_sms('+48577524527', 'Bez internetu')
