@@ -9,7 +9,8 @@ MENU_OPTIONS = {'1': 'Promote user to Mentor',
                 '3': 'Edit Mentor data',
                 '4': 'Display list of Mentors',
                 '5': 'Display list of Students',
-                '6': 'Exit manager'}
+                '6': 'Change user role',
+                '0': 'Exit manager'}
 COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
                         for k, v in MENU_OPTIONS.items()}
 
@@ -89,7 +90,7 @@ class ManagerView:
 
     @staticmethod
     def display_user_promoted(user):
-        print(ColorfulView.format_string_to_green('User: {} has been promoted to Mentor'.format(user.get_login())))
+        print(ColorfulView.format_string_to_green('User: {} has been promoted'.format(user.get_login())))
         input('\nPress ENTER to continue')
 
     @staticmethod
@@ -105,4 +106,18 @@ class ManagerView:
     @staticmethod
     def display_user_not_found():
         print(ColorfulView.format_string_to_red('User with that name not found!'))
+        input('\nPress ENTER to continue')
+
+    @staticmethod
+    def get_user_login():
+        return input('Enter login of the user: ')
+
+    @staticmethod
+    def get_new_role():
+        return input('Choose new role: \033[91mS\033[0mtudent, \033[91mE\033[0mmployee, '
+                     '\033[91mM\033[0mentor, \033[91mM\033[0manager')
+
+    @staticmethod
+    def display_wrong_role():
+        print('There is no such role.')
         input('\nPress ENTER to continue')
