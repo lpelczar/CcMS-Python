@@ -275,7 +275,7 @@ There are currently no unassigned users
         os.system('clear')
         print(ColorfulView.format_string_to_yellow('Current groups: '))
         for group in group_list:
-            print(str(group_list.index(group)) + '\n' + group.name)
+            print(str(group_list.index(group)) + '. ' + group.name)
         if exit_with_enter:
             input('Press enter to return')
 
