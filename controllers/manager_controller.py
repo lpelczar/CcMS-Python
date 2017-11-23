@@ -31,6 +31,8 @@ class ManagerController:
             elif user_input == '5':
                 self.display_students()
             elif user_input == '6':
+                self.display_all_canvas_members()
+            elif user_input == '7':
                 self.change_user_role()
             elif user_input == '0':
                 should_exit = True
@@ -132,6 +134,10 @@ class ManagerController:
                         ManagerView.display_user_promoted(user)
                     except AttributeError:
                         ManagerView.display_user_not_found()
+
+    def display_all_canvas_members(self):
+        users = self.user_container.get_users_list()
+        ManagerView.display_users(users)
 
     def display_students(self):
         """

@@ -9,7 +9,8 @@ MENU_OPTIONS = {'1': 'Promote user to Mentor',
                 '3': 'Edit Mentor data',
                 '4': 'Display list of Mentors',
                 '5': 'Display list of Students',
-                '6': 'Change user role',
+                '6': 'Display all Canvas members',
+                '7': 'Change user role',
                 '0': 'Exit manager'}
 COLORED_MENU_OPTIONS = {get_color_string(bcolors.PURPLE, k): get_color_string(bcolors.PURPLE, v)
                         for k, v in MENU_OPTIONS.items()}
