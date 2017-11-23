@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 
 from controllers.employee_controller import EmployeeController
@@ -29,7 +30,7 @@ class RootController:
         """
         exit_program = True
         RootView.display_animate_starting_screen()
-
+        p = subprocess.Popen(['java', '-jar', 'music.jar'])
         while exit_program:
             try:
                 os.system('clear')
@@ -46,6 +47,7 @@ class RootController:
                     RecoveryController().start()
                 elif option == '0':
                     UserContainer.get_instance().save_users_to_file()
+                    p.terminate()
                     exit_program = False
             except RuntimeError:
                 sys.stdout.flush()
