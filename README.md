@@ -47,9 +47,9 @@ Let's create our own Learning Management System. We'll call it Codecool Manageme
 
 ## Sample Screenshots
 
-![c1](http://i63.tinypic.com/1zx7cro.png)
+![c1](https://raw.github.com/lpelczar/CcMS-Python/master/screenshots/python-cms-main.png)
 
-![c2](http://i65.tinypic.com/25tdgz5.png)
+![c2](https://raw.github.com/lpelczar/CcMS-Python/master/screenshots/python-cms-manager.png)
 
 ## More info
 
